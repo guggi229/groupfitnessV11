@@ -1,0 +1,15 @@
+.metadata/
+GroupfitnessV11/.settings/
+*.project
+GroupfitnessV11Client/.settings/org.eclipse.jdt.core.prefs
+GroupfitnessV11EJB/build/classes/META-INF/MANIFEST.MF
+GroupfitnessV11Web/.settings/org.eclipse.wst.jsdt.ui.superType.name
+GroupfitnessV11EJB/.settings/org.eclipse.wst.validation.prefs
+GroupfitnessV11EJB/.settings/org.eclipse.wst.common.component
+GroupfitnessV11EJB/.settings/
+GroupfitnessV11Web/target/
+GroupfitnessV11Web/.settings/
+GroupfitnessV11EJB/target/
+GroupfitnessV11/target/
+GroupfitnessV11Client/.settings/
+GroupfitnessV11Client/target/
