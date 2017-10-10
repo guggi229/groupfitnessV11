@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<ui:define name="title">#{msg['menu.cours.management.setting.tag']}</ui:define>
+	<ui:define name="content">
+		<div class="container">
+			<table class="table table-striped">
+				<thead class="success">
+					<tr>
+						<th><h:outputText value="#{msg['tag.name']}" /></th>
+
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tr>
+					<h:form>
+						<td><h:inputText styleClass="form-control"
+								value="#{dataManager.tagName}" id="tagName" /> <h:message
+								for="tagName" style="color:red" /></td>
+						<td><h:commandButton 
+								action="#{dataManager.addTag}" image="/images/add.png"/></td>
+					</h:form>
+				</tr>
+				<ui:repeat var="tag" value="#{dataManager.tags}">
+					<tr>
+									<td>
+									#{tag.tagName}
+									<h:outputText styleClass="form-control"
+											value="#{tag.tagName}" />#{tag.tagName}</td>
+											</tr>
+				</ui:repeat>
+			</table>
+
+			
+
+
+
+
+
+		</div>
+		<!-- /container -->
+	</ui:define>
+</ui:composition>
+
+

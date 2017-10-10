@@ -1,0 +1,26 @@
+
+/* Ausrichtung content  */
+.content {
+	 margin-top: 100px;
+}
+
+.button {
+	margin-top:10px;	
+}
+
+.marginRight{
+	margin-right: 10px;
+}
+.tableHead{
+	background-color: #333;
+	width: 300px;
+	padding-left: 15px;
+}
+.tableBody{
+	width: 300px;
+	padding-left: 15px;
+}
+.tableText{
+	color: #fff;
+	padding-left: 15px;
+}

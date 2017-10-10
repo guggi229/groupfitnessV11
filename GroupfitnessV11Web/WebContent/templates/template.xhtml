@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:loadBundle basename="messages" var="msg" />
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE-edge" />
+	<meta name="viewport" content="width-device-width, initial-scale=1" />
+	<link href="/GroupfitnessV11Web/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/GroupfitnessV11Web/css/sigin.css" rel="stylesheet" />
+	<link href="/GroupfitnessV11Web/css/groupfitness.css" rel="stylesheet" />
+	<link href="/GroupfitnessV11Web/css/ionicons.css" rel="stylesheet" />
+	<title><ui:insert name="title">??? title ???</ui:insert> |
+		Groupfitness</title>
+</h:head>
+
+<h:body>
+<h:form>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+	<a class="navbar-brand" href="#">Groupfitness</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarsExampleDefault"
+		aria-controls="navbarsExampleDefault" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<ul class="navbar-nav mr-auto">
+		<li class="nav-item active"><a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a></li>
+		<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+		<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+		<c:choose>
+			<c:when test="#{loginBean.logged}">
+  				
+  				<!-- Management Cours -->
+  				<li class="nav-item dropdown" ><a class="nav-link dropdown-toggle" href="http://example.com"
+							id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">#{msg['menu.cours.management']}</a>
+							
+					<div class="dropdown-menu" aria-labelledby="dropdown01">
+						<h:commandLink styleClass="dropdown-item" action="#{loginBean.doLogout}" value="#{msg['menu.cours.management.setting.typ']}" />
+						<h:commandLink styleClass="dropdown-item" action="#{loginBean.doLogout}" value="#{msg['menu.cours.management.setting.cat']}" />
+						<h:commandLink styleClass="dropdown-item" action="#{loginBean.doLogout}" value="#{msg['menu.cours.management.setting.cours']}" />
+					</div>
+				</li>
+				
+				<!-- Management Cours -->					
+				<li class="ion-locked nav-link" data-pack="default" data-tags="padlock, security"></li>
+				<li class="nav-item dropdown" ><a class="nav-link dropdown-toggle" href="http://example.com"
+							id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">#{loginBean.user.userName}</a>
+							
+				<div class="dropdown-menu" aria-labelledby="dropdown01">
+								<a class="dropdown-item ion-edit" href="#">Action</a>
+								<h:commandLink styleClass="dropdown-item"
+									action="#{loginBean.doLogout}" value="#{msg['user.setting']}" />
+								<h:commandLink styleClass="dropdown-item"
+									action="#{loginBean.doLogout}" value="#{msg['login.logout']}" />
+							</div></li>		
+					</c:when>
+				</c:choose>
+			
+		</ul>
+	</div>
+	</nav>
+	</h:form>
+	<div class="container content">
+		<ui:insert name="content">
+		</ui:insert>
+	</div>
+	<!-- /.container -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="/GroupfitnessV11Web/scripts/popper.min.js"></script>
+	<script src="/GroupfitnessV11Web/scripts/bootstrap.min.js"></script>
+</h:body>
+</html>
