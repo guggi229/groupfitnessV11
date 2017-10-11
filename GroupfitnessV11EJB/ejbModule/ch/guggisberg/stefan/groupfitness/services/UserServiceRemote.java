@@ -13,6 +13,7 @@ public interface UserServiceRemote {
 	public void remove(Long id) throws UserNotFoundException;
 	public User getUser(Long id) throws UserNotFoundException;
 	public List<User> getAllUser();
+	public void sayHello();
 	
 }
 
