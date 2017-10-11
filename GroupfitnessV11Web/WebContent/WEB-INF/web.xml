@@ -27,7 +27,64 @@
 		<url-pattern>/faces/*</url-pattern>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+
+
+	<!-- Security -->
+
 	<session-config>
 		<session-timeout>15</session-timeout>
 	</session-config>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Webseite</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+
+		<auth-constraint>
+			<role-name>ADMINISTRATOR</role-name>
+			<role-name>USER</role-name>
+		</auth-constraint>
+
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Webseite</web-resource-name>
+			<url-pattern>/sec/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMINISTRATOR</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Resourcen freigeben</web-resource-name>
+			<url-pattern>/css/*</url-pattern>
+			<url-pattern>/fonts/*</url-pattern>
+			<url-pattern>/scripts/*</url-pattern>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login2.xhtml</form-login-page>
+			<form-error-page>/error.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<security-role>
+		<role-name>ADMINISTRATOR</role-name>
+	</security-role>
+
+	<security-role>
+		<role-name>USER</role-name>
+	</security-role>
 </web-app>
