@@ -18,5 +18,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Views/wildfly-10.1.0.FinalV2/bin/client/jboss-client.jar"/>
+	<classpathentry kind="lib" path="/GroupfitnessV11EJB"/>
+	<classpathentry kind="lib" path="/GroupfitnessV11EJB/.settings"/>
+	<classpathentry kind="lib" path="/GroupfitnessV11EJB/build"/>
+	<classpathentry kind="lib" path="/GroupfitnessV11EJB/ejbModule"/>
+	<classpathentry kind="lib" path="/GroupfitnessV11EJB/target"/>
+	<classpathentry kind="lib" path="C:/Users/guggi229/Desktop/GroupfitnessV11EJB.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
