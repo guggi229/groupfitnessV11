@@ -4,8 +4,7 @@ package ch.guggisberg.stefan.groupfitness.services;
 
 import java.util.List;
 
-import javax.annotation.security.DeclareRoles;
-import javax.annotation.security.RolesAllowed;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,7 +17,7 @@ import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
 
 @Stateless
 @Remote(UserServiceRemote.class)
-@DeclareRoles({"ADMINISTRATOR", "USER"})
+
 public class UserService implements UserServiceRemote {
 
 	@PersistenceContext
@@ -53,7 +52,6 @@ public class UserService implements UserServiceRemote {
 		return null;
 	}
 	@Override
-	@RolesAllowed("ADMINISTRATOR")
 	public void sayHello() {
 		System.out.println("Hello2");
 	}
