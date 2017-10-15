@@ -23,32 +23,36 @@
 						<h:form>
 							<tr>
 								<th><h:inputText styleClass="form-control"
-										value="#{indexActionBean.password.description}" />
-									<h:message for="description" style="color:red" /></th>
+										value="#{indexActionBean.password.description}" /> <h:message
+										for="description" style="color:red" /></th>
 
 								<td><h:inputText styleClass="form-control"
 										value="#{indexActionBean.password.description}" /></td>
 								<th><h:inputText styleClass="form-control"
-										value="#{indexActionBean.password.description}" />
-									<h:message for="description" style="color:red" /></th>
+										value="#{indexActionBean.password.description}" /> <h:message
+										for="description" style="color:red" /></th>
 							</tr>
 							<th></th>
 							<th></th>
 						</h:form>
 						<ui:repeat var="k" value="#{kurse.allKurse}">
-							<tr>
-								<td><h:outputText styleClass="form-control"
-										value="#{k.kursName}" /></td>
+							<h:form>
+								<tr>
+									<td><h:outputText styleClass="form-control"
+											value="#{k.kursName}" /></td>
 
-								<td><h:inputTextarea styleClass="form-control" rows="10"
-										value="#{k.kursDescriptionDe}" /></td>
+									<td><h:inputTextarea styleClass="form-control" rows="10"
+											value="#{k.kursDescriptionDe}" /></td>
 
-								<td><h:inputTextarea styleClass="form-control" rows="10"
-										value="#{k.kursDescriptionFr}" /></td>
-								<td></td>
-								<td></td>
-							</tr>
-
+									<td><h:inputTextarea styleClass="form-control" rows="10"
+											value="#{k.kursDescriptionFr}" /></td>
+									<td><h:commandButton onclick="if (! confirm('#{msg['infos.sure']}')) return false" action="#{kurse.remove(k)}"
+											styleClass="btn btn-outline-danger" value="Löschen"
+											immediate="true" /></td>
+									<td><h:commandButton action="#{kurse.remove(k)}"
+											styleClass="btn btn-outline-warning" value="Edit" /></td>
+								</tr>
+							</h:form>
 						</ui:repeat>
 
 					</tbody>

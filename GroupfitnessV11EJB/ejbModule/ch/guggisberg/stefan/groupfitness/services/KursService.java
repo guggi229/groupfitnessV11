@@ -19,7 +19,7 @@ public class KursService implements KursServiceRemote{
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public Kurs create(Kurs kurs) throws KursAlreadyExistsException {
 		// TODO Auto-generated method stub
@@ -34,20 +34,18 @@ public class KursService implements KursServiceRemote{
 
 	@Override
 	public void remove(Long id) throws KursNotFoundException {
-		// TODO Auto-generated method stub
-		
+		em.remove(getKurs(id));		
 	}
 
 	@Override
 	public Kurs getKurs(Long id) throws KursNotFoundException {
-		
 		return em.find(Kurs.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Kurs> getAllKurs() {
-			return  em.createNamedQuery(Kurs.QUERY_FIND_ALL).getResultList();
+		return  em.createNamedQuery(Kurs.QUERY_FIND_ALL).getResultList();
 	}
 
 }
