@@ -13,18 +13,13 @@ import ch.guggisberg.stefan.groupfitness.services.UserServiceRemote;
 
 @ManagedBean
 public class Kurse {
-	
+
 	@EJB
 	private KursServiceRemote kursService;
-	
 
-	public String getWorld() {
-		
-		List<Kurs> kurse= kursService.getAllKurs();
-		for (Kurs kurs : kurse) {
-			System.out.println(kurs.getKursName());
-		}
-		return "123";
-		
+
+	public List<Kurs> getAllKurse() {
+		return kursService.getAllKurs();
+
 	}
 }

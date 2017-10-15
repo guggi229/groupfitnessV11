@@ -19,9 +19,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="kurs")
-@NamedNativeQueries({
-	@NamedNativeQuery(name= Kurs.QUERY_FIND_ALL, 
-			query ="SELECT * FROM Kurs", resultClass = Kurs.class)
+@NamedQueries({
+	@NamedQuery(name= Kurs.QUERY_FIND_ALL, 
+			query ="SELECT k FROM Kurs k")
 })
 
 public class Kurs implements Serializable {

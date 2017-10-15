@@ -47,7 +47,7 @@ public class KursService implements KursServiceRemote{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Kurs> getAllKurs() {
-			return  em.createQuery("SELECT k FROM Kurs k", Kurs.class).getResultList();
+			return  em.createNamedQuery(Kurs.QUERY_FIND_ALL).getResultList();
 	}
 
 }
