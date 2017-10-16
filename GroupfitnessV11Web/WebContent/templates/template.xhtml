@@ -18,57 +18,69 @@
 </h:head>
 
 <h:body>
-<h:form>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-	<a class="navbar-brand" href="#">Groupfitness</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarsExampleDefault"
-		aria-controls="navbarsExampleDefault" aria-expanded="false"
-		aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
+	<h:form>
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="#">Groupfitness</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-		<ul class="navbar-nav mr-auto">
-		<li class="nav-item active"><a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-		<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
-		<c:choose>
-			<c:when test="#{loginBean.logged}">
-  				
-  				<!-- Management Cours -->
-  				<li class="nav-item dropdown" ><a class="nav-link dropdown-toggle" href="http://example.com"
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#">Home<span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+				<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+				<c:choose>
+					<c:when test="#{loginBean.logged}">
+
+						<!-- Management Cours -->
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="http://example.com"
 							id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false">#{msg['menu.cours.management']}</a>
-							
-					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<h:commandLink styleClass="dropdown-item" action="#{loginBean.doLogout}" value="#{msg['menu.cours.management.setting.typ']}" />
-						<h:commandLink styleClass="dropdown-item" action="#{loginBean.doLogout}" value="#{msg['menu.cours.management.setting.cat']}" />
-						<h:commandLink styleClass="dropdown-item" action="#{loginBean.doLogout}" value="#{msg['menu.cours.management.setting.cours']}" />
-					</div>
-				</li>
-				
-				<!-- Management Cours -->					
-				<li class="ion-locked nav-link" data-pack="default" data-tags="padlock, security"></li>
-				<li class="nav-item dropdown" ><a class="nav-link dropdown-toggle" href="http://example.com"
+
+							<div class="dropdown-menu" aria-labelledby="dropdown01">
+								<h:commandLink styleClass="dropdown-item"
+									action="#{loginBean.doLogout}"
+									value="#{msg['menu.cours.management.setting.typ']}" />
+								<h:commandLink styleClass="dropdown-item"
+									action="#{loginBean.doLogout}"
+									value="#{msg['menu.cours.management.setting.cat']}" />
+								<h:commandLink styleClass="dropdown-item"
+									action="#{loginBean.doLogout}"
+									value="#{msg['menu.cours.management.setting.cours']}" />
+							</div></li>
+
+						<!-- Management Cours -->
+						<li class="ion-locked nav-link" data-pack="default"
+							data-tags="padlock, security"></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="http://example.com"
 							id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false">#{loginBean.user.userName}</a>
-							
-				<div class="dropdown-menu" aria-labelledby="dropdown01">
+
+							<div class="dropdown-menu" aria-labelledby="dropdown01">
 								<a class="dropdown-item ion-edit" href="#">Action</a>
 								<h:commandLink styleClass="dropdown-item"
 									action="#{loginBean.doLogout}" value="#{msg['user.setting']}" />
 								<h:commandLink styleClass="dropdown-item"
 									action="#{loginBean.doLogout}" value="#{msg['login.logout']}" />
-							</div></li>		
+							</div></li>
 					</c:when>
 				</c:choose>
-			
-		</ul>
-	</div>
-	</nav>
+
+			</ul>
+		</div>
+		</nav>
 	</h:form>
 	<div class="container content">
+		<div>
+			<h:messages infoClass="info" errorClass="error" globalOnly="true" />
+		</div>
 		<ui:insert name="content">
 		</ui:insert>
 	</div>

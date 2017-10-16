@@ -23,17 +23,19 @@
 						<h:form>
 							<tr>
 								<th><h:inputText styleClass="form-control"
-										value="#{indexActionBean.password.description}" /> <h:message
-										for="description" style="color:red" /></th>
+										value="#{kurse.kurs.kursName}" id="kursName" /> <h:message
+										 /></th>
 
 								<td><h:inputText styleClass="form-control"
-										value="#{indexActionBean.password.description}" /></td>
+										value="#{kurse.kurs.kursDescriptionDe}" id="kursDescriptionDe"/></td>
 								<th><h:inputText styleClass="form-control"
-										value="#{indexActionBean.password.description}" /> <h:message
-										for="description" style="color:red" /></th>
-							</tr>
+										value="#{kurse.kurs.kursDescriptionFr}" id="kursDescriptionFr"/> <h:message
+										 /></th>
+							
 							<th></th>
-							<th></th>
+							<th><h:commandButton action="#{kurse.addKurs}"
+											styleClass="btn btn-outline-success" value="#{msg['button.create']}" /></th>
+											</tr>
 						</h:form>
 						<ui:repeat var="k" value="#{kurse.allKurse}">
 							<h:form>
@@ -47,10 +49,10 @@
 									<td><h:inputTextarea styleClass="form-control" rows="10"
 											value="#{k.kursDescriptionFr}" /></td>
 									<td><h:commandButton onclick="if (! confirm('#{msg['infos.sure']}')) return false" action="#{kurse.remove(k)}"
-											styleClass="btn btn-outline-danger" value="Löschen"
+											styleClass="btn btn-outline-danger" value="#{msg['button.del']}"
 											immediate="true" /></td>
 									<td><h:commandButton action="#{kurse.remove(k)}"
-											styleClass="btn btn-outline-warning" value="Edit" /></td>
+											styleClass="btn btn-outline-warning" value="#{msg['button.edit']}" /></td>
 								</tr>
 							</h:form>
 						</ui:repeat>

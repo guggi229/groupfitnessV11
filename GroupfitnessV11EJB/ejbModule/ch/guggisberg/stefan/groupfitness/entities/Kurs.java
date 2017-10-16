@@ -4,6 +4,7 @@ package ch.guggisberg.stefan.groupfitness.entities;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,19 +24,23 @@ import javax.validation.constraints.Size;
 	@NamedQuery(name= Kurs.QUERY_FIND_ALL, 
 			query ="SELECT k FROM Kurs k")
 })
-
 public class Kurs implements Serializable {
 	
 	private static final long serialVersionUID = 5942147005085804609L;
 
 	public static final String QUERY_FIND_ALL = "QUERY_FIND_ALL";
+	
+	public Kurs() {
+		
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="classId")
 	private Long id;
 	
 	@Column(name="className")
-	@NotNull
+	//@NotNull
 	@Size(min=1, max=45)
 	private String kursName;
 	

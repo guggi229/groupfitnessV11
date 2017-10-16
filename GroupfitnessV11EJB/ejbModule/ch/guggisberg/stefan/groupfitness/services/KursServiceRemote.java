@@ -8,7 +8,7 @@ import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 
 public interface KursServiceRemote {
 
-	public Kurs create(Kurs kurs) throws KursAlreadyExistsException;
+	public void create(Kurs kurs) throws KursAlreadyExistsException;
 	public Kurs update(Kurs kurs) throws KursNotFoundException;
 	public void remove(Long id) throws KursNotFoundException;
 	public Kurs getKurs(Long id) throws KursNotFoundException;

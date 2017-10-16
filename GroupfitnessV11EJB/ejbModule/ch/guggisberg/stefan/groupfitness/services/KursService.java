@@ -21,9 +21,8 @@ public class KursService implements KursServiceRemote{
 	private EntityManager em;
 
 	@Override
-	public Kurs create(Kurs kurs) throws KursAlreadyExistsException {
-		// TODO Auto-generated method stub
-		return null;
+	public void create(Kurs kurs) throws KursAlreadyExistsException {
+		em.persist(kurs);
 	}
 
 	@Override
