@@ -23,8 +23,10 @@
 					<tbody>
 						<h:form>
 							<tr>
-								<th><h:inputText styleClass="form-control"
-										value="#{kurse.kurs.kursName}" id="kursName" /> <h:message /></th>
+								<th class="form-group"><h:inputText styleClass="form-control"
+										value="#{kurse.kurs.kursName}" id="kursName" required="true" requiredMessage="#{msg['warn.notNull']}"/> <h:message />
+										<h:message for="kursName" style="color:red" />
+										</th>
 
 								<td><h:inputText styleClass="form-control"
 										value="#{kurse.kurs.kursDescriptionDe}" id="kursDescriptionDe" /></td>
