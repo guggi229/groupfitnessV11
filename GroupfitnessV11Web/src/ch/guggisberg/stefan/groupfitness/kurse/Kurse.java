@@ -26,13 +26,7 @@ public class Kurse implements Serializable {
 	@EJB
 	private KursServiceRemote kursService;
 
-	private String kursName;
-	private String kursDescDe;
-	private String kursDescFr;
-	
-
-	private Kurs kurs = new Kurs();
-
+	private Kurs kurs = new Kurs(); // Inject
 	
 	public List<Kurs> getAllKurse() {
 		return kursService.getAllKurs();
@@ -41,45 +35,21 @@ public class Kurse implements Serializable {
 		kursService.remove(k.getId());
 		return "kurse";
 	}
-	public KursServiceRemote getKursService() {
-		return kursService;
-	}
-	public void setKursService(KursServiceRemote kursService) {
-		this.kursService = kursService;
-	}
-
 	public void addKurs() throws KursAlreadyExistsException {
 		kursService.create(kurs);
 	}
-	public String getKursName() {
-		return kursName;
+	public Kurs update(Kurs kurs) throws KursNotFoundException {
+		System.out.println(kurs.getKursName());
+		return kursService.update(kurs);
 	}
-	public void setKursName(String kursName) {
-		this.kursName = kursName;
-	}
-	public String getKursDescDe() {
-		return kursDescDe;
-	}
-	public void setKursDescDe(String kursDescDe) {
-		this.kursDescDe = kursDescDe;
-	}
-	public String getKursDescFr() {
-		return kursDescFr;
-	}
-	public void setKursDescFr(String kursDescFr) {
-		this.kursDescFr = kursDescFr;
-	}
+	
+	// Getter / Setter
+
 	public Kurs getKurs() {
 		return kurs;
 	}
 	public void setKurs(Kurs kurs) {
 		this.kurs = kurs;
 	}
-
-
-	
-	
-	
-	
 
 }

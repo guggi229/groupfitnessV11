@@ -1,26 +1,49 @@
-
 /* Ausrichtung content  */
 .content {
-	 margin-top: 100px;
+	margin-top: 100px;
 }
 
 .button {
-	margin-top:10px;	
+	margin-top: 10px;
 }
 
-.marginRight{
+.marginRight {
 	margin-right: 10px;
 }
-.tableHead{
+
+.tableHead {
 	background-color: #333;
 	width: 300px;
 	padding-left: 15px;
 }
-.tableBody{
+
+.tableBody {
 	width: 300px;
 	padding-left: 15px;
 }
-.tableText{
+
+.tableText {
 	color: #fff;
 	padding-left: 15px;
 }
+
+/* Message Style (Error and Info) */
+.info {
+    background-color: #28a745;
+    border-color: #28a745;
+    border-radius: .25rem;
+    padding: 5px;
+}
+
+.error {
+	background-color: #dc3545;
+    border-color: #dc3545; 
+  }
+.messageListStyle{
+    list-style: none;
+    padding-left: 10px;
+    color: white;
+    background-image: none;
+    border-radius: .25rem;
+     padding: 5px;
+    }

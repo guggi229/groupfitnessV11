@@ -5,30 +5,35 @@ import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 
 @Stateless
 @Remote(KursServiceRemote.class)
-public class KursService implements KursServiceRemote{
+public class KursService extends BaseBean implements KursServiceRemote{
 
+	private static final long serialVersionUID = 319735437119932640L;
+	
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
 	public void create(Kurs kurs) throws KursAlreadyExistsException {
+		showGlobalMessage("info.UserDataSaved", "saveOK");
 		em.persist(kurs);
 	}
 
 	@Override
 	public Kurs update(Kurs kurs) throws KursNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(kurs);
 	}
 
 	@Override
@@ -46,5 +51,5 @@ public class KursService implements KursServiceRemote{
 	public List<Kurs> getAllKurs() {
 		return  em.createNamedQuery(Kurs.QUERY_FIND_ALL).getResultList();
 	}
-
+	
 }

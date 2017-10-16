@@ -9,6 +9,7 @@
 	<ui:define name="content">
 		<div class="container">
 			<div>
+
 				<table class="table table-sm table-inverse">
 					<thead>
 						<tr>
@@ -23,24 +24,24 @@
 						<h:form>
 							<tr>
 								<th><h:inputText styleClass="form-control"
-										value="#{kurse.kurs.kursName}" id="kursName" /> <h:message
-										 /></th>
+										value="#{kurse.kurs.kursName}" id="kursName" /> <h:message /></th>
 
 								<td><h:inputText styleClass="form-control"
-										value="#{kurse.kurs.kursDescriptionDe}" id="kursDescriptionDe"/></td>
+										value="#{kurse.kurs.kursDescriptionDe}" id="kursDescriptionDe" /></td>
 								<th><h:inputText styleClass="form-control"
-										value="#{kurse.kurs.kursDescriptionFr}" id="kursDescriptionFr"/> <h:message
-										 /></th>
-							
-							<th></th>
-							<th><h:commandButton action="#{kurse.addKurs}"
-											styleClass="btn btn-outline-success" value="#{msg['button.create']}" /></th>
-											</tr>
+										value="#{kurse.kurs.kursDescriptionFr}" id="kursDescriptionFr" />
+									<h:message /></th>
+
+								<th></th>
+								<th><h:commandButton action="#{kurse.addKurs}"
+										styleClass="btn btn-outline-success"
+										value="#{msg['button.create']}" /></th>
+							</tr>
 						</h:form>
 						<ui:repeat var="k" value="#{kurse.allKurse}">
 							<h:form>
 								<tr>
-									<td><h:outputText styleClass="form-control"
+									<td><h:inputText styleClass="form-control" id="kursName"
 											value="#{k.kursName}" /></td>
 
 									<td><h:inputTextarea styleClass="form-control" rows="10"
@@ -48,11 +49,14 @@
 
 									<td><h:inputTextarea styleClass="form-control" rows="10"
 											value="#{k.kursDescriptionFr}" /></td>
-									<td><h:commandButton onclick="if (! confirm('#{msg['infos.sure']}')) return false" action="#{kurse.remove(k)}"
-											styleClass="btn btn-outline-danger" value="#{msg['button.del']}"
-											immediate="true" /></td>
-									<td><h:commandButton action="#{kurse.remove(k)}"
-											styleClass="btn btn-outline-warning" value="#{msg['button.edit']}" /></td>
+									<td><h:commandButton
+											onclick="if (! confirm('#{msg['infos.sure']}')) return false"
+											action="#{kurse.remove(k)}"
+											styleClass="btn btn-outline-danger"
+											value="#{msg['button.del']}" immediate="true" /></td>
+									<td><h:commandButton action="#{kurse.update(k)}"
+											styleClass="btn btn-outline-warning"
+											value="#{msg['button.edit']}" /></td>
 								</tr>
 							</h:form>
 						</ui:repeat>
