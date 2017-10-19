@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ch.guggisberg.stefan.groupfitness.services.LoginBean;
 
+@Deprecated
 public class LoginFilter implements Filter {
 	
 	@Override

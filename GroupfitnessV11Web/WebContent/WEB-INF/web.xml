@@ -82,7 +82,7 @@
 	</login-config>
 
 	<security-role>
-		<role-name>ADMINISTRATOR</role-name>
+		<role-name>Admin</role-name>
 	</security-role>
 
 	<security-role>

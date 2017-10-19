@@ -25,6 +25,7 @@ import ch.guggisberg.stefan.groupfitness.entities.User;
  */
 @ManagedBean(name="loginBean")
 @SessionScoped
+@Deprecated
 public final class LoginBean implements Serializable  {
 	private static final long serialVersionUID = -3070846601605974845L;
 	private static Logger log = Logger.getLogger(LoginBean.class);
