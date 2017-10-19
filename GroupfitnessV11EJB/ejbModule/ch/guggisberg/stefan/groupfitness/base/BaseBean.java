@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+
+
 /**
  * 
  * @author guggi229
@@ -15,21 +17,52 @@ import javax.faces.context.FacesContext;
  * Lädt das richtige Message Bundle für die Übersetzung
  *
  */
-abstract public class BaseBean implements Serializable {
 
+
+
+abstract public class BaseBean implements Serializable {
+//	public static void main(String args[]) {
+//		
+//		
+//		System.out.println(String.format("Daten gespeichert %s","test"));
+//	}
+	
 	private static final long serialVersionUID = 7832409288788294742L;
 
+	/**
+	 * 
+	 * @param key Ist eine Schlüssel in der Message Bundle
+	 * @param jsfInfo Wird in dieser Version nicht benötigt.
+	 */
 	public void showGlobalMessage(String key, String jsfInfo){
+		
 		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO,getText(key), jsfInfo);
 		FacesContext fc = FacesContext.getCurrentInstance();
 		fc.addMessage(null, facesMsg);
 	}
-
+	/**
+	 * Zeigt Fehlermeldungen im Globale Scope an.
+	 * @param key Ist eine Schlüssel in der Message Bundle
+	 * @param jsfInfo Wird in dieser Version nicht benötigt.
+	 */
 	public void showGlobalErrorMessage(String key, String jsfInfo){
 		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,getText(key), jsfInfo);
 		FacesContext fc = FacesContext.getCurrentInstance();
 		fc.addMessage(null, facesMsg);
 	}
+	 public void showLocalErrrorMessage()  {
+	FacesMessage msg =
+			new FacesMessage("E-mail validation failed.",
+					"Die Emaailadresse hat ein falsches Format!");
+	msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+	// throw new ValidatorException(msg);
+	}
+	
+	/**
+	 * Sucht die Übersetzung mit dem Key
+	 * @param key
+	 * @return Übersetzer Text
+	 */
 	private String getText(String key) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String messageBundleName = facesContext.getApplication().getMessageBundle();
@@ -37,4 +70,8 @@ abstract public class BaseBean implements Serializable {
 		ResourceBundle bundle = ResourceBundle.getBundle(messageBundleName, locale);
 		return bundle.getString(key);
 	}
+	
+
+	
+	
 }

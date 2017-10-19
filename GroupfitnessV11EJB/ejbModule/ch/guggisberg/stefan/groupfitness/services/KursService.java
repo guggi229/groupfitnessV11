@@ -27,6 +27,7 @@ public class KursService extends BaseBean implements KursServiceRemote{
 
 	@Override
 	public void create(Kurs kurs) throws KursAlreadyExistsException {
+		
 		showGlobalMessage("info.UserDataSaved", "saveOK");
 		em.persist(kurs);
 	}

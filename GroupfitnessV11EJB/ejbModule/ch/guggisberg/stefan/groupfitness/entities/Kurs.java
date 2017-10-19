@@ -44,11 +44,11 @@ public class Kurs implements Serializable {
 	@Size(min=1, max=45)
 	private String kursName;
 	
-	@Size(min=1, max=200)
+	@Size(max=200)
 	@Column(name="classDescriptionDe")
 	private String kursDescriptionDe;
 
-	@Size(min=1, max=200)
+	@Size(max=200)
 	@Column(name="classDescriptionFr")
 	private String kursDescriptionFr;
 	
