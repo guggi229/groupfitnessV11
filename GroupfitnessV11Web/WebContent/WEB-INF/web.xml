@@ -45,9 +45,9 @@
 
 		<auth-constraint>
 			<role-name>Admin</role-name>
-			<role-name>USER</role-name>
+			<role-name>User</role-name>
+			<role-name>Customer</role-name>
 		</auth-constraint>
-
 	</security-constraint>
 
 	<security-constraint>
@@ -58,7 +58,21 @@
 			<http-method>GET</http-method>
 		</web-resource-collection>
 		<auth-constraint>
+			<role-name>GroupfitnessAdmin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Webseite</web-resource-name>
+			<url-pattern>/customer/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<auth-constraint>
 			<role-name>Admin</role-name>
+			<role-name>Customer</role-name>
+			<role-name>GroupfitnessAdmin</role-name>
 		</auth-constraint>
 	</security-constraint>
 
@@ -86,6 +100,10 @@
 	</security-role>
 
 	<security-role>
-		<role-name>USER</role-name>
+		<role-name>Customer</role-name>
+	</security-role>
+
+	<security-role>
+		<role-name>GroupfitnessAdmin</role-name>
 	</security-role>
 </web-app>

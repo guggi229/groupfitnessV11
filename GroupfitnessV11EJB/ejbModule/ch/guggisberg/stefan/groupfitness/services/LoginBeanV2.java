@@ -11,7 +11,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
+
+import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.User;
 
 /**
@@ -25,10 +28,16 @@ import ch.guggisberg.stefan.groupfitness.entities.User;
  */
 @ManagedBean(name="loginBeanV2")
 @SessionScoped
-public final class LoginBeanV2 implements Serializable  {
+public final class LoginBeanV2 extends BaseBean implements Serializable  {
 	private static final long serialVersionUID = -3070846601605974845L;
 	private static Logger log = Logger.getLogger(LoginBeanV2.class);
 
-		
+	public String logout() {
+	     return "/home.xhtml?faces-redirect=true";
+	}
+	
+	public String login() {
+		return "customer/customersHome";
+	}
 	
 }

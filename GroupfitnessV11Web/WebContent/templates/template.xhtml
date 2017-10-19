@@ -33,9 +33,9 @@
 				<li class="nav-item active"><a class="nav-link" href="#">Home<span
 						class="sr-only">(current)</span></a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-				<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+				
 				<c:choose>
-					<c:when test="#{request.isUserInRole('Admin')}">
+					<c:when test="#{request.isUserInRole('GroupfitnessAdmin')}">
 
 						<!-- Management Cours -->
 						<li class="nav-item dropdown"><a
@@ -54,8 +54,13 @@
 									action="#{loginBean.doLogout}"
 									value="#{msg['menu.cours.management.setting.cours']}" />
 							</div></li>
+					</c:when>
+				</c:choose>
 
-						<!-- Management Cours -->
+				<c:choose>
+					<c:when test="#{request.isUserInRole('Customer')}">
+
+						<!-- Manage Customer -->
 						<li class="ion-locked nav-link" data-pack="default"
 							data-tags="padlock, security"></li>
 						<li class="nav-item dropdown"><a
@@ -68,10 +73,14 @@
 								<h:commandLink styleClass="dropdown-item"
 									action="#{loginBean.doLogout}" value="#{msg['user.setting']}" />
 								<h:commandLink styleClass="dropdown-item"
-									action="#{loginBean.doLogout}" value="#{msg['login.logout']}" />
+									action="#{loginBeanV2.logout()}" value="#{msg['login.logout']}" />
 							</div></li>
 					</c:when>
 				</c:choose>
+				<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+				
+				<li class="nav-item"><h:link outcome="/customer/customersHome" value="#{msg['login.login']}" styleClass="ion-locked nav-link"
+						rendered="#{empty request.remoteUser}" /></li>
 
 			</ul>
 			<h:messages infoClass="info messageListStyle" errorClass="error"
