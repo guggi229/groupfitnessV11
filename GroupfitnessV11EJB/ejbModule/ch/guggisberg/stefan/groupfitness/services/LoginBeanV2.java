@@ -33,6 +33,7 @@ public final class LoginBeanV2 extends BaseBean implements Serializable  {
 	private static Logger log = Logger.getLogger(LoginBeanV2.class);
 
 	public String logout() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 	     return "/home.xhtml?faces-redirect=true";
 	}
 	
