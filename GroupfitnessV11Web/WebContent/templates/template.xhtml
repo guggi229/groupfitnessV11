@@ -20,7 +20,8 @@
 <h:body>
 	<h:form>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-		<a class="navbar-brand" href="#">Groupfitness</a>
+		<h:link value="Groupfitness" outcome="home" styleClass="navbar-brand" />
+		
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExampleDefault"
 			aria-controls="navbarsExampleDefault" aria-expanded="false"
@@ -37,16 +38,20 @@
 					</c:when>
 				</c:choose>
 
+				<li class="nav-item"><h:link outcome="/productoverview"
+						value="#{msg['menu.cours.management.cours']}"
+						styleClass="nav-link" /></li>
+
 				<c:choose>
 					<c:when test="#{request.isUserInRole('Customer')}">
 
 						<ui:include src="/templates/menuCustomer.xhtml" />
 					</c:when>
 				</c:choose>
-			
+
 				<li class="nav-item"><h:link outcome="/customer/customersHome"
 						value="#{msg['login.login']}" styleClass="nav-link"
-						rendered="#{empty request.remoteUser}" /></li>  
+						rendered="#{empty request.remoteUser}" /></li>
 
 			</ul>
 			<h:messages infoClass="info messageListStyle" errorClass="error"

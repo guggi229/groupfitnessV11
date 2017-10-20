@@ -9,14 +9,10 @@
 		aria-haspopup="true" aria-expanded="false">#{msg['menu.cours.management']}</a>
 
 		<div class="dropdown-menu" aria-labelledby="dropdown01">
+			
+
 			<h:commandLink styleClass="dropdown-item"
 				action="#{loginBean.doLogout}"
-				value="#{msg['menu.cours.management.setting.typ']}" />
-			<h:commandLink styleClass="dropdown-item"
-				action="#{loginBean.doLogout}"
-				value="#{msg['menu.cours.management.setting.cat']}" />
-			<h:commandLink styleClass="dropdown-item"
-				action="#{loginBean.doLogout}"
-				value="#{msg['menu.cours.management.setting.cours']}" />
+				value="#{msg['menu.cours.management.new.cours']}" />
 		</div></li>
 </ui:composition>

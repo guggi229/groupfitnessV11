@@ -60,6 +60,7 @@
 		<web-resource-collection>
 			<web-resource-name>Webseite</web-resource-name>
 			<url-pattern>/sec/*</url-pattern>
+			<url-pattern>/groupfitnessAdmin/*</url-pattern>
 			<http-method>POST</http-method>
 			<http-method>GET</http-method>
 		</web-resource-collection>
