@@ -39,7 +39,6 @@ public class Kurse implements Serializable {
 		kursService.create(kurs);
 	}
 	public Kurs update(Kurs kurs) throws KursNotFoundException {
-		System.out.println(kurs.getKursName());
 		return kursService.update(kurs);
 	}
 	

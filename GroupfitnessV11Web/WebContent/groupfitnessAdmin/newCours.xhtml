@@ -5,10 +5,41 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
-	<ui:define name="title">Login Page</ui:define>
+	<ui:define name="title">#{msg['title.newCours']}</ui:define>
 	<ui:define name="content">
 		<div class="container">
-			
+
+			<h:form>
+				<h2 class="form-signin-heading">#{msg['title.newCours']}</h2>
+				<div class="form-group">
+					<label for="newCoursDe">#{msg['newcourstyp.name.de']}</label> <input
+						type="text" class="form-control " id="newCoursDe"
+						placeholder="Yoga, BBP etc" />
+				</div>
+				<div class="form-group">
+					<label for="newCoursFr">#{msg['newcourstyp.name.fr']}</label> <input
+						type="text" class="form-control " id="newCoursFr"
+						placeholder="Yoga, BBP etc" />
+				</div>
+
+				<div class="form-group">
+					<label for="descriptionDe">#{msg['newcourstyp.description.de']}</label>
+					<h:inputTextarea styleClass="form-control"
+						value="#{kurse.kurs.kursDescriptionDe}" id="descriptionDe" placeholder="Yoga, BBP etc" rows="10"/>
+					<h:message for="descriptionDe" style="color:red" />
+				</div>
+
+				<div class="form-group">
+					<label for="descriptionFr">#{msg['newcourstyp.description.fr']}</label>
+					<h:inputTextarea styleClass="form-control"
+						value="#{kurse.kurs.kursDescriptionFr}" id="descriptionFr"  placeholder="Yoga, BBP etc" rows="10"/>
+					<h:message for="descriptionFe" style="color:red" />
+				</div>
+
+
+			</h:form>
+
+
 		</div>
 		<!-- /container -->
 	</ui:define>

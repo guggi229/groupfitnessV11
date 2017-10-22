@@ -39,10 +39,13 @@ public class Kurs implements Serializable {
 	@Column(name="classId")
 	private Long id;
 	
-	@Column(name="className")
-	//@NotNull
+	@Column(name="classNameDe")
 	@Size(min=1, max=45)
-	private String kursName;
+	private String kursNameDe;
+	
+	@Column(name="classNameFr")
+	@Size(min=1, max=45)
+	private String kursNameFr;
 	
 	@Size(max=200)
 	@Column(name="classDescriptionDe")
@@ -60,15 +63,6 @@ public class Kurs implements Serializable {
 		this.id = id;
 	}
 
-
-	public String getKursName() {
-		return kursName;
-	}
-
-	public void setKursName(String kursName) {
-		this.kursName = kursName;
-	}
-
 	public String getKursDescriptionDe() {
 		return kursDescriptionDe;
 	}
@@ -83,6 +77,22 @@ public class Kurs implements Serializable {
 
 	public void setKursDescriptionFr(String kursDescriptionFr) {
 		this.kursDescriptionFr = kursDescriptionFr;
+	}
+
+	public String getKursNameDe() {
+		return kursNameDe;
+	}
+
+	public void setKursNameDe(String kursNameDe) {
+		this.kursNameDe = kursNameDe;
+	}
+
+	public String getKursNameFr() {
+		return kursNameFr;
+	}
+
+	public void setKursNameFr(String kursNameFr) {
+		this.kursNameFr = kursNameFr;
 	}
 	
 	

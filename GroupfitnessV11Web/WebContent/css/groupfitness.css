@@ -29,21 +29,27 @@
 
 /* Message Style (Error and Info) */
 .info {
-    background-color: #28a745;
-    border-color: #28a745;
-    border-radius: .25rem;
-    padding: 5px;
+	background-color: #28a745;
+	border-color: #28a745;
+	border-radius: .25rem;
+	padding: 5px;
 }
 
 .error {
 	background-color: #dc3545;
-    border-color: #dc3545; 
-  }
-.messageListStyle{
-    list-style: none;
-    padding-left: 10px;
-    color: white;
-    background-image: none;
-    border-radius: .25rem;
-     padding: 5px;
-    }
+	border-color: #dc3545;
+}
+
+.messageListStyle {
+	list-style: none;
+	padding-left: 10px;
+	color: white;
+	background-image: none;
+	border-radius: .25rem;
+	padding: 5px;
+}
+/* Form fix for jsf */
+.backgroundwhite {
+	background-color: #fff;
+}
+
