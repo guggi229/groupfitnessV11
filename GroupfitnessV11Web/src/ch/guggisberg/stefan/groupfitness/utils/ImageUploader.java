@@ -10,25 +10,20 @@ import javax.servlet.http.Part;
 @SessionScoped
 public class ImageUploader {
 
-    private Part file1;
-    private Part file2;
+    private Part file;
+   
 
-    public Part getFile1() {
-        return file1;
+    public Part getFile() {
+        return file;
     }
 
     public void setFile1(Part file1) {
-        this.file1 = file1;
-    }
-
-  
-    public void setFile2(Part file2) {
-        this.file2 = file2;
+        this.file = file1;
     }
 
     public String upload() throws IOException {
         // C:\Users\guggi229\Documents
-        file1.write("C:\\Users\\guggi229\\Documents\\"+getFilename(file1));
+        file.write("C:\\Users\\guggi229\\Documents\\"+getFilename(file));
          return "success";
     }
 

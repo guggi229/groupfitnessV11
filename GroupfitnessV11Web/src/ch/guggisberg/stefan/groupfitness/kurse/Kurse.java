@@ -1,5 +1,6 @@
 package ch.guggisberg.stefan.groupfitness.kurse;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.management.DescriptorKey;
+import javax.servlet.http.Part;
 
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
@@ -25,7 +27,7 @@ public class Kurse implements Serializable {
 
 	@EJB
 	private KursServiceRemote kursService;
-
+	private Part file;
 	private Kurs kurs = new Kurs(); // Inject
 	
 	public List<Kurs> getAllKurse() {
@@ -35,12 +37,27 @@ public class Kurse implements Serializable {
 		kursService.remove(k.getId());
 		return "kurse";
 	}
-	public void addKurs() throws KursAlreadyExistsException {
-		kursService.create(kurs);
+	public void addKurs() throws KursAlreadyExistsException, IOException {
+		kurs = kursService.create(kurs);
+		System.out.println("Kurs ID :" + kurs.getId());
+		file.write("C:\\Users\\guggi229\\Documents\\"+getFilename(file));
+		kurs=null;
+		
 	}
 	public Kurs update(Kurs kurs) throws KursNotFoundException {
 		return kursService.update(kurs);
 	}
+	
+	private static String getFilename(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+  
+        	if (cd.trim().startsWith("filename")) {
+                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
+            }
+        }
+        return null;
+    }
 	
 	// Getter / Setter
 
@@ -50,5 +67,12 @@ public class Kurse implements Serializable {
 	public void setKurs(Kurs kurs) {
 		this.kurs = kurs;
 	}
+	public Part getFile() {
+		return file;
+	}
+	public void setFile(Part file) {
+		this.file = file;
+	}
+	
 
 }

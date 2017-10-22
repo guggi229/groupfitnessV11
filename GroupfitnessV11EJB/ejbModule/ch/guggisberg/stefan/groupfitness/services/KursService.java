@@ -26,10 +26,11 @@ public class KursService extends BaseBean implements KursServiceRemote{
 	private EntityManager em;
 
 	@Override
-	public void create(Kurs kurs) throws KursAlreadyExistsException {
-		
+	public Kurs create(Kurs kurs) throws KursAlreadyExistsException {
 		showGlobalMessage("info.UserDataSaved", "saveOK");
 		em.persist(kurs);
+		em.flush();
+		return kurs;
 	}
 
 	@Override
