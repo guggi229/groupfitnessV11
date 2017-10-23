@@ -1,25 +1,17 @@
 package ch.guggisberg.stefan.groupfitness.kurse;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.management.DescriptorKey;
 import javax.servlet.http.Part;
-
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
-import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
-import ch.guggisberg.stefan.groupfitness.services.KursService;
 import ch.guggisberg.stefan.groupfitness.services.KursServiceRemote;
-import ch.guggisberg.stefan.groupfitness.services.UserServiceRemote;
 
 @RequestScoped
 @Named
@@ -37,12 +29,12 @@ public class Kurse implements Serializable {
 	public String remove (Kurs k) throws KursNotFoundException {
 		kursService.remove(k.getId());
 		return "kurse";
+		
 	}
 	public void addKurs() throws KursAlreadyExistsException, IOException {
-		kurs = kursService.create(kurs);
-		System.out.println("Kurs ID :" + kurs.getId());
-		getFileTyp();
-		file.write("C:\\Users\\guggi229\\Documents\\"+ kurs.getId() + "." + getFileTyp());
+		kurs = kursService.create(kurs); // Nach dem persistieren wird das Avatar mit Kurs ID gespeichert
+		if (file != null) file.write("C:\\Users\\guggi229\\Documents\\cours\\"+ kurs.getId() + "." + getFileTyp());
+		file= null;
 		kurs=null;
 		
 	}
@@ -53,17 +45,6 @@ public class Kurse implements Serializable {
 	private String getFileTyp() {
 		return file.getContentType().substring(file.getContentType().indexOf("/")+1);
 	}
-	
-//	private static String getFilename(Part part) {
-//        for (String cd : part.getHeader("content-disposition").split(";")) {
-//  
-//        	if (cd.trim().startsWith("filename")) {
-//                String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-//                return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
-//            }
-//        }
-//        return null;
-//    }
 	
 	// Getter / Setter
 

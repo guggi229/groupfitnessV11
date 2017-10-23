@@ -5,12 +5,24 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 	<!-- Management Cours -->
 	<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-		href="#" id="dropdown01" data-toggle="dropdown"
-		aria-haspopup="true" aria-expanded="false">#{msg['menu.cours.management']}</a>
+		href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+		aria-expanded="false">#{msg['menu.cours.management']}</a>
 
 		<div class="dropdown-menu" aria-labelledby="dropdown01">
-			
-		<a class="dropdown-item" href="/GroupfitnessV11Web/groupfitnessAdmin/newCours.xhtml">#{msg['menu.cours.management.new.courstyp']}</a>
 
+			<a class="dropdown-item"
+				href="/GroupfitnessV11Web/groupfitnessAdmin/newCours.xhtml">#{msg['menu.cours.management.new.courstyp']}</a>
+			
+		</div></li>
+	<!-- Mitarbeiter Cours -->
+	<li class="nav-item dropdown">
+	
+	<a class="nav-link dropdown-toggle"
+		href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
+		aria-expanded="false">#{msg['menu.employee.management']}</a>
+		
+		
+		<div class="dropdown-menu" aria-labelledby="dropdown01">
+				<h:link outcome="/groupfitnessAdmin/newEmployee" styleClass="dropdown-item">#{msg['menu.cours.management.new.employee']}</h:link>
 		</div></li>
 </ui:composition>

@@ -31,6 +31,8 @@ public class User implements Serializable {
 	@Column(name="UserLang")
 	private String  userLang;
 	
+	@Column(name="UserVorname")
+	private String  userVorname;
 
 	
 	// Konstruktor für Hibernate
@@ -67,6 +69,12 @@ public class User implements Serializable {
 	}
 	public void setUserLang(String userLang) {
 		this.userLang = userLang;
+	}
+	public String getUserVorname() {
+		return userVorname;
+	}
+	public void setUserVorname(String userVorname) {
+		this.userVorname = userVorname;
 	}
 
 
