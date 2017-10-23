@@ -55,11 +55,6 @@ public class Kurs implements Serializable {
 	@Column(name="classDescriptionFr")
 	private String kursDescriptionFr;
 	
-	@Column(name="classImageName")
-	@Size(max=45)
-	private String kursImageName;
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -98,14 +93,6 @@ public class Kurs implements Serializable {
 
 	public void setKursNameFr(String kursNameFr) {
 		this.kursNameFr = kursNameFr;
-	}
-
-	public String getKursImageName() {
-		return kursImageName;
-	}
-
-	public void setKursImageName(String kursImageName) {
-		this.kursImageName = kursImageName;
 	}
 
 		
