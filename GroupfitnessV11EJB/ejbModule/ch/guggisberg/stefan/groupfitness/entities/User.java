@@ -1,13 +1,17 @@
 package ch.guggisberg.stefan.groupfitness.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,7 +37,15 @@ public class User implements Serializable {
 	
 	@Column(name="UserVorname")
 	private String  userVorname;
+	
+	@Column(name="UserCreatedDate")
+	private LocalDateTime  userCreatedDate;
+	
+	@Column(name="UserModifiedDate")
+	private LocalDateTime  userModifiedDate;
 
+	@OneToMany(fetch = FetchType.EAGER)
+	private Set<Rollen> roles;
 	
 	// Konstruktor für Hibernate
 	public User() {
@@ -76,6 +88,26 @@ public class User implements Serializable {
 	public void setUserVorname(String userVorname) {
 		this.userVorname = userVorname;
 	}
+	public Set<Rollen> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Rollen> roles) {
+		this.roles = roles;
+	}
+	public LocalDateTime getUserCreatedDate() {
+		return userCreatedDate;
+	}
+	public void setUserCreatedDate(LocalDateTime userCreatedDate) {
+		this.userCreatedDate = userCreatedDate;
+	}
+	public LocalDateTime getUserModifiedDate() {
+		return userModifiedDate;
+	}
+	public void setUserModifiedDate(LocalDateTime userModifiedDate) {
+		this.userModifiedDate = userModifiedDate;
+	}
+
+
 
 
 }

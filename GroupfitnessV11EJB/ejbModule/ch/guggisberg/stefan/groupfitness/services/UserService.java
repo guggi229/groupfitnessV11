@@ -2,6 +2,7 @@ package ch.guggisberg.stefan.groupfitness.services;
 
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -9,6 +10,8 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.apache.log4j.Logger;
 
 import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.User;
@@ -22,14 +25,24 @@ import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
 public class UserService extends BaseBean implements UserServiceRemote {
 
 	private static final long serialVersionUID = -987975636197353363L;
+	private static Logger log = Logger.getLogger(UserService.class);
 	@PersistenceContext
 	private EntityManager em;
 	
 	@Override
-	public User create(User user) throws UserAlreadyExistsException {
-		showGlobalMessage("info.UserDataSaved", "saveOK");
-		em.persist(user);
-		em.flush();
+	public User create(User user) {
+		try {
+			user.setUserCreatedDate(LocalDateTime.now());
+			user.setUserModifiedDate(LocalDateTime.now());
+			em.persist(user);
+			em.flush();
+			showGlobalMessage("info.UserDataSaved", null);
+		} catch(Exception e) { // TODO!
+			showGlobalErrorMessage("warn.error", null);
+			log.error(e);
+		}
+		
+		
 		return user;
 	}
 

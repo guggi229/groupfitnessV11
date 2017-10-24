@@ -40,11 +40,11 @@ public class Kurs implements Serializable {
 	private Long id;
 	
 	@Column(name="classNameDe")
-	@Size(min=1, max=45)
+	@Size( max=45)
 	private String kursNameDe;
 	
 	@Column(name="classNameFr")
-	@Size(min=1, max=45)
+	@Size( max=45)
 	private String kursNameFr;
 	
 	@Size(max=200)

@@ -17,6 +17,7 @@ import ch.guggisberg.stefan.groupfitness.services.KursServiceRemote;
 @Named
 public class Kurse implements Serializable {
 	private static final long serialVersionUID = 8012191796192067840L;
+	private final String coursImage = "C:\\Users\\\\guggi229\\Documents\\cours\\";
 
 	@EJB
 	private KursServiceRemote kursService;
@@ -33,7 +34,7 @@ public class Kurse implements Serializable {
 	}
 	public void addKurs() throws KursAlreadyExistsException, IOException {
 		kurs = kursService.create(kurs); // Nach dem persistieren wird das Avatar mit Kurs ID gespeichert
-		if (file != null) file.write("C:\\Users\\guggi229\\Documents\\cours\\"+ kurs.getId() + "." + getFileTyp());
+		if (file != null) file.write(coursImage+ kurs.getId() + "." + getFileTyp());
 		file= null;
 		kurs=null;
 		

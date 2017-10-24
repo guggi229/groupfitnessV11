@@ -16,7 +16,7 @@ import ch.guggisberg.stefan.groupfitness.services.UserServiceRemote;
 @Named
 public class Users implements Serializable {
 	private static final long serialVersionUID = 2145918315776262944L;
-
+	private final String avatarPath ="C:\\Users\\guggi229\\Documents\\avatar\\";
 	@EJB
 	private UserServiceRemote userService;
 	private Part file;
@@ -24,7 +24,7 @@ public class Users implements Serializable {
 	
 	public void addUser() throws UserAlreadyExistsException, IOException {
 		user = userService.create(user); // Nach dem persistieren wird das Avatar mit User ID gespeichert
-		if (file != null) file.write("C:\\Users\\guggi229\\Documents\\avatar\\"+ user.getId() + "." + getFileTyp());
+		if (file != null) file.write(avatarPath+ user.getId() + "." + getFileTyp());
 		user = null;
 		file= null;
 	}

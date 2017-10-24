@@ -31,8 +31,6 @@
 .info {
 	background-color: #28a745;
 	border-color: #28a745;
-	border-radius: .25rem;
-	padding: 5px;
 }
 
 .error {
