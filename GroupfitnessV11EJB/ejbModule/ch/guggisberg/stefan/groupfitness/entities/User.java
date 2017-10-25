@@ -44,6 +44,9 @@ public class User implements Serializable {
 	@Column(name="UserModifiedDate")
 	private LocalDateTime  userModifiedDate;
 
+	@Column(name="UserPassword")
+	private String  userPassword;
+	
 	@OneToMany(fetch = FetchType.EAGER)
 	private Set<Rollen> roles;
 	
@@ -105,6 +108,12 @@ public class User implements Serializable {
 	}
 	public void setUserModifiedDate(LocalDateTime userModifiedDate) {
 		this.userModifiedDate = userModifiedDate;
+	}
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
 
