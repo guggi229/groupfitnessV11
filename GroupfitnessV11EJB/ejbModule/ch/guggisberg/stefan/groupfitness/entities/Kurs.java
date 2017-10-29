@@ -1,6 +1,7 @@
 package ch.guggisberg.stefan.groupfitness.entities;
 
 
+import java.io.File;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
@@ -94,6 +95,7 @@ public class Kurs implements Serializable {
 	public void setKursNameFr(String kursNameFr) {
 		this.kursNameFr = kursNameFr;
 	}
+
 
 		
 }

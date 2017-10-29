@@ -51,10 +51,15 @@
 	background-color: #fff;
 }
 
-/* Card forms */
+/* Card */
 .cardForm {
 	max-width: 320px;
 }
+.cardWhite{
+	min-width: 200px;
+	margin-bottom: 30px;
+}
+
 /* Eployee forms */
 .newEmployeeForm {
 	max-width: 150px;

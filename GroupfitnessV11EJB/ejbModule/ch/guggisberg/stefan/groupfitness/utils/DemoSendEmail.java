@@ -9,6 +9,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
  
+// https://linux.bfh.ch/services/mail/mail.html
+
+
 public class DemoSendEmail {
    public static void main(String[] args) {
       //Declare recipient's & sender's e-mail id.
@@ -16,7 +19,7 @@ public class DemoSendEmail {
       String sendrmailid = "guggs2@bfh.ch";	  
      //Mention user name and password as per your configuration
       final String uname = "guggs2";
-      final String pwd = "Cisco80C";
+      final String pwd = "";
       //We are using relay.jangosmtp.net for sending emails
       String smtphost = "smtp.bfh.ch";
      //Set properties and their values
@@ -33,13 +36,16 @@ public class DemoSendEmail {
 	   }
          });
  
-      try {
+
+      
+      try { //message.setContent("<h1>This is actual message</h1>", "text/html");
 	   //Create MimeMessage object & set values
 	   Message messageobj = new MimeMessage(sessionobj);
 	   messageobj.setFrom(new InternetAddress(sendrmailid));
 	   messageobj.setRecipients(Message.RecipientType.TO,InternetAddress.parse(destmailid));
 	   messageobj.setSubject("This is test Subject");
 	   messageobj.setText("Checking sending emails by using JavaMail APIs");
+	   messageobj.setContent("<h1>This is actual message</h1>", "text/html");
 	  //Now send the message
 	   Transport.send(messageobj);
 	   System.out.println("Your email sent successfully....");

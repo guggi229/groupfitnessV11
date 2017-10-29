@@ -1,6 +1,7 @@
 package ch.guggisberg.stefan.groupfitness.kurse;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -61,6 +62,11 @@ public class Kurse implements Serializable {
 	public void setFile(Part file) {
 		this.file = file;
 	}
-	
+	public String getImgPath(String id) {
+		File filejpg = new File(coursImage, id +".jpeg");
+			if (filejpg.exists()) return (coursImage + id +".jpeg");
+		return "/GroupfitnessV11Web/images/placeholder-image.png";
+		
+	}
 
 }

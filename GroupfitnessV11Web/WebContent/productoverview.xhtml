@@ -9,49 +9,27 @@
 	<ui:define name="content">
 		<div class="container">
 
-<div class="card-deck">
-  <div class="card">
-    <img class="card-img-top" src="/GroupfitnessV11Web/images/placeholder-image.png"
-					alt="Card image cap" />
-    <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-  <img class="card-img-top" src="/GroupfitnessV11Web/images/pump.jpg"
-					alt="Card image cap" />
-    <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-   <img class="card-img-top" src="/GroupfitnessV11Web/images/pump.jpg"
-					alt="Card image cap" /><div class="card-body">
-    <h4 class="card-title">Card title</h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-  </div>
-</div>
+			<div class="card-deck">
+				<ui:repeat var="k" value="#{kurse.allKurse}">
 
+					<div class="card cardWhite">
+					
+					<h:graphicImage url="image?id=#{k.id}" />
+					
+						<img class="card-img-top"
+							src="#{kurse.getImgPath(k.id)}"
+							alt="Card image cap" />
+						<div class="card-body">
+							<h4 class="card-title">#{k.kursNameDe}</h4>
+							<p class="card-text">#{k.kursDescriptionDe}</p>
+							<p class="card-text">
+								<small class="text-muted">Last updated 3 mins ago</small>
+							</p>
+						</div>
+					</div>
 
-
-
-		
-
-
+				</ui:repeat>
+			</div>
 
 		</div>
 		<!-- /container -->
