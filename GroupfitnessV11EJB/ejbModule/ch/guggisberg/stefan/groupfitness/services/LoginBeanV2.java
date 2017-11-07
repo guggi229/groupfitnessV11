@@ -1,21 +1,12 @@
 package ch.guggisberg.stefan.groupfitness.services;
 
 import java.io.Serializable;
-import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import ch.guggisberg.stefan.groupfitness.base.BaseBean;
-import ch.guggisberg.stefan.groupfitness.entities.User;
 
 /**
  * 

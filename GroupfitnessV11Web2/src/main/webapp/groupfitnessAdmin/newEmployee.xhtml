@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<ui:define name="title">#{msg['title.newEmplyee']}</ui:define>
+	<ui:define name="content">
+		<div class="container ">
+
+			<h:form enctype="multipart/form-data">
+				<h2 class="form-signin-heading">#{msg['title.newEmplyee']}</h2>
+				<div>
+
+					<div class="row">
+						<div class="col">
+							<div class="col newEmployeeForm">
+								<img src="/GroupfitnessV11Web/images/avatarneutral.png"
+									alt="Avatar" id="preview" />
+								<div>
+									<!-- image-preview-input -->
+									<h:inputFile value="#{users.file}" pt:id="select" />
+
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<label for="newUserName">#{msg['newuser.name']}</label>
+								<h:inputText type="text" class="form-control " id="newUserName"
+									placeholder="Karl etc" value="#{users.user.userName}" />
+							</div>
+							<div class="form-group">
+								<label for="newUserVorname">#{msg['newuser.vorname']}</label>
+								<h:inputText type="text" class="form-control "
+									id="newUserVorname" placeholder="Yoga, BBP etc"
+									value="#{users.user.userVorname}" />
+							</div>
+							<div class="form-group">
+								<label for="newUserEmail">#{msg['newuser.email']}</label>
+								<h:inputText type="text" class="form-control " id="newUserEmail"
+									placeholder="info@myCompany.ch" value="#{users.user.userEmail}" />
+							</div>
+							<div class="form-group">
+								<label for="password">#{msg['newuser.password']}</label>
+								<h:inputText type="text" class="form-control " id="password"
+									placeholder="Password" value="#{users.user.userPassword}" />
+							</div>
+							<div>
+							<fieldset class="form-group">
+								<div class="row">
+									<legend class="col-form-legend col-sm-2">Radios</legend>
+									<div class="col-sm-10">
+										<div class="form-check">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="gridRadios"
+												id="gridRadios1" value="option1" checked="checked" />
+												Option one is this and that&mdash;be sure to include why
+												it's great
+											</label>
+										</div>
+										<div class="form-check">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="gridRadios"
+												id="gridRadios2" value="option2" /> Option two can be
+												something else and selecting it will deselect option one
+											</label>
+										</div>
+										<div class="form-check disabled">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="gridRadios"
+												id="gridRadios3" value="option3" disabled="disabled" />
+												Option three is disabled
+											</label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+							</div>
+							<div>
+							<div>
+								<h:commandButton action="#{users.addUser()}"
+									styleClass="btn btn-primary" value="#{msg['button.create']}" />
+							</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</h:form>
+		</div>
+		<script src="/GroupfitnessV11Web/scripts/ImageTools.js"></script>
+		<script src="/GroupfitnessV11Web/scripts/newUser.js"></script>
+		<!-- /container -->
+	</ui:define>
+</ui:composition>
+
+

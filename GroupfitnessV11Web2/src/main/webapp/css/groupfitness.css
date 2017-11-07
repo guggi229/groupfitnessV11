@@ -1,0 +1,67 @@
+/* Ausrichtung content  */
+.content {
+	margin-top: 100px;
+}
+
+.button {
+	margin-top: 10px;
+}
+
+.marginRight {
+	margin-right: 10px;
+}
+
+.tableHead {
+	background-color: #333;
+	width: 300px;
+	padding-left: 15px;
+}
+
+.tableBody {
+	width: 300px;
+	padding-left: 15px;
+}
+
+.tableText {
+	color: #fff;
+	padding-left: 15px;
+}
+
+/* Message Style (Error and Info) */
+.info {
+	background-color: #28a745;
+	border-color: #28a745;
+}
+
+.error {
+	background-color: #dc3545;
+	border-color: #dc3545;
+}
+
+.messageListStyle {
+	list-style: none;
+	padding-left: 10px;
+	color: white;
+	background-image: none;
+	border-radius: .25rem;
+	padding: 5px;
+}
+/* Form fix for jsf */
+.backgroundwhite {
+	background-color: #fff;
+}
+
+/* Card */
+.cardForm {
+	max-width: 320px;
+}
+.cardWhite{
+	min-width: 200px;
+	margin-bottom: 30px;
+}
+
+/* Eployee forms */
+.newEmployeeForm {
+	max-width: 150px;
+}
+

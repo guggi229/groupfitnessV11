@@ -3,7 +3,6 @@
   
   <groupId>GroupfitnessV11Client</groupId>
   <artifactId>GroupfitnessV11Client</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <packaging>app-client</packaging>
   
   <build>
@@ -39,4 +38,13 @@
       </plugin>
     </plugins>
   </build>
+  <parent>
+  	<groupId>GroupfitnessTool</groupId>
+  	<artifactId>GroupfitnessToolParent</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>../GroupfitnessToolParent</relativePath>
+  </parent>
+  	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 </project>

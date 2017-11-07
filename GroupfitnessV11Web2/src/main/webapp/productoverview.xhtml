@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<ui:define name="title">Login Page</ui:define>
+	<ui:define name="content">
+		<div class="container">
+
+			<div class="card-deck">
+				<ui:repeat var="k" value="#{kurse.allKurse}">
+
+					<div class="card cardWhite">
+					
+					<h:graphicImage url="image?id=#{k.id}" />
+					
+						<img class="card-img-top"
+							src="#{kurse.getImgPath(k.id)}"
+							alt="Card image cap" />
+						<div class="card-body">
+							<h4 class="card-title">#{k.kursNameDe}</h4>
+							<p class="card-text">#{k.kursDescriptionDe}</p>
+							<p class="card-text">
+								<small class="text-muted">Last updated 3 mins ago</small>
+							</p>
+						</div>
+					</div>
+
+				</ui:repeat>
+			</div>
+
+		</div>
+		<!-- /container -->
+	</ui:define>
+</ui:composition>
+
+

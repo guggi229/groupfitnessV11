@@ -3,8 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>GroupfitnessV11Web</groupId>
 	<artifactId>GroupfitnessV11Web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>GroupfitnessV11EJB</groupId>
@@ -52,7 +55,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -72,9 +75,17 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
+					<warName>${artifactId}</warName>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	<parent>
+		<groupId>GroupfitnessTool</groupId>
+		<artifactId>GroupfitnessToolParent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../GroupfitnessToolParent</relativePath>
+	</parent>
+
 </project>

@@ -50,7 +50,7 @@ public class User implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER)
 	private Set<Rollen> roles;
 	
-	// Konstruktor für Hibernate
+	// Konstruktor fÃ¼r Hibernate
 	public User() {
 
 	}

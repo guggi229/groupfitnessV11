@@ -12,9 +12,9 @@ import javax.faces.context.FacesContext;
  * 
  * @author guggi229
  *
- * Generelle Elemente für die App.
+ * Generelle Elemente fï¿½r die App.
  * 
- * Lädt das richtige Message Bundle für die Übersetzung
+ * Lï¿½dt das richtige Message Bundle fï¿½r die ï¿½bersetzung
  *
  */
 
@@ -31,8 +31,8 @@ abstract public class BaseBean implements Serializable {
 
 	/**
 	 * 
-	 * @param key Ist eine Schlüssel in der Message Bundle
-	 * @param jsfInfo Wird in dieser Version nicht benötigt.
+	 * @param key Ist eine Schlï¿½ssel in der Message Bundle
+	 * @param jsfInfo Wird in dieser Version nicht benï¿½tigt.
 	 */
 	public void showGlobalMessage(String key, String jsfInfo){
 		
@@ -42,8 +42,8 @@ abstract public class BaseBean implements Serializable {
 	}
 	/**
 	 * Zeigt Fehlermeldungen im Globale Scope an.
-	 * @param key Ist eine Schlüssel in der Message Bundle
-	 * @param jsfInfo Wird in dieser Version nicht benötigt.
+	 * @param key Ist eine SchlÃ¼ssel in der Message Bundle
+	 * @param jsfInfo Wird in dieser Version nicht benÃ¶tigt.
 	 */
 	public void showGlobalErrorMessage(String key, String jsfInfo){
 		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,getText(key), jsfInfo);
@@ -59,9 +59,9 @@ abstract public class BaseBean implements Serializable {
 	}
 	
 	/**
-	 * Sucht die Übersetzung mit dem Key
+	 * Sucht die Ãœbersetzung mit dem Key
 	 * @param key
-	 * @return Übersetzer Text
+	 * @return Ã¼bersetzer Text
 	 */
 	private String getText(String key) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();

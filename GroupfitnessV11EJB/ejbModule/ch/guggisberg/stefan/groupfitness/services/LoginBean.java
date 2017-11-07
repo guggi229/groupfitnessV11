@@ -54,12 +54,12 @@ public final class LoginBean implements Serializable  {
 			result =  (Integer) query.getSingleResult();
 			if (result.intValue()>0){
 				
-				// User Entität aus DB laden
+				// User EntitÃ¤ aus DB laden
 				user = em.find(User.class, result.longValue());
 				log.info("User mit Email " + email + "hat korrekt eingeloggt");
 				loggedIn=true;
 				
-				// Local für diesen User setzen.
+				// Local fÃ¼r diesen User setzen.
 				UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();
 				viewRoot.setLocale(new Locale(user.getUserLang()));
 				return "secured/welcome";
@@ -73,13 +73,13 @@ public final class LoginBean implements Serializable  {
 	}
 
 	/**
-	 * Zerstört die Session!
+	 * ZerstÃ¶rt die Session!
 	 * 
 	 * @return Startpage
 	 */
 	public String doLogout(){
 		loggedIn = false;																
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();	// Usersession auf dem Backend löschen
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();	// Usersession auf dem Backend lÃ¶schen
 		return "/login";
 	}
 	

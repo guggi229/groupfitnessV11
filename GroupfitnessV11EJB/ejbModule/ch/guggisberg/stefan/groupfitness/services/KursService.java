@@ -1,16 +1,11 @@
 package ch.guggisberg.stefan.groupfitness.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
 import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;

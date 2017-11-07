@@ -3,9 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>GroupfitnessV11</groupId>
 	<artifactId>GroupfitnessV11</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>ear</packaging>
-
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		</properties>
 
 
 	<dependencies>
@@ -13,39 +14,47 @@
 		<dependency>
 			<groupId>GroupfitnessV11Client</groupId>
 			<artifactId>GroupfitnessV11Client</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<type>app-client</type>
 		</dependency>
 		<dependency>
 			<groupId>GroupfitnessV11EJB</groupId>
 			<artifactId>GroupfitnessV11EJB</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<type>ejb</type>
 		</dependency>
+
+
+
 		<dependency>
 			<groupId>GroupfitnessV11Web</groupId>
 			<artifactId>GroupfitnessV11Web</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>war</type>
 		</dependency>
-
 	</dependencies>
+	
+	
 	<build>
 		<plugins>
-			<plugin>
-				<artifactId>maven-acr-plugin</artifactId>
-				<version>1.0</version>
-				<extensions>true</extensions>
-			</plugin>
 			<plugin>
 				<artifactId>maven-ear-plugin</artifactId>
 				<version>2.10</version>
 				<configuration>
 					<earSourceDirectory>EarContent</earSourceDirectory>
-					<version>6</version>
+					<version>7</version>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<fileNameMapping>no-version</fileNameMapping>
+					<finalName>GroupfitnessV11</finalName>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	<parent>
+		<groupId>GroupfitnessTool</groupId>
+		<artifactId>GroupfitnessToolParent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../GroupfitnessToolParent</relativePath>
+	</parent>
+	<name>GroupfitnessV11</name>
 </project>
