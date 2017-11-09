@@ -1,0 +1,158 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>MavenResourceTest</groupId>
+	<artifactId>MavenResourceTest</artifactId>
+	<packaging>jar</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>MavenResourceTest Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<version.wildfly>10.1.0.Final</version.wildfly>
+		<jboss.home>${project.build.directory}/wildfly-${version.wildfly}</jboss.home>
+		<server.config>standalone.xml</server.config>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.44</version>
+		</dependency>
+
+	</dependencies>
+	<build>
+		<finalName>MavenResourceTest</finalName>
+		<plugins>
+			<!-- Zeigr beim Ausführen die Environment -->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<property environment="env" />
+								<echoproperties />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Setup Wildfly -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-wildfly</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.wildfly</groupId>
+									<artifactId>wildfly-dist</artifactId>
+									<version>${version.wildfly}</version>
+									<type>zip</type>
+									<overWrite>false</overWrite>
+									<outputDirectory>${project.build.directory}</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+
+					<!-- Copy server configuration -->
+
+					<execution>
+						<id>copy-standalone-xml</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+
+						<configuration>
+							<outputDirectory>${jboss.home}/standalone/configuration</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/wildflyConfig</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+
+
+					<!-- Kopiert den Treiber in den Ordner von Wildfly deployments -->
+					<execution>
+						<id>copy-mysql-driver</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${jboss.home}/standalone/deployments</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${settings.localRepository}/mysql/mysql-connector-java/5.1.44</directory>
+									<includes>
+										<include>mysql-connector-java-5.1.44.jar</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Wilffly Schnittstelle vorbereiten -->
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>1.2.1.Final</version>
+				<configuration>
+					<add-user>
+						<users>
+							<user>
+								<username>admin</username>
+								<password>1234</password>
+							</user>
+
+
+						</users>
+					</add-user>
+				</configuration>
+			</plugin>
+
+
+
+
+		</plugins>
+	</build>
+</project>
