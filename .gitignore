@@ -16,3 +16,4 @@ GroupfitnessV11/.project
 *.classpath
 MavenResourceTest/.settings/
 MavenResourceTest/.project
+MavenDomainBuilder/.settings/
