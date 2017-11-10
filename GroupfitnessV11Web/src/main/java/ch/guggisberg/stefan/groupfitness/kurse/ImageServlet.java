@@ -1,6 +1,5 @@
 package ch.guggisberg.stefan.groupfitness.kurse;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,14 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 /**
  * Servlet implementation class ImageServlet
  */
 @WebServlet("/image")
 public class ImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String coursImage = "C:\\Users\\\\guggi229\\Documents\\cours\\";
-	
+	private final String coursImage = "D:\\Documents\\cours\\";
+	private static Logger log = Logger.getLogger(ImageServlet.class);
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,12 +34,12 @@ public class ImageServlet extends HttpServlet {
 			if (file==null) file = Paths.get("/GroupfitnessV11Web/images/avatarneutral.png");
 			System.out.println(coursImage  + " " +  id +".jpeg");
 			byteFile = Files.readAllBytes(file);
+			response.reset();
+			response.getOutputStream().write(byteFile);
 		} catch (Exception e) {
-			System.out.println("Es ist ein Fehler aufgetreten!");
+			log.warn("Bild nicht vorhanden: ", e);
 		}
-		response.reset();
-		
-		response.getOutputStream().write(byteFile);
+
 	}
 
 }

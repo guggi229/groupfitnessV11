@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="user")
@@ -23,29 +24,34 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="Userid")
+	@Column(name="id")
 	private Long id;
-
-	@Column(name="username")
+	
+	@Size(max=45)
+	@Column(name="name")
 	private String  userName;
 	
-	@Column(name="UserEmail")
-	private String  userEmail;
-	
-	@Column(name="UserLang")
-	private String  userLang;
-	
-	@Column(name="UserVorname")
+	@Size(max=45)
+	@Column(name="vorname")
 	private String  userVorname;
 	
-	@Column(name="UserCreatedDate")
+	@Size(max=45)
+	@Column(name="email")
+	private String  userEmail;
+	
+	@Size(max=45)
+	@Column(name="password")
+	private String  userPassword;
+	
+	@Column(name="lang")
+	private String  userLang;
+	
+	
+	@Column(name="createdDate")
 	private LocalDateTime  userCreatedDate;
 	
-	@Column(name="UserModifiedDate")
+	@Column(name="modifiedDate")
 	private LocalDateTime  userModifiedDate;
-
-	@Column(name="UserPassword")
-	private String  userPassword;
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	private Set<Rollen> roles;

@@ -9,6 +9,9 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.servlet.http.Part;
+
+import org.apache.log4j.Logger;
+
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
@@ -18,7 +21,8 @@ import ch.guggisberg.stefan.groupfitness.services.KursServiceRemote;
 @Named
 public class Kurse implements Serializable {
 	private static final long serialVersionUID = 8012191796192067840L;
-	private final String coursImage = "C:\\Users\\\\guggi229\\Documents\\cours\\";
+	private final String coursImage = "D:\\Documents\\cours\\";
+	private static Logger log = Logger.getLogger(Kurse.class);
 
 	@EJB
 	private KursServiceRemote kursService;
@@ -38,8 +42,8 @@ public class Kurse implements Serializable {
 		if (file != null) file.write(coursImage+ kurs.getId() + "." + getFileTyp());
 		file= null;
 		kurs=null;
-		
 	}
+	
 	public Kurs update(Kurs kurs) throws KursNotFoundException {
 		return kursService.update(kurs);
 	}

@@ -368,8 +368,8 @@
                     <authentication>
                         <login-module code="Database" flag="required">
                             <module-option name="dsJndiName" value="java:/datasources/groupfitnessds"/>
-                            <module-option name="principalsQuery" value="SELECT UserPassword FROM user where UserEmail=?"/>
-                            <module-option name="rolesQuery" value="select  role, 'Roles' from roles r natural join user u where u.UserEmail=?"/>
+                            <module-option name="principalsQuery" value="SELECT password FROM user where email=?"/>
+                            <module-option name="rolesQuery" value="select  role, 'Roles' from roles r natural join user u where u.email=?"/>
                             <module-option name="hashEncoding" value="base64"/>
                         </login-module>
                     </authentication>
