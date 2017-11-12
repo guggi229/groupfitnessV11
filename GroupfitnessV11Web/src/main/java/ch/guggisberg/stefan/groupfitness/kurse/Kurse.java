@@ -16,6 +16,7 @@ import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 import ch.guggisberg.stefan.groupfitness.services.KursServiceRemote;
+import ch.guggisberg.stefan.groupfitness.utils.ImageUtil;
 
 @RequestScoped
 @Named
@@ -28,7 +29,7 @@ public class Kurse implements Serializable {
 	private KursServiceRemote kursService;
 	private Part file;
 	private Kurs kurs = new Kurs(); // Inject
-	
+		
 	public List<Kurs> getAllKurse() {
 		return kursService.getAllKurs();
 	}
@@ -37,11 +38,23 @@ public class Kurse implements Serializable {
 		return "kurse";
 		
 	}
-	public void addKurs() throws KursAlreadyExistsException, IOException {
-		kurs = kursService.create(kurs); // Nach dem persistieren wird das Avatar mit Kurs ID gespeichert
-		if (file != null) file.write(coursImage+ kurs.getId() + "." + getFileTyp());
-		file= null;
-		kurs=null;
+	public void addKurs()  {
+		try {
+			kurs = kursService.create(kurs);								 // Nach dem persistieren wird das Avatar mit Kurs ID gespeichert
+			if (file != null) file.write(coursImage+ kurs.getId() + "." + getFileTyp());
+			ImageUtil.imageResizerFile(new File (coursImage+ kurs.getId() + "." + getFileTyp()), 200);
+		} catch (KursAlreadyExistsException e) {
+			log.error("Fehler beim Erstellen eines Kurses: Kurs existiert bereits", e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error("Es gab beim Speicher ein Problem", e);
+			e.printStackTrace();
+		}
+		finally {
+			file= null;
+			kurs=null;
+		}
+	
 	}
 	
 	public Kurs update(Kurs kurs) throws KursNotFoundException {

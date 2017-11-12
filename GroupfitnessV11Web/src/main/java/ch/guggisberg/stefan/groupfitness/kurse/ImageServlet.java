@@ -1,9 +1,11 @@
 package ch.guggisberg.stefan.groupfitness.kurse;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,23 +23,26 @@ public class ImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final String coursImage = "D:\\Documents\\cours\\";
 	private static Logger log = Logger.getLogger(ImageServlet.class);
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		byte[] byteFile = null ;
-		try {
-			String id = request.getParameter("id");
-			System.out.println("ID = " + id);
-			Path file = Paths.get(coursImage+  id +".jpeg"); 
-			if (file==null) file = Paths.get("/GroupfitnessV11Web/images/avatarneutral.png");
-			System.out.println(coursImage  + " " +  id +".jpeg");
-			byteFile = Files.readAllBytes(file);
-			response.reset();
-			response.getOutputStream().write(byteFile);
-		} catch (Exception e) {
-			log.warn("Bild nicht vorhanden: ", e);
+		String id = request.getParameter("id");
+		log.info(MessageFormat.format("Suche Bild ID {0}", id));
+		Path path = Paths.get(coursImage+  id +".jpeg");
+		File file = new File(coursImage+  id +".jpeg");
+		if(file.exists()) {
+			try {
+				byteFile = Files.readAllBytes(path);
+				response.reset();
+				response.getOutputStream().write(byteFile);
+			} catch (IOException e) {
+				log.info(MessageFormat.format("Es gibt noch kein Bild für {0}.", id));
+				response.reset();
+			}
+			
 		}
 
 	}
