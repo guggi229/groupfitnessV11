@@ -33,10 +33,8 @@ public class KursController implements Serializable {
 	public List<Kurs> getAllKurse() {
 		return kursService.getAllKurs();
 	}
-	public String remove (Kurs k) throws KursNotFoundException {
+	public void remove (Kurs k) throws KursNotFoundException {
 		kursService.remove(k.getId());
-		return "kurse";
-		
 	}
 	public void addKurs()  {
 		try {

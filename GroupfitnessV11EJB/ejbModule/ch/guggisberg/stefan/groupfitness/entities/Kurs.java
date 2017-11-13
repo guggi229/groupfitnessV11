@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 @Table(name="kurs")
 @NamedQueries({
 	@NamedQuery(name= Kurs.QUERY_FIND_ALL, 
-			query ="SELECT k FROM Kurs k")
+			query ="SELECT k FROM Kurs k WHERE  k.deleted=false")
 })
 public class Kurs implements Serializable {
 	
@@ -31,24 +31,28 @@ public class Kurs implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="classId")
+	@Column(name="id")
 	private Long id;
 	
-	@Column(name="classNameDe")
+	@Column(name="nameDe")
 	@Size( max=45)
 	private String kursNameDe;
 	
-	@Column(name="classNameFr")
+	@Column(name="nameFr")
 	@Size( max=45)
 	private String kursNameFr;
 	
 	@Size(max=200)
-	@Column(name="classDescriptionDe")
+	@Column(name="descriptionDe")
 	private String kursDescriptionDe;
 
 	@Size(max=200)
-	@Column(name="classDescriptionFr")
+	@Column(name="descriptionFr")
 	private String kursDescriptionFr;
+	
+	@Column(name="deleted" ,columnDefinition="tinyint(1)")
+	private boolean deleted;
+	
 	
 	public Long getId() {
 		return id;
@@ -90,6 +94,12 @@ public class Kurs implements Serializable {
 		this.kursNameFr = kursNameFr;
 	}
 
+	public boolean isDeleted() {
+		return deleted;
+	}
 
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 		
 }

@@ -4,7 +4,8 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	<ui:define name="title">Login Page</ui:define>
 	<ui:define name="content">
 		<div class="container">
@@ -13,11 +14,10 @@
 				<ui:repeat var="k" value="#{kursController.allKurse}">
 
 					<div class="card cardWhiteCours">
-					
-					<h:graphicImage url="image?id=#{k.id}" />
-					
-						<img class="card-img-top"
-							src="#{kursController.getImgPath(k.id)}"
+
+						<h:graphicImage url="image?id=#{k.id}" />
+
+						<img class="card-img-top" src="#{kursController.getImgPath(k.id)}"
 							alt="Card image cap" />
 						<div class="card-body">
 							<h4 class="card-title">#{k.kursNameDe}</h4>
@@ -26,8 +26,23 @@
 								<small class="text-muted">Last updated 3 mins ago</small>
 							</p>
 						</div>
+						<!-- Admin Zone -->
+						<c:choose>
+							<c:when test="#{request.isUserInRole('GroupfitnessAdmin')}">
+								<h:form>
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item  ion-edit"><a href="#"
+											class="card-link"> #{msg['kurstable.edit']}</a></li>
+										<li class="list-group-item ion-trash-a"><h:commandLink
+												onclick="if (! confirm('#{msg['infos.sure']}')) return false"
+												immediate="true" styleClass="card-link"
+												action="#{kursController.remove(k)}"
+												value="  #{msg['kurstable.delete']}" /></li>
+									</ul>
+								</h:form>
+							</c:when>
+						</c:choose>
 					</div>
-
 				</ui:repeat>
 			</div>
 
