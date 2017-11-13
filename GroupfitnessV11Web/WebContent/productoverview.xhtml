@@ -10,14 +10,14 @@
 		<div class="container">
 
 			<div class="card-deck">
-				<ui:repeat var="k" value="#{kurse.allKurse}">
+				<ui:repeat var="k" value="#{kursController.allKurse}">
 
-					<div class="card cardWhite">
+					<div class="card cardWhiteCours">
 					
 					<h:graphicImage url="image?id=#{k.id}" />
 					
 						<img class="card-img-top"
-							src="#{kurse.getImgPath(k.id)}"
+							src="#{kursController.getImgPath(k.id)}"
 							alt="Card image cap" />
 						<div class="card-body">
 							<h4 class="card-title">#{k.kursNameDe}</h4>

@@ -20,10 +20,10 @@ import ch.guggisberg.stefan.groupfitness.utils.ImageUtil;
 
 @RequestScoped
 @Named
-public class Kurse implements Serializable {
+public class KursController implements Serializable {
 	private static final long serialVersionUID = 8012191796192067840L;
 	private final String coursImage = "D:\\Documents\\cours\\";
-	private static Logger log = Logger.getLogger(Kurse.class);
+	private static Logger log = Logger.getLogger(KursController.class);
 
 	@EJB
 	private KursServiceRemote kursService;

@@ -47,10 +47,7 @@ public class ImageUtil {
 	public static File imageResizer(File originFile, int newWitdh, int newHeigth) throws IOException {
 		Image img = ImageIO.read(originFile);
 		BufferedImage tempJPG = resizeImage(img, newWitdh, newHeigth);
-		System.out.println("*************");
-		System.out.println("*************");
-		System.out.println("*************");
-		System.out.println("*************");
+
 		System.out.println(originFile.getPath());
 
 		File newFileJPG = new File(originFile.getPath());
