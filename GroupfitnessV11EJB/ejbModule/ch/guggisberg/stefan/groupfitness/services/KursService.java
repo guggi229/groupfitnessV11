@@ -60,5 +60,7 @@ public class KursService extends BaseBean implements KursServiceRemote{
 	public List<Kurs> getAllKurs() {
 		return  em.createNamedQuery(Kurs.QUERY_FIND_ALL).getResultList();
 	}
+
+
 	
 }

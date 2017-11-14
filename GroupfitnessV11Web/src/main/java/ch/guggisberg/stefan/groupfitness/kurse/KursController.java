@@ -29,13 +29,11 @@ public class KursController implements Serializable {
 	private KursServiceRemote kursService;
 	private Part file;
 	private Kurs kurs = new Kurs(); // Inject
-		
+
 	public List<Kurs> getAllKurse() {
 		return kursService.getAllKurs();
 	}
-	public void remove (Kurs k) throws KursNotFoundException {
-		kursService.remove(k.getId());
-	}
+	
 	public void addKurs()  {
 		try {
 			kurs = kursService.create(kurs);								 // Nach dem persistieren wird das Avatar mit Kurs ID gespeichert
@@ -52,17 +50,32 @@ public class KursController implements Serializable {
 			file= null;
 			kurs=null;
 		}
-	
+
 	}
-	
+
 	public Kurs update(Kurs kurs) throws KursNotFoundException {
 		return kursService.update(kurs);
 	}
+
+	public void getKurs(Long id) throws KursNotFoundException {
+		kurs= kursService.getKurs(id); 
+	}
 	
+	public String modKurs (Kurs k) throws KursNotFoundException {
+		kurs = kursService.getKurs(k.getId());
+		return "groupfitnessAdmin\\modCours";
+	}
+	public void remove (Kurs k) throws KursNotFoundException {
+
+		kursService.remove(k.getId());
+	}
+
+	// Utils
+
 	private String getFileTyp() {
 		return file.getContentType().substring(file.getContentType().indexOf("/")+1);
 	}
-	
+
 	// Getter / Setter
 
 	public Kurs getKurs() {
@@ -79,9 +92,9 @@ public class KursController implements Serializable {
 	}
 	public String getImgPath(String id) {
 		File filejpg = new File(coursImage, id +".jpeg");
-			if (filejpg.exists()) return (coursImage + id +".jpeg");
+		if (filejpg.exists()) return (coursImage + id +".jpeg");
 		return "/GroupfitnessV11Web/images/placeholder-image.png";
-		
+
 	}
 
 }
