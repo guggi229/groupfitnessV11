@@ -30,27 +30,23 @@
 						<!-- Admin Zone -->
 						<c:choose>
 							<c:when test="#{request.isUserInRole('GroupfitnessAdmin')}">
-								
-									<ul class="list-group list-group-flush">
-<h:form>
+
+								<ul class="list-group list-group-flush">
+									<h:form>
 										<!-- Kurs löschen -->
 										<li class="list-group-item ion-trash-a"><h:commandLink
 												onclick="if (! confirm('#{msg['infos.sure']}')) return false"
 												immediate="true" styleClass="card-link"
 												action="#{kursController.remove(k)}"
 												value="  #{msg['kurstable.delete']}" /></li>
-</h:form>
-<h:form>
+												
 										<!-- Editieren eines Kurses -->
 										<li class="list-group-item  ion-edit"><h:commandLink
-												
 												immediate="true" styleClass="card-link"
 												action="#{kursController.modKurs(k)}"
 												value="  #{msg['kurstable.edit']}" /></li>
-
-</h:form>
-									</ul>
-								
+									</h:form>
+								</ul>
 							</c:when>
 						</c:choose>
 					</div>
