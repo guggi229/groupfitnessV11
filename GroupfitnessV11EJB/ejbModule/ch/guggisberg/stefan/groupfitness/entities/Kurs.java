@@ -2,16 +2,20 @@ package ch.guggisberg.stefan.groupfitness.entities;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import ch.guggisberg.stefan.groupfitness.entities.User;
 
 @Entity
 @Table(name="kurs")
@@ -22,7 +26,8 @@ import javax.validation.constraints.Size;
 public class Kurs implements Serializable {
 	
 	private static final long serialVersionUID = 5942147005085804609L;
-
+	
+	// Hibernate
 	public static final String QUERY_FIND_ALL = "QUERY_FIND_ALL";
 	
 	public Kurs() {
@@ -53,6 +58,8 @@ public class Kurs implements Serializable {
 	@Column(name="deleted" ,columnDefinition="tinyint(1)")
 	private boolean deleted;
 	
+	@ManyToMany(mappedBy = "kurse")
+    private Set<User> users = new HashSet<>();
 	
 	public Long getId() {
 		return id;
@@ -100,6 +107,14 @@ public class Kurs implements Serializable {
 
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 		
 }

@@ -21,7 +21,7 @@
 									alt="Avatar" id="preview" />
 								<div>
 									<!-- image-preview-input -->
-									<h:inputFile value="#{users.file}" pt:id="select" />
+									<h:inputFile value="#{userController.file}" pt:id="select" />
 
 								</div>
 							</div>
@@ -30,23 +30,23 @@
 							<div class="form-group">
 								<label for="newUserName">#{msg['newuser.name']}</label>
 								<h:inputText type="text" class="form-control " id="newUserName"
-									placeholder="Karl etc" value="#{users.user.userName}" />
+									placeholder="Karl etc" value="#{userController.user.userName}" />
 							</div>
 							<div class="form-group">
 								<label for="newUserVorname">#{msg['newuser.vorname']}</label>
 								<h:inputText type="text" class="form-control "
 									id="newUserVorname" placeholder="Yoga, BBP etc"
-									value="#{users.user.userVorname}" />
+									value="#{userController.user.userVorname}" />
 							</div>
 							<div class="form-group">
 								<label for="newUserEmail">#{msg['newuser.email']}</label>
 								<h:inputText type="text" class="form-control " id="newUserEmail"
-									placeholder="info@myCompany.ch" value="#{users.user.userEmail}" />
+									placeholder="info@myCompany.ch" value="#{userController.user.userEmail}" />
 							</div>
 							<div class="form-group">
 								<label for="password">#{msg['newuser.password']}</label>
 								<h:inputText type="text" class="form-control " id="password"
-									placeholder="Password" value="#{users.user.userPassword}" />
+									placeholder="Password" value="#{userController.user.userPassword}" />
 							</div>
 							<div>
 							<fieldset class="form-group">
@@ -81,7 +81,7 @@
 							</div>
 							<div>
 							<div>
-								<h:commandButton action="#{users.addUser()}"
+								<h:commandButton action="#{userController.addUser()}"
 									styleClass="btn btn-primary" value="#{msg['button.create']}" />
 							</div>
 							</div>

@@ -2,26 +2,43 @@ package ch.guggisberg.stefan.groupfitness.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="user")
 @RequestScoped
+@NamedEntityGraphs({
+    @NamedEntityGraph(
+        name = User.GRAPH_WITH_USER_SKILLS,
+        attributeNodes = {
+            @NamedAttributeNode("kurse")
+        }
+    )
+})
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8974946876389769968L;
 
+	// Hibernate
+	public static final String GRAPH_WITH_USER_SKILLS= "GRAPH_WITH_USER_SKILLS";
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -52,9 +69,16 @@ public class User implements Serializable {
 	
 	@Column(name="modifiedDate")
 	private LocalDateTime  userModifiedDate;
+//	
+//	@OneToMany(fetch = FetchType.EAGER)
+//	private Set<Rollen> roles;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	private Set<Rollen> roles;
+	@ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable( name = "kannUnterrichten", joinColumns = { 
+    		@JoinColumn(name = "userid") }, 
+        inverseJoinColumns = { @JoinColumn(name = "kursid") }
+    )
+    private Set<Kurs> kurse = new HashSet<>();
 	
 	// Konstruktor für Hibernate
 	public User() {
@@ -97,12 +121,12 @@ public class User implements Serializable {
 	public void setUserVorname(String userVorname) {
 		this.userVorname = userVorname;
 	}
-	public Set<Rollen> getRoles() {
-		return roles;
-	}
-	public void setRoles(Set<Rollen> roles) {
-		this.roles = roles;
-	}
+//	public Set<Rollen> getRoles() {
+//		return roles;
+//	}
+//	public void setRoles(Set<Rollen> roles) {
+//		this.roles = roles;
+//	}
 	public LocalDateTime getUserCreatedDate() {
 		return userCreatedDate;
 	}
@@ -120,6 +144,12 @@ public class User implements Serializable {
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+	public Set<Kurs> getKurse() {
+		return kurse;
+	}
+	public void setKurse(Set<Kurs> kurse) {
+		this.kurse = kurse;
 	}
 
 

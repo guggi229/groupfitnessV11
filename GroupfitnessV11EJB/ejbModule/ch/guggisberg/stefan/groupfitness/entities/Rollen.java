@@ -24,9 +24,9 @@ public class Rollen {
 	@Size(max=45)
 	private String roleName;
 	
-	 @ManyToOne(fetch=FetchType.EAGER) // Braucht keinen Speicher
-	 @JoinColumn(name = "UserId")
-	 private User user;
+//	 @ManyToOne(fetch=FetchType.EAGER) // Braucht keinen Speicher
+//	 @JoinColumn(name = "Userid")
+//	 private User user;
 
 	public Long getId() {
 		return id;
@@ -44,13 +44,13 @@ public class Rollen {
 		this.roleName = roleName;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 	
 	
 }

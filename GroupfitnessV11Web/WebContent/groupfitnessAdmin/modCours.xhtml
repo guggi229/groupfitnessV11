@@ -15,34 +15,39 @@
 					<div class="form-group">
 						<label for="newCoursDe">#{msg['newcourstyp.name.de']}</label>
 						<h:inputText type="text" class="form-control " id="newCoursDe"
-							placeholder="Yoga, BBP etc" value="#{kursController.kurs.kursNameDe}" />
+							placeholder="Yoga, BBP etc"
+							value="#{kursController.kurs.kursNameDe}" />
 					</div>
 					<div class="form-group">
 						<label for="newCoursFr">#{msg['newcourstyp.name.fr']}</label>
 						<h:inputText type="text" class="form-control " id="newCoursFr"
-							placeholder="Yoga, BBP etc" value="#{kursController.kurs.kursNameFr}" />
+							placeholder="Yoga, BBP etc"
+							value="#{kursController.kurs.kursNameFr}" />
 					</div>
 
 					<div class="form-group">
 						<label for="descriptionDe">#{msg['newcourstyp.description.de']}</label>
 						<h:inputTextarea styleClass="form-control"
-							value="#{kursController.kurs.kursDescriptionDe}" id="descriptionDe"
-							placeholder="Yoga, BBP etc" rows="10" />
+							value="#{kursController.kurs.kursDescriptionDe}"
+							id="descriptionDe" placeholder="Yoga, BBP etc" rows="10" />
 						<h:message for="descriptionDe" style="color:red" />
 					</div>
 
 					<div class="form-group">
 						<label for="descriptionFr">#{msg['newcourstyp.description.fr']}</label>
 						<h:inputTextarea styleClass="form-control"
-							value="#{kursController.kurs.kursDescriptionFr}" id="descriptionFr"
-							placeholder="Yoga, BBP etc" rows="10" />
+							value="#{kursController.kurs.kursDescriptionFr}"
+							id="descriptionFr" placeholder="Yoga, BBP etc" rows="10" />
 						<h:message for="descriptionFr" style="color:red" />
 					</div>
 					<div>
 
+						<h:graphicImage url="image?id=#{k.kursController.kurs.id}" />
+
 						<img class="card-img-top"
-							src="/GroupfitnessV11Web/images/placeholder-image.png"
-							alt="Cours Image" id="preview" />
+							src="#{kursController.getImgPath(kursController.kurs.id)}"
+							alt="Cours Image" id="preview"  />
+
 
 					</div>
 
@@ -53,9 +58,10 @@
 
 					</div>
 
+					<h:inputHidden value="#{kursController.kurs.id}"/>
 
-					<h:commandButton action="#{kursController.addKurs}"
-						styleClass="btn btn-primary" value="#{msg['button.create']}" />
+					<h:commandButton action="#{kursController.editKurs}"
+						styleClass="btn btn-primary" value="#{msg['button.edit']}" />
 
 
 				</h:form>

@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
+import ch.guggisberg.stefan.groupfitness.services.KursService;
 import ch.guggisberg.stefan.groupfitness.services.KursServiceRemote;
 import ch.guggisberg.stefan.groupfitness.utils.ImageUtil;
 
@@ -33,16 +34,19 @@ public class KursController implements Serializable {
 	public List<Kurs> getAllKurse() {
 		return kursService.getAllKurs();
 	}
-	
-	public void addKurs()  {
+
+	/**
+	 * Fügt einen neuen Krs hinzu und speichert, falls vorhanden, das Bild im Filesystem.
+	 * @throws KursAlreadyExistsException
+	 */
+	public void addKurs() throws KursAlreadyExistsException  {
 		try {
 			kurs = kursService.create(kurs);								 // Nach dem persistieren wird das Avatar mit Kurs ID gespeichert
-			if (file != null) file.write(coursImage+ kurs.getId() + "." + getFileTyp());
-			ImageUtil.imageResizerFile(new File (coursImage+ kurs.getId() + "." + getFileTyp()), 200);
-		} catch (KursAlreadyExistsException e) {
-			log.error("Fehler beim Erstellen eines Kurses: Kurs existiert bereits", e);
-			e.printStackTrace();
-		} catch (IOException e) {
+			if (file != null) {
+				file.write(coursImage+ kurs.getId() + "." + getFileTyp());
+				ImageUtil.imageResizerFile(new File (coursImage+ kurs.getId() + "." + getFileTyp()), 300);
+			}
+		}  catch (IOException e) {
 			log.error("Es gab beim Speicher ein Problem", e);
 			e.printStackTrace();
 		}
@@ -53,6 +57,22 @@ public class KursController implements Serializable {
 
 	}
 
+	public String editKurs() throws KursNotFoundException {
+		try {
+			kursService.update(kurs);								
+			if (file != null) file.write(coursImage+ kurs.getId() + "." + getFileTyp());
+			ImageUtil.imageResizerFile(new File (coursImage+ kurs.getId() + "." + getFileTyp()), 300);
+		}  catch (IOException e) {
+			log.error("Es gab beim Speicher ein Problem", e);
+			e.printStackTrace();
+		}
+		finally {
+			file= null;
+			kurs=null;
+		}
+		return "coursTypList";
+	}
+
 	public Kurs update(Kurs kurs) throws KursNotFoundException {
 		return kursService.update(kurs);
 	}
@@ -60,10 +80,10 @@ public class KursController implements Serializable {
 	public void getKurs(Long id) throws KursNotFoundException {
 		kurs= kursService.getKurs(id); 
 	}
-	
+
 	public String modKurs (Kurs k) throws KursNotFoundException {
 		kurs = kursService.getKurs(k.getId());
-		return "groupfitnessAdmin\\modCours";
+		return "groupfitnessAdmin/modCours";
 	}
 	public void remove (Kurs k) throws KursNotFoundException {
 

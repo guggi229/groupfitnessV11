@@ -14,8 +14,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/main/resources/messages_de.properties"/>
-	<classpathentry kind="lib" path="src/main/resources/messages_fr.properties"/>
-	<classpathentry kind="lib" path="src/main/resources/messages.properties"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
