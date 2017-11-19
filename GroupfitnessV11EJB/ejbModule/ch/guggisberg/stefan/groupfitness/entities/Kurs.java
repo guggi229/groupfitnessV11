@@ -58,7 +58,7 @@ public class Kurs implements Serializable {
 	@Column(name="deleted" ,columnDefinition="tinyint(1)")
 	private boolean deleted;
 	
-	@ManyToMany(mappedBy = "kurse")
+	@ManyToMany(mappedBy = "kannUnterrichten")
     private Set<User> users = new HashSet<>();
 	
 	public Long getId() {

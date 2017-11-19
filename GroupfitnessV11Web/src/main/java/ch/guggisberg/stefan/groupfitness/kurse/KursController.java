@@ -4,7 +4,10 @@ package ch.guggisberg.stefan.groupfitness.kurse;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -27,16 +30,22 @@ public class KursController implements Serializable {
 	private static Logger log = Logger.getLogger(KursController.class);
 
 	@EJB
-	private KursServiceRemote kursService;
+	private KursService kursService;
 	private Part file;
 	private Kurs kurs = new Kurs(); // Inject
-
+	
+	
+	/**
+	 * 
+	 * @return Liefert alle Kurs zurück, die nicht gelöscht wurden.
+	 */
 	public List<Kurs> getAllKurse() {
 		return kursService.getAllKurs();
 	}
-
+	
+		
 	/**
-	 * Fügt einen neuen Krs hinzu und speichert, falls vorhanden, das Bild im Filesystem.
+	 * Fügt einen neuen Kurs hinzu und speichert, falls vorhanden, das Bild im Filesystem.
 	 * @throws KursAlreadyExistsException
 	 */
 	public void addKurs() throws KursAlreadyExistsException  {
@@ -114,7 +123,5 @@ public class KursController implements Serializable {
 		File filejpg = new File(coursImage, id +".jpeg");
 		if (filejpg.exists()) return (coursImage + id +".jpeg");
 		return "/GroupfitnessV11Web/images/placeholder-image.png";
-
 	}
-
 }

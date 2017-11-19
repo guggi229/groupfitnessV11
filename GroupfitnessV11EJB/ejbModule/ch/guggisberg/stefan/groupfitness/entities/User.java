@@ -28,7 +28,7 @@ import javax.persistence.JoinColumn;
     @NamedEntityGraph(
         name = User.GRAPH_WITH_USER_SKILLS,
         attributeNodes = {
-            @NamedAttributeNode("kurse")
+            @NamedAttributeNode("kannUnterrichten")
         }
     )
 })
@@ -78,7 +78,7 @@ public class User implements Serializable {
     		@JoinColumn(name = "userid") }, 
         inverseJoinColumns = { @JoinColumn(name = "kursid") }
     )
-    private Set<Kurs> kurse = new HashSet<>();
+    private Set<Kurs> kannUnterrichten = new HashSet<>();
 	
 	// Konstruktor für Hibernate
 	public User() {
@@ -145,12 +145,13 @@ public class User implements Serializable {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public Set<Kurs> getKurse() {
-		return kurse;
+	public Set<Kurs> getKannUnterrichten() {
+		return kannUnterrichten;
 	}
-	public void setKurse(Set<Kurs> kurse) {
-		this.kurse = kurse;
+	public void setKannUnterrichten(Set<Kurs> kannUnterrichten) {
+		this.kannUnterrichten = kannUnterrichten;
 	}
+	
 
 
 

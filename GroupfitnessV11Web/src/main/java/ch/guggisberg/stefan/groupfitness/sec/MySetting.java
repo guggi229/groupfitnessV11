@@ -30,12 +30,18 @@ public class MySetting {
 		System.out.println("*******************************");
 		System.out.println("*******************************");
 		
-		User user = usr.getUserWithSkills(3L);
-		System.out.println(user.getUserEmail());
-		Set<Kurs> kurse = user.getKurse();
-		for (Kurs kurs : kurse) {
-			System.out.println(kurs.getKursDescriptionDe());
+		User user = usr.getUserWithSkills(13L);
+		Set<Kurs> list = user.getKannUnterrichten();
+		System.out.println("Kann unterrichten:");
+		
+		for (Kurs kurs : list) {
+			System.out.println(kurs.getKursNameDe());
 		}
+		
+//		Set<Kurs> kurse = user.getKurse();
+//		for (Kurs kurs : kurse) {
+//			System.out.println(kurs.getKursDescriptionDe());
+//		}
 	}
 	
 	public String sayHello() throws IOException, URISyntaxException, UserNotFoundException {

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityGraph;
@@ -22,16 +23,16 @@ import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
 
 
 @Stateless
-@Remote(UserServiceRemote.class)
+@LocalBean
 
-public class UserService extends BaseBean implements UserServiceRemote {
+public class UserService extends BaseBean {
 
 	private static final long serialVersionUID = -987975636197353363L;
 	private static Logger log = Logger.getLogger(UserService.class);
 	@PersistenceContext
 	private EntityManager em;
 
-	@Override
+	
 	public User create(User user) {
 		try {
 			user.setUserCreatedDate(LocalDateTime.now());
@@ -56,32 +57,24 @@ public class UserService extends BaseBean implements UserServiceRemote {
 		return this.em.find(User.class, id, hints);
 	}
 
-	@Override
 	public User update(User user) throws UserNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void remove(Long id) throws UserNotFoundException {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public User getUser(Long id) throws UserNotFoundException {
 		return em.find(User.class, id);
 	}
 
-	@Override
 	public List<User> getAllUser() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public void sayHello() {
-		System.out.println("Hello2");
-	}
-
+	
 }
 
