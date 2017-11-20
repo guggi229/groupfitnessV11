@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +59,7 @@ public class Kurs implements Serializable {
 	@Column(name="deleted" ,columnDefinition="tinyint(1)")
 	private boolean deleted;
 	
-	@ManyToMany(mappedBy = "kannUnterrichten")
+	@ManyToMany(mappedBy = "kannUnterrichten",fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 	
 	public Long getId() {
@@ -116,5 +117,8 @@ public class Kurs implements Serializable {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
-		
+	public void addUser(User user) {
+		users.add(user);
+	}
+	
 }

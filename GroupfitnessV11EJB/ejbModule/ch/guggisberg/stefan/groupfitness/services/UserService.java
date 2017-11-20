@@ -25,23 +25,21 @@ import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
 @Stateless
 @LocalBean
 
-public class UserService extends BaseBean {
+public class UserService extends BaseCrud<User> {
 
 	private static final long serialVersionUID = -987975636197353363L;
 	private static Logger log = Logger.getLogger(UserService.class);
-	@PersistenceContext
-	private EntityManager em;
 
 	
 	public User create(User user) {
 		try {
 			user.setUserCreatedDate(LocalDateTime.now());
 			user.setUserModifiedDate(LocalDateTime.now());
-			em.persist(user);
-			em.flush();
-			showGlobalMessage("info.UserDataSaved", null);
+			entityManager.persist(user);
+	
+		//	showGlobalMessage("info.UserDataSaved", null);
 		} catch(Exception e) { // TODO!
-			showGlobalErrorMessage("warn.error", null);
+			//showGlobalErrorMessage("warn.error", null);
 			log.error(e);
 		}
 
@@ -51,13 +49,13 @@ public class UserService extends BaseBean {
 	public User getUserWithSkills(Long id) {
 		// TODO ? --> Korrigieren
 		
-		EntityGraph<?> graph = em.getEntityGraph(User.GRAPH_WITH_USER_SKILLS);
+		EntityGraph<?> graph = entityManager.getEntityGraph(User.GRAPH_WITH_USER_SKILLS);
 		Map<String, Object> hints = new HashMap<String, Object>();
 		hints.put("javax.persistence.fetchgraph", graph);
-		return this.em.find(User.class, id, hints);
+		return this.entityManager.find(User.class, id, hints);
 	}
 
-	public User update(User user) throws UserNotFoundException {
+	public User update(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -68,13 +66,14 @@ public class UserService extends BaseBean {
 	}
 
 	public User getUser(Long id) throws UserNotFoundException {
-		return em.find(User.class, id);
+		return entityManager.find(User.class, id);
 	}
 
 	public List<User> getAllUser() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	
 }
 

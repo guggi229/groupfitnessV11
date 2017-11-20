@@ -14,14 +14,14 @@ import javax.faces.bean.ManagedBean;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.entities.User;
 import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
-import ch.guggisberg.stefan.groupfitness.services.UserServiceRemote;
+import ch.guggisberg.stefan.groupfitness.services.UserService;
 
 @ManagedBean
 
 public class MySetting {
 	
 	@EJB
-	UserServiceRemote usr;
+	UserService usr;
 	
 	public void getProp() throws IOException, UserNotFoundException {
 		System.out.println("*******************************");

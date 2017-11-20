@@ -19,7 +19,6 @@ import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 import ch.guggisberg.stefan.groupfitness.services.KursService;
-import ch.guggisberg.stefan.groupfitness.services.KursServiceRemote;
 import ch.guggisberg.stefan.groupfitness.utils.ImageUtil;
 
 @RequestScoped

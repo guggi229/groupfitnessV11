@@ -9,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -73,7 +74,7 @@ public class User implements Serializable {
 //	@OneToMany(fetch = FetchType.EAGER)
 //	private Set<Rollen> roles;
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL } , fetch = FetchType.EAGER)
     @JoinTable( name = "kannUnterrichten", joinColumns = { 
     		@JoinColumn(name = "userid") }, 
         inverseJoinColumns = { @JoinColumn(name = "kursid") }

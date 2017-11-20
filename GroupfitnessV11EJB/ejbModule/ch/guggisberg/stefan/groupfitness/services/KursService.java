@@ -18,27 +18,26 @@ import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 @Stateless
 @LocalBean
 @DeclareRoles({"GroupfitnessAdmin", "Customer", "Admin"})
-public class KursService extends BaseBean {
+public class KursService extends  BaseCrud<Kurs> {
 
 	private static final long serialVersionUID = 319735437119932640L;
 	
-	@PersistenceContext
-	private EntityManager em;
+
 
 
 	@RolesAllowed("GroupfitnessAdmin")
 	public Kurs create(Kurs kurs) throws KursAlreadyExistsException {
-		showGlobalMessage("info.UserDataSaved", "saveOK");
+		//showGlobalMessage("info.UserDataSaved", "saveOK");
 		kurs.setDeleted(false);
-		em.persist(kurs);
-		em.flush();
+		entityManager.persist(kurs);
+	
 		return kurs;
 	}
 
 
 	@RolesAllowed("GroupfitnessAdmin")
-	public Kurs update(Kurs kurs) throws KursNotFoundException {
-		return em.merge(kurs);
+	public Kurs update(Kurs kurs) {
+		return entityManager.merge(kurs);
 	}
 
 
@@ -52,14 +51,14 @@ public class KursService extends BaseBean {
 	
 	@PermitAll
 	public Kurs getKurs(Long id) throws KursNotFoundException {
-		return em.find(Kurs.class, id);
+		return entityManager.find(Kurs.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 
 	@PermitAll
 	public List<Kurs> getAllKurs() {
-		return  em.createNamedQuery(Kurs.QUERY_FIND_ALL).getResultList();
+		return  entityManager.createNamedQuery(Kurs.QUERY_FIND_ALL).getResultList();
 	}
 
 
