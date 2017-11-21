@@ -10,8 +10,7 @@ public class BaseCrud<T>  {
 
 	public T persist(T entity) {
 		entityManager.persist(entity);
-	//	entityManager.flush();
-	
+		entityManager.flush();
 		return entity;
 	}
 
@@ -39,5 +38,5 @@ public class BaseCrud<T>  {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-	
+
 }

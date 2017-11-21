@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.entities.User;
+import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 import ch.guggisberg.stefan.groupfitness.exceptions.UserAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
 
@@ -39,45 +40,27 @@ public class UserService extends BaseCrud<User> {
 		try {
 			user.setUserCreatedDate(LocalDateTime.now());
 			user.setUserModifiedDate(LocalDateTime.now());
-			entityManager.persist(user);
-			entityManager.flush();
-	
-		//	showGlobalMessage("info.UserDataSaved", null);
-		} catch(Exception e) { // TODO!
-			//showGlobalErrorMessage("warn.error", null);
+			persist(user);
+		} catch(Exception e) { 
 			log.error(e);
 		}
-
-
 		return user;
 	}
-	
-	public User create(User user, Long[] kursIds) {
-		try {
-			for (Long id : kursIds) {
-				Kurs kurs = kursService.getKurs(id);
-				user.getKannUnterrichten().add(kurs);
-//				kurs.addUser(user);
-//				kursService.update(kurs);
-			}
-			user.setUserCreatedDate(LocalDateTime.now());
-			user.setUserModifiedDate(LocalDateTime.now());
-			entityManager.persist(user);
-			entityManager.flush();
-	
-		//	showGlobalMessage("info.UserDataSaved", null);
-		} catch(Exception e) { // TODO!
-			//showGlobalErrorMessage("warn.error", null);
-			log.error(e);
+
+	public User create(User user, Long[] kursIds) throws KursNotFoundException {
+		for (Long id : kursIds) {
+			Kurs kurs = kursService.getKurs(id);
+			user.getKannUnterrichten().add(kurs);
 		}
+		user.setUserCreatedDate(LocalDateTime.now());
+		user.setUserModifiedDate(LocalDateTime.now());
+		return persist(user);
 
-
-		return user;
 	}
 
 	public User getUserWithSkills(Long id) {
 		// TODO ? --> Korrigieren
-		
+
 		EntityGraph<?> graph = entityManager.getEntityGraph(User.GRAPH_WITH_USER_SKILLS);
 		Map<String, Object> hints = new HashMap<String, Object>();
 		hints.put("javax.persistence.fetchgraph", graph);
@@ -103,6 +86,6 @@ public class UserService extends BaseCrud<User> {
 		return null;
 	}
 
-	
+
 }
 
