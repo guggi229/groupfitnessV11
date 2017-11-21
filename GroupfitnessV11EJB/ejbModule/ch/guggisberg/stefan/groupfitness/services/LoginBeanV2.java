@@ -6,8 +6,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.apache.log4j.Logger;
 
-import ch.guggisberg.stefan.groupfitness.base.BaseBean;
-
 /**
  * 
  * @author guggi229
@@ -19,7 +17,7 @@ import ch.guggisberg.stefan.groupfitness.base.BaseBean;
  */
 @ManagedBean(name="loginBeanV2")
 @SessionScoped
-public final class LoginBeanV2 extends BaseBean implements Serializable  {
+public final class LoginBeanV2 implements Serializable  {
 	private static final long serialVersionUID = -3070846601605974845L;
 	private static Logger log = Logger.getLogger(LoginBeanV2.class);
 

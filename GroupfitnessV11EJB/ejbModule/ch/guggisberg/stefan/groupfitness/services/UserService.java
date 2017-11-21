@@ -9,19 +9,13 @@ import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityGraph;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.apache.log4j.Logger;
 
-import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.entities.User;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
-import ch.guggisberg.stefan.groupfitness.exceptions.UserAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
 
 

@@ -6,11 +6,7 @@ import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
-import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
@@ -22,9 +18,6 @@ public class KursService extends  BaseCrud<Kurs> {
 
 	private static final long serialVersionUID = 319735437119932640L;
 	
-
-
-
 	@RolesAllowed("GroupfitnessAdmin")
 	public Kurs create(Kurs kurs) throws KursAlreadyExistsException {
 		//showGlobalMessage("info.UserDataSaved", "saveOK");
@@ -34,12 +27,10 @@ public class KursService extends  BaseCrud<Kurs> {
 		return kurs;
 	}
 
-
 	@RolesAllowed("GroupfitnessAdmin")
 	public Kurs update(Kurs kurs) {
 		return entityManager.merge(kurs);
 	}
-
 
 	@RolesAllowed("GroupfitnessAdmin")
 	public void remove(Long id) throws KursNotFoundException {
@@ -47,7 +38,6 @@ public class KursService extends  BaseCrud<Kurs> {
 		kurs.setDeleted(true);
 		update(kurs);
 	}
-
 	
 	@PermitAll
 	public Kurs getKurs(Long id) throws KursNotFoundException {
@@ -55,7 +45,6 @@ public class KursService extends  BaseCrud<Kurs> {
 	}
 
 	@SuppressWarnings("unchecked")
-
 	@PermitAll
 	public List<Kurs> getAllKurs() {
 		return  entityManager.createNamedQuery(Kurs.QUERY_FIND_ALL).getResultList();
