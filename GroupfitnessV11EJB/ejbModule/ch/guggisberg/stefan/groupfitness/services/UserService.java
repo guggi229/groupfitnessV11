@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -17,6 +18,7 @@ import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 
 import ch.guggisberg.stefan.groupfitness.base.BaseBean;
+import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.entities.User;
 import ch.guggisberg.stefan.groupfitness.exceptions.UserAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
@@ -30,12 +32,15 @@ public class UserService extends BaseCrud<User> {
 	private static final long serialVersionUID = -987975636197353363L;
 	private static Logger log = Logger.getLogger(UserService.class);
 
-	
+	@EJB
+	private KursService kursService;
+
 	public User create(User user) {
 		try {
 			user.setUserCreatedDate(LocalDateTime.now());
 			user.setUserModifiedDate(LocalDateTime.now());
 			entityManager.persist(user);
+			entityManager.flush();
 	
 		//	showGlobalMessage("info.UserDataSaved", null);
 		} catch(Exception e) { // TODO!
@@ -46,6 +51,30 @@ public class UserService extends BaseCrud<User> {
 
 		return user;
 	}
+	
+	public User create(User user, Long[] kursIds) {
+		try {
+			for (Long id : kursIds) {
+				Kurs kurs = kursService.getKurs(id);
+				user.getKannUnterrichten().add(kurs);
+//				kurs.addUser(user);
+//				kursService.update(kurs);
+			}
+			user.setUserCreatedDate(LocalDateTime.now());
+			user.setUserModifiedDate(LocalDateTime.now());
+			entityManager.persist(user);
+			entityManager.flush();
+	
+		//	showGlobalMessage("info.UserDataSaved", null);
+		} catch(Exception e) { // TODO!
+			//showGlobalErrorMessage("warn.error", null);
+			log.error(e);
+		}
+
+
+		return user;
+	}
+
 	public User getUserWithSkills(Long id) {
 		// TODO ? --> Korrigieren
 		

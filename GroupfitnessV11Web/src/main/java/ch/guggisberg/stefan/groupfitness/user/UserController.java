@@ -42,23 +42,26 @@ public class UserController implements Serializable {
 	 * @throws KursNotFoundException 
 	 */
 	public void addUser() throws UserAlreadyExistsException, KursNotFoundException {
+/*
 		Kurs myKurs1 = kursService.getKurs(123L);
 		Kurs myKurs2 = kursService.getKurs(124L);
 
-		
 		Set<Kurs> kannUnterrichten2 = new HashSet<>();
 		kannUnterrichten2.add(myKurs2);
 		kannUnterrichten2.add(myKurs1);
 		
 		user.setKannUnterrichten(kannUnterrichten2);
+*/
+		user = userService.create(user, new Long[] {123L, 124L}); // Nach dem persistieren wird das Avatar mit User ID gespeichert
 
-		user = userService.create(user); // Nach dem persistieren wird das Avatar mit User ID gespeichert
-
+		System.out.println("**************************************");
+		System.out.println(user.getId());
+/*
 		myKurs1.addUser(user);
 		myKurs2.addUser(user);
-		
-		kursService.update(myKurs1);
-		kursService.update(myKurs2);
+
+		myKurs1 = kursService.update(myKurs1);
+		myKurs2 = kursService.update(myKurs2);
 	
 		System.out.println("**************************************");
 		System.out.println("**************************************");
@@ -68,7 +71,7 @@ public class UserController implements Serializable {
 		System.out.println("**************************************");
 		System.out.println("**************************************");
 		System.out.println("**************************************");
-		System.out.println("**************************************");
+*/
 		
 	//	try {
 			
