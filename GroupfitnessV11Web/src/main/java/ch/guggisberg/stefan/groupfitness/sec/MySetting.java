@@ -1,62 +1,37 @@
 package ch.guggisberg.stefan.groupfitness.sec;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.util.Properties;
-import java.util.Set;
-
-import javax.ejb.EJB;
+import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
-
-import ch.guggisberg.stefan.groupfitness.entities.Kurs;
-import ch.guggisberg.stefan.groupfitness.entities.User;
-import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
-import ch.guggisberg.stefan.groupfitness.services.UserService;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 @ManagedBean
 
 public class MySetting {
+
+	@Resource(name="java:jboss/mail/BFHMail")
+	private javax.mail.Session sessionobj;
+	 String sendrmailid = "guggs2@bfh.ch";	
+	 String destmailid = "guggs2@bfh.ch";
 	
-	@EJB
-	UserService usr;
-	
-	public void getProp() throws IOException, UserNotFoundException {
-		System.out.println("*******************************");
-		System.out.println("*******************************");
-		System.out.println("*******************************");
-		System.out.println("*******************************");
-		System.out.println("*******************************");
-		
-		User user = usr.getUserWithSkills(13L);
-		Set<Kurs> list = user.getKannUnterrichten();
-		System.out.println("Kann unterrichten:");
-		
-		for (Kurs kurs : list) {
-			System.out.println(kurs.getKursNameDe());
-		}
-		
-//		Set<Kurs> kurse = user.getKurse();
-//		for (Kurs kurs : kurse) {
-//			System.out.println(kurs.getKursDescriptionDe());
-//		}
-	}
-	
-	public String sayHello() throws IOException, URISyntaxException, UserNotFoundException {
-		
-		getProp();
-		
-		
-		
-//		Properties properties3 = new Properties();
-//		properties3.load(getClass().getResourceAsStream("/app.properties"));
-//		String test = properties3.getProperty("PfadBilderKurse");
-//		System.out.println(test);
-//		
-//		
-//		usr.sayHello();
-		return "1";
+	public String sayHello() throws MessagingException {
+		 try { //message.setContent("<h1>This is actual message</h1>", "text/html");
+			   //Create MimeMessage object & set values
+			   Message messageobj = new MimeMessage(sessionobj);
+			   messageobj.setFrom(new InternetAddress(sendrmailid));
+			   messageobj.setRecipients(Message.RecipientType.TO,InternetAddress.parse(destmailid));
+			   messageobj.setSubject("This is test Subject");
+			   messageobj.setText("Checking sending emails by using JavaMail APIs");
+			   messageobj.setContent("<h1>This is actual message</h1>", "text/html");
+			  //Now send the message
+			   Transport.send(messageobj);
+			   System.out.println("Your email sent successfully....");
+		      } catch (MessagingException exp) {
+		         throw new RuntimeException(exp);
+		      }
+		return null;
 	}
 }

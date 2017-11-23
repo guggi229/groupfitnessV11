@@ -74,7 +74,7 @@ public class User implements Serializable {
 //	@OneToMany(fetch = FetchType.EAGER)
 //	private Set<Rollen> roles;
 	
-	@ManyToMany(cascade = { CascadeType.ALL } , fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.ALL })	// Standard LAZY! 
     @JoinTable( name = "kannUnterrichten", joinColumns = { 
     		@JoinColumn(name = "userid") }, 
         inverseJoinColumns = { @JoinColumn(name = "kursid") }

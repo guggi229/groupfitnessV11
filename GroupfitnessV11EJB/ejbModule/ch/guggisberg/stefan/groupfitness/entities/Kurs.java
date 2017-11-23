@@ -7,11 +7,13 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -24,12 +26,21 @@ import ch.guggisberg.stefan.groupfitness.entities.User;
 	@NamedQuery(name= Kurs.QUERY_FIND_ALL, 
 			query ="SELECT k FROM Kurs k WHERE  k.deleted=false")
 })
+@NamedEntityGraphs({
+    @NamedEntityGraph(
+        name = Kurs.GRAPH_WITH_USERS,
+        attributeNodes = {
+            @NamedAttributeNode("users")
+        }
+    )
+})
 public class Kurs implements Serializable {
 	
 	private static final long serialVersionUID = 5942147005085804609L;
 	
 	// Hibernate
 	public static final String QUERY_FIND_ALL = "QUERY_FIND_ALL";
+	public static final String GRAPH_WITH_USERS= "GRAPH_WITH_USERS";
 	
 	public Kurs() {
 		
@@ -59,7 +70,7 @@ public class Kurs implements Serializable {
 	@Column(name="deleted" ,columnDefinition="tinyint(1)")
 	private boolean deleted;
 	
-	@ManyToMany(mappedBy = "kannUnterrichten",fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "kannUnterrichten")
     private Set<User> users = new HashSet<>();
 	
 	public Long getId() {

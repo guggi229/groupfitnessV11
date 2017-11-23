@@ -315,6 +315,12 @@
             <mail-session name="default" jndi-name="java:jboss/mail/Default">
                 <smtp-server outbound-socket-binding-ref="mail-smtp"/>
             </mail-session>
+             <mail-session name="HostfactoryMail" jndi-name="java:jboss/mail/HostfactoryMail">
+                <smtp-server outbound-socket-binding-ref="infoHostfactory" username="info@group-fitness.ch" password="Du6YHa%EdULA"/>
+            </mail-session>
+             <mail-session name="bfh" jndi-name="java:jboss/mail/BFHMail">
+                <smtp-server outbound-socket-binding-ref="infoBFH" username="guggs2" password="Cisco80C"/>
+            </mail-session>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:naming:2.0">
             <remote-naming/>
@@ -440,6 +446,12 @@
         <socket-binding name="txn-status-manager" port="4713"/>
         <outbound-socket-binding name="mail-smtp">
             <remote-destination host="localhost" port="25"/>
+        </outbound-socket-binding>
+        <outbound-socket-binding name="infoHostfactory" source-port="0" fixed-source-port="false">
+            <remote-destination host="server101.hostfactory.ch" port="587"/>
+        </outbound-socket-binding>
+         <outbound-socket-binding name="infoBFH" source-port="0" fixed-source-port="false">
+            <remote-destination host="smtp.bfh.ch" port="587"/>
         </outbound-socket-binding>
     </socket-binding-group>
 

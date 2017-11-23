@@ -21,7 +21,6 @@ import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
 
 @Stateless
 @LocalBean
-
 public class UserService extends BaseCrud<User> {
 
 	private static final long serialVersionUID = -987975636197353363L;

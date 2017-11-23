@@ -19,7 +19,7 @@ public class DemoSendEmail {
       String sendrmailid = "guggs2@bfh.ch";	  
      //Mention user name and password as per your configuration
       final String uname = "guggs2";
-      final String pwd = "";
+      final String pwd = "Cisco80C";
       //We are using relay.jangosmtp.net for sending emails
       String smtphost = "smtp.bfh.ch";
      //Set properties and their values
