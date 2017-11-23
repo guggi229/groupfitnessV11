@@ -4,10 +4,7 @@ package ch.guggisberg.stefan.groupfitness.kurse;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -20,12 +17,14 @@ import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 import ch.guggisberg.stefan.groupfitness.services.KursService;
 import ch.guggisberg.stefan.groupfitness.utils.ImageUtil;
+import ch.guggisberg.stefan.groupfitness.utils.PropertiesExporter;
 
 @RequestScoped
 @Named
 public class KursController implements Serializable {
 	private static final long serialVersionUID = 8012191796192067840L;
-	private final String coursImage = "D:\\Documents\\cours\\";
+	private final String PROPERTY_IMAGE_PATH_COURS = PropertiesExporter.getPropertyImagePathCours();
+	private final int PROPERTY_IMAGE_SIZE_COURS=PropertiesExporter.getPropertyImageSizeCours();
 	private static Logger log = Logger.getLogger(KursController.class);
 
 	@EJB
@@ -51,8 +50,8 @@ public class KursController implements Serializable {
 		try {
 			kurs = kursService.create(kurs);								 // Nach dem persistieren wird das Avatar mit Kurs ID gespeichert
 			if (file != null) {
-				file.write(coursImage+ kurs.getId() + "." + getFileTyp());
-				ImageUtil.imageResizerFile(new File (coursImage+ kurs.getId() + "." + getFileTyp()), 300);
+				file.write(PROPERTY_IMAGE_PATH_COURS+ kurs.getId() + "." + getFileTyp());
+				ImageUtil.imageResizerFile(new File (PROPERTY_IMAGE_PATH_COURS+ kurs.getId() + "." + getFileTyp()), PROPERTY_IMAGE_SIZE_COURS);
 			}
 		}  catch (IOException e) {
 			log.error("Es gab beim Speicher ein Problem", e);
@@ -68,8 +67,8 @@ public class KursController implements Serializable {
 	public String editKurs() throws KursNotFoundException {
 		try {
 			kursService.update(kurs);								
-			if (file != null) file.write(coursImage+ kurs.getId() + "." + getFileTyp());
-			ImageUtil.imageResizerFile(new File (coursImage+ kurs.getId() + "." + getFileTyp()), 300);
+			if (file != null) file.write(PROPERTY_IMAGE_PATH_COURS+ kurs.getId() + "." + getFileTyp());
+			ImageUtil.imageResizerFile(new File (PROPERTY_IMAGE_PATH_COURS+ kurs.getId() + "." + getFileTyp()), 300);
 		}  catch (IOException e) {
 			log.error("Es gab beim Speicher ein Problem", e);
 			e.printStackTrace();
@@ -119,8 +118,8 @@ public class KursController implements Serializable {
 		this.file = file;
 	}
 	public String getImgPath(String id) {
-		File filejpg = new File(coursImage, id +".jpeg");
-		if (filejpg.exists()) return (coursImage + id +".jpeg");
+		File filejpg = new File(PROPERTY_IMAGE_PATH_COURS, id +".jpeg");
+		if (filejpg.exists()) return (PROPERTY_IMAGE_PATH_COURS + id +".jpeg");
 		return "/GroupfitnessV11Web/images/placeholder-image.png";
 	}
 }

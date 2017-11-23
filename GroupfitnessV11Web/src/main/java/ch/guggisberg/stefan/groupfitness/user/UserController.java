@@ -2,6 +2,8 @@ package ch.guggisberg.stefan.groupfitness.user;
 
 import java.io.File;
 import java.io.Serializable;
+import java.text.MessageFormat;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -13,22 +15,27 @@ import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.User;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 import ch.guggisberg.stefan.groupfitness.exceptions.UserAlreadyExistsException;
-import ch.guggisberg.stefan.groupfitness.services.KursService;
 import ch.guggisberg.stefan.groupfitness.services.UserService;
+import ch.guggisberg.stefan.groupfitness.utils.EmailManager;
 import ch.guggisberg.stefan.groupfitness.utils.ImageUtil;
+import ch.guggisberg.stefan.groupfitness.utils.PropertiesExporter;
 
 @RequestScoped
 @Named
 public class UserController extends BaseBean implements Serializable {
 	private static final long serialVersionUID = 2145918315776262944L;
-	private final String avatarPath ="D:\\Documents\\employee\\";
+	private final String PROPERTY_IMAGE_PATH_COURS = PropertiesExporter.getPropertyImagePathAvatar();
+	private final String PROPERTY_IMAGE_PATH_EMPTY_AVATAR = PropertiesExporter.getPropertyImagePathEmptyAvatar();
+	private final int PROPERTY_IMAGE_SIZE_AVATAR=PropertiesExporter.getPropertyImageSizeAvatar();
+
 	private static Logger log = Logger.getLogger(UserController.class);
 
 	@EJB
 	private UserService userService;
-	@EJB
-	private KursService kursService;
 
+	@EJB
+	private EmailManager emailManager;
+	
 	private Part file;
 	private User user = new User();
 	private Long[] kurse;
@@ -56,8 +63,8 @@ public class UserController extends BaseBean implements Serializable {
 		// Speichern des Avatars:
 		try {
 			if (file != null) {
-				file.write(avatarPath+ user.getId() + "." + getFileTyp());
-				ImageUtil.imageResizerFile(new File (avatarPath+ user.getId() + "." + getFileTyp()), 200);
+				file.write(PROPERTY_IMAGE_PATH_COURS+ user.getId() + "." + getFileTyp());
+				ImageUtil.imageResizerFile(new File (PROPERTY_IMAGE_PATH_COURS+ user.getId() + "." + getFileTyp()), PROPERTY_IMAGE_SIZE_AVATAR);
 			}
 		} catch (Exception e) {
 			showGlobalErrorMessage("warn.error", null);
@@ -68,6 +75,10 @@ public class UserController extends BaseBean implements Serializable {
 			file= null;
 			kurse=null;
 		}	
+		
+		// Versenden der Welcome Mail
+		emailManager.sendEmail("guggs2@bfh.ch", "This is test Subject", "Checking sending emails by using JavaMail APIs", MessageFormat.format("<h1>Hallo {0}</h1><br>","Thomas"));
+
 	}
 
 
@@ -75,12 +86,9 @@ public class UserController extends BaseBean implements Serializable {
 		return kurse;
 	}
 
-
 	public void setKurse(Long[] kurse) {
 		this.kurse = kurse;
 	}
-
-
 
 	public Part getFile() {
 		return file;
@@ -103,9 +111,9 @@ public class UserController extends BaseBean implements Serializable {
 	 * @return
 	 */
 	public String getImgPath(String id) {
-		File filejpg = new File(avatarPath, id +".jpeg");
-		if (filejpg.exists()) return (avatarPath + id +".jpeg");
-		return "/GroupfitnessV11Web/images/avatarneutral.png";
+		File filejpg = new File(PROPERTY_IMAGE_PATH_COURS, id +".jpeg");
+		if (filejpg.exists()) return (PROPERTY_IMAGE_PATH_COURS + id +".jpeg");
+		return PROPERTY_IMAGE_PATH_EMPTY_AVATAR;
 
 	}
 	/**
