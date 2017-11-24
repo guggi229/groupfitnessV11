@@ -51,35 +51,36 @@ public class UserController extends BaseBean implements Serializable {
 
 		//Speichern des users
 		try {
-			user = userService.create(user, kurse); // Nach dem persistieren wird das Avatar mit User ID gespeichert
+			user = userService.create(user, kurse, rollen); // Nach dem persistieren wird das Avatar mit User ID gespeichert
 			// Versenden der Welcome Mail
 			emailManager.sendEmail(user.getUserEmail(), getText("email.welcomemail.user.subject"), 
-					"Checking sending emails by using JavaMail APIs", MessageFormat.format(getText("email.welcomemail.user.content"),
+					"Ersatz Text", MessageFormat.format(getText("email.welcomemail.user.content"),
 							user.getUserVorname(),user.getUserEmail(),user.getUserPassword()));
 			showGlobalMessage("info.UserDataSaved", null);
-		} 
-		catch (KursNotFoundException e) {
-			showGlobalErrorMessage("warn.error", null);
-			log.error("Es gab beim Speicher ein Problem", e); // Könnte /Sollte man differenzieren.
-		} catch (MessagingException e) {
-			showGlobalErrorMessage("warn.error", null);
-			log.error("Es gab beim Versenden der Email ein Problem", e);}
-
-
-		// Speichern des Avatars:
-		try {
+			// Bild speichern
 			if (file != null) {
 				file.write(PROPERTY_IMAGE_PATH_COURS+ user.getId() + "." + getFileTyp());
 				ImageUtil.imageResizerFile(new File (PROPERTY_IMAGE_PATH_COURS+ user.getId() + "." + getFileTyp()), PROPERTY_IMAGE_SIZE_AVATAR);
 			}
-		} catch (Exception e) {
+		} 
+		catch (KursNotFoundException e) {
+			showGlobalErrorMessage("warn.error", null);
+			log.error("Es gab beim Speicher ein Problem", e); // Könnte /Sollte man differenzieren.
+		} 
+		catch (MessagingException e) {
+			showGlobalErrorMessage("warn.error", null);
+			log.error("Es gab beim Versenden der Email ein Problem", e);
+		}
+		catch (Exception e) {
 			showGlobalErrorMessage("warn.error", null);
 			log.error("Es gab beim Speicher ein Problem", e);
 			e.printStackTrace();
-		} finally {
+		} 
+		finally {
 			user = null;
 			file= null;
 			kurse=null;
+			rollen=null;
 		}	
 	}
 
@@ -138,6 +139,6 @@ public class UserController extends BaseBean implements Serializable {
 	public String getPROPERTY_IMAGE_PATH_EMPTY_AVATAR() {
 		return PROPERTY_IMAGE_PATH_EMPTY_AVATAR;
 	}
-	
+
 
 }

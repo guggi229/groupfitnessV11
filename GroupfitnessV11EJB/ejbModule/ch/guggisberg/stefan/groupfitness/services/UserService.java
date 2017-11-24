@@ -14,6 +14,7 @@ import javax.persistence.EntityGraph;
 import org.apache.log4j.Logger;
 
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
+import ch.guggisberg.stefan.groupfitness.entities.Rollen;
 import ch.guggisberg.stefan.groupfitness.entities.User;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
@@ -28,6 +29,9 @@ public class UserService extends BaseCrud<User> {
 
 	@EJB
 	private KursService kursService;
+	
+	@EJB
+	private RollenService rollenService;
 
 	public User create(User user) {
 		try {
@@ -40,10 +44,15 @@ public class UserService extends BaseCrud<User> {
 		return user;
 	}
 
-	public User create(User user, Long[] kursIds) throws KursNotFoundException {
+	public User create(User user, Long[] kursIds, Long[] rollenIds) throws KursNotFoundException {
 		for (Long id : kursIds) {
 			Kurs kurs = kursService.getKurs(id);
 			user.getKannUnterrichten().add(kurs);
+		}
+		for (Long id : rollenIds) {
+			Rollen rolle = rollenService.getRollen(id);
+			user.getUserRolle().add(rolle);
+			//user.getKannUnterrichten().add(kurs);
 		}
 		user.setUserCreatedDate(LocalDateTime.now());
 		user.setUserModifiedDate(LocalDateTime.now());

@@ -80,7 +80,7 @@ public class User implements Serializable {
 			@JoinColumn(name = "UserId") }, 
 	inverseJoinColumns = { @JoinColumn(name = "RolleId") }
 			)
-	private Set<Kurs> userRolle = new HashSet<>();
+	private Set<Rollen> userRolle = new HashSet<>();
 
 	@ManyToMany(cascade = { CascadeType.ALL })	// Standard LAZY! 
 	@JoinTable( name = "kannUnterrichten", joinColumns = { 
@@ -154,16 +154,11 @@ public class User implements Serializable {
 	public void setKannUnterrichten(Set<Kurs> kannUnterrichten) {
 		this.kannUnterrichten = kannUnterrichten;
 	}
-	public Set<Kurs> getUserRolle() {
+	public Set<Rollen> getUserRolle() {
 		return userRolle;
 	}
-	public void setUserRolle(Set<Kurs> userRolle) {
+	public void setUserRolle(Set<Rollen> userRolle) {
 		this.userRolle = userRolle;
 	}
-
-
-
-
-
 
 }
