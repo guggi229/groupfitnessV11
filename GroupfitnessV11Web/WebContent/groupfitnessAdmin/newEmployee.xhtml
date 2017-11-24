@@ -55,11 +55,23 @@
 								<h:message for="password" style="color:red" />
 							</div>
 
+							<div class="row">
+								<div class="col">
+									<label for="kurs">#{msg['newuser.cours']}</label>
+									<h:selectManyListbox value="#{userController.kurse}">
+										<f:selectItems value="#{kursController.allKurse}" var="k"
+											id="kurs" itemLabel="#{k.kursNameDe}" itemValue="#{k.id}" />
+									</h:selectManyListbox>
+								</div>
 
-							<h:selectManyListbox value="#{userController.kurse}">
-								<f:selectItems value="#{kursController.allKurse}" var="k"
-									itemLabel="#{k.kursNameDe}" itemValue="#{k.id}" />
-							</h:selectManyListbox>
+								<div class="col">
+									<label for="rolle">#{msg['newuser.rollen']}</label>
+									<h:selectManyListbox value="#{userController.rollen}">
+										<f:selectItems value="#{rollenController.allRollen}" var="r"
+											id="rolle" itemLabel="#{r.roleName}" itemValue="#{r.id}" />
+									</h:selectManyListbox>
+								</div>
+							</div>
 							<div>
 								<div>
 									<h:commandButton action="#{userController.addUser()}"

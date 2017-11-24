@@ -41,6 +41,7 @@ public class UserController extends BaseBean implements Serializable {
 	private Part file;
 	private User user = new User();
 	private Long[] kurse;
+	private Long[] rollen;
 	/**
 	 * Fügt einen neuen User hinzu und speichert, falls vorhanden, das Avatar im Filesystem.
 	 * @throws UserAlreadyExistsException
@@ -90,6 +91,15 @@ public class UserController extends BaseBean implements Serializable {
 	public void setKurse(Long[] kurse) {
 		this.kurse = kurse;
 	}
+
+	public Long[] getRollen() {
+		return rollen;
+	}
+
+	public void setRollen(Long[] rollen) {
+		this.rollen = rollen;
+	}
+
 
 	public Part getFile() {
 		return file;

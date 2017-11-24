@@ -65,4 +65,18 @@
 .newEmployeeForm {
 	max-width: 150px;
 }
+/* Info Box */
+.bd-callout-info {
+    border-left-color: #5bc0de;
+}
+
+_callouts.scss:6
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+}
 
