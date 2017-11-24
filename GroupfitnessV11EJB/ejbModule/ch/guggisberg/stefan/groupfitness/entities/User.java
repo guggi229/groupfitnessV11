@@ -19,6 +19,8 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.persistence.JoinColumn;
 
@@ -45,19 +47,22 @@ public class User implements Serializable {
 	@Column(name="id")
 	private Long id;
 	
-	@Size(max=45)
+	@Size(min=1,max=45)
 	@Column(name="name")
 	private String  userName;
 	
-	@Size(max=45)
+	@Size(min=1,max=45)
 	@Column(name="vorname")
 	private String  userVorname;
 	
-	@Size(max=45)
+	@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+	        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+	        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+	             message="{warn.email.invalid}")
 	@Column(name="email")
 	private String  userEmail;
 	
-	@Size(max=45)
+	@Size(min=8,max=45)
 	@Column(name="password")
 	private String  userPassword;
 	

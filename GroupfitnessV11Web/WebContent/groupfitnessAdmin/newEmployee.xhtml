@@ -5,8 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ice="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html">
 	<ui:define name="title">#{msg['title.newEmplyee']}</ui:define>
 	<ui:define name="content">
 		<div class="container ">
@@ -18,7 +17,7 @@
 					<div class="row">
 						<div class="col">
 							<div class="col newEmployeeForm">
-								<img src="/GroupfitnessV11Web/images/avatarneutral.png"
+								<img src="#{userController.PROPERTY_IMAGE_PATH_EMPTY_AVATAR}"
 									alt="Avatar" id="preview" />
 								<div>
 									<!-- image-preview-input -->
@@ -32,31 +31,35 @@
 								<label for="newUserName">#{msg['newuser.name']}</label>
 								<h:inputText type="text" class="form-control " id="newUserName"
 									placeholder="Karl etc" value="#{userController.user.userName}" />
+								<h:message for="newUserName" style="color:red" />
 							</div>
 							<div class="form-group">
 								<label for="newUserVorname">#{msg['newuser.vorname']}</label>
 								<h:inputText type="text" class="form-control "
-									id="newUserVorname" placeholder="Yoga, BBP etc"
+									id="newUserVorname" placeholder="Thomas,Lukas etc"
 									value="#{userController.user.userVorname}" />
+								<h:message for="newUserVorname" style="color:red" />
 							</div>
 							<div class="form-group">
 								<label for="newUserEmail">#{msg['newuser.email']}</label>
 								<h:inputText type="text" class="form-control " id="newUserEmail"
 									placeholder="info@myCompany.ch"
 									value="#{userController.user.userEmail}" />
+								<h:message for="newUserEmail" style="color:red" />
 							</div>
 							<div class="form-group">
 								<label for="password">#{msg['newuser.password']}</label>
 								<h:inputText type="text" class="form-control " id="password"
 									placeholder="Password"
 									value="#{userController.user.userPassword}" />
+								<h:message for="password" style="color:red" />
 							</div>
 
 
-							<ice:selectManyListbox value="#{userController.kurse}">
+							<h:selectManyListbox value="#{userController.kurse}">
 								<f:selectItems value="#{kursController.allKurse}" var="k"
 									itemLabel="#{k.kursNameDe}" itemValue="#{k.id}" />
-							</ice:selectManyListbox>
+							</h:selectManyListbox>
 							<div>
 								<div>
 									<h:commandButton action="#{userController.addUser()}"

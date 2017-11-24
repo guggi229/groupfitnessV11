@@ -6,12 +6,10 @@ package ch.guggisberg.stefan.groupfitness.utils;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.reloading.FileChangedReloadingStrategy;
-import org.apache.commons.lang3.StringUtils;
 
 
 /**
- * Properties für die ganze APP
-
+ * Properties für die ganze APP. Diese Klasse stellt alle statischen Elemente, wie Pfad, grössen etc., zur Verfügung.
  *
  */
 public final class PropertiesExporter {

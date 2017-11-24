@@ -7,6 +7,7 @@ import java.text.MessageFormat;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.mail.MessagingException;
 import javax.servlet.http.Part;
 
 import org.apache.log4j.Logger;
@@ -28,6 +29,7 @@ public class UserController extends BaseBean implements Serializable {
 	private final String PROPERTY_IMAGE_PATH_EMPTY_AVATAR = PropertiesExporter.getPropertyImagePathEmptyAvatar();
 	private final int PROPERTY_IMAGE_SIZE_AVATAR=PropertiesExporter.getPropertyImageSizeAvatar();
 
+
 	private static Logger log = Logger.getLogger(UserController.class);
 
 	@EJB
@@ -35,7 +37,7 @@ public class UserController extends BaseBean implements Serializable {
 
 	@EJB
 	private EmailManager emailManager;
-	
+
 	private Part file;
 	private User user = new User();
 	private Long[] kurse;
@@ -45,21 +47,24 @@ public class UserController extends BaseBean implements Serializable {
 	 * @throws KursNotFoundException 
 	 */
 	public void addUser()  {
-		
+
 		//Speichern des users
 		try {
 			user = userService.create(user, kurse); // Nach dem persistieren wird das Avatar mit User ID gespeichert
+			// Versenden der Welcome Mail
+			emailManager.sendEmail(user.getUserEmail(), getText("email.welcomemail.user.subject"), 
+					"Checking sending emails by using JavaMail APIs", MessageFormat.format(getText("email.welcomemail.user.content"),
+							user.getUserVorname(),user.getUserEmail(),user.getUserPassword()));
 			showGlobalMessage("info.UserDataSaved", null);
 		} 
 		catch (KursNotFoundException e) {
 			showGlobalErrorMessage("warn.error", null);
 			log.error("Es gab beim Speicher ein Problem", e); // Könnte /Sollte man differenzieren.
-		}
-		catch (Exception e) {
+		} catch (MessagingException e) {
 			showGlobalErrorMessage("warn.error", null);
-			log.error("Es gab beim Speicher ein Problem", e);
-		}
-		
+			log.error("Es gab beim Versenden der Email ein Problem", e);}
+
+
 		// Speichern des Avatars:
 		try {
 			if (file != null) {
@@ -75,10 +80,6 @@ public class UserController extends BaseBean implements Serializable {
 			file= null;
 			kurse=null;
 		}	
-		
-		// Versenden der Welcome Mail
-		emailManager.sendEmail("guggs2@bfh.ch", "This is test Subject", "Checking sending emails by using JavaMail APIs", MessageFormat.format("<h1>Hallo {0}</h1><br>","Thomas"));
-
 	}
 
 
@@ -106,7 +107,7 @@ public class UserController extends BaseBean implements Serializable {
 		this.user = user;
 	}
 	/**
-	 * Sucht ein Avatar mit name id. Sollte es nicht vorhanden sein, wird der Pfad des Standard Avatars zurück geliefert.
+	 * Sucht ein Avatar mit Name id. Sollte es nicht vorhanden sein, wird der Pfad des Standard Avatars zurück geliefert.
 	 * @param id
 	 * @return
 	 */
@@ -123,5 +124,10 @@ public class UserController extends BaseBean implements Serializable {
 	private String getFileTyp() {
 		return file.getContentType().substring(file.getContentType().indexOf("/")+1);
 	}
+
+	public String getPROPERTY_IMAGE_PATH_EMPTY_AVATAR() {
+		return PROPERTY_IMAGE_PATH_EMPTY_AVATAR;
+	}
+	
 
 }

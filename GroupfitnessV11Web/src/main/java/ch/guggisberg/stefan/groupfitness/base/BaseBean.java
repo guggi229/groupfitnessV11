@@ -58,7 +58,7 @@ abstract public class BaseBean implements Serializable {
 	 * @param key
 	 * @return übersetzer Text
 	 */
-	private String getText(String key) {
+	public String getText(String key) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String messageBundleName = facesContext.getApplication().getMessageBundle();
 		Locale locale = facesContext.getViewRoot().getLocale();
