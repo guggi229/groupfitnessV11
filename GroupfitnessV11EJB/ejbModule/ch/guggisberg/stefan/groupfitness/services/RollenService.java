@@ -2,8 +2,6 @@ package ch.guggisberg.stefan.groupfitness.services;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
-
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
 import javax.ejb.LocalBean;

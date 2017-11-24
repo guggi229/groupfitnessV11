@@ -25,6 +25,7 @@ public final class PropertiesExporter {
 	private static final String PROPERTY_IMAGE_SIZE_COURS = "image.size.cours";
 	private static final String PROPERTY_IMAGE_SIZE_AVATAR = "image.size.avatar";
 	private static final String PROPERTY_IMAGE_PATH_EMPTY_AVATAR = "image.path.empty.avatar";
+	private static final String PROPERTY_EMAILADDRESS_PATTERN = "emailaddress.appern";
 
 	static {
 		CONFIG = new PropertiesConfiguration();
@@ -68,6 +69,10 @@ public final class PropertiesExporter {
 
 	public static Integer getPropertyImageSizeAvatar() {
 		return Integer.parseInt(CONFIG.getString(PROPERTY_IMAGE_SIZE_AVATAR));
+	}
+
+	public static String getPropertyEmailaddressPattern() {
+		return (CONFIG.getString(PROPERTY_EMAILADDRESS_PATTERN));
 	}
 	
 	

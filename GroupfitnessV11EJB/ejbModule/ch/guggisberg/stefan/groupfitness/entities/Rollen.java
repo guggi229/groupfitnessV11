@@ -1,17 +1,21 @@
 package ch.guggisberg.stefan.groupfitness.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="roles")
+@Table(name="rolle")
 
 @NamedQueries({
 	@NamedQuery(name= Rollen.QUERY_FIND_ALL_ROLES, 
@@ -20,19 +24,18 @@ import javax.validation.constraints.Size;
 public class Rollen {
 	// Hibernate
 	public static final String QUERY_FIND_ALL_ROLES = "QUERY_FIND_ALL_ROLES";
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="rolesId")
+	@Column(name="id")
 	private Long id;
 
-	@Column(name="role")
+	@Column(name="rolle")
 	@Size(max=45)
 	private String roleName;
 
-	//	 @ManyToOne(fetch=FetchType.EAGER) // Braucht keinen Speicher
-	//	 @JoinColumn(name = "Userid")
-	//	 private User user;
+	@ManyToMany(mappedBy="userRolle")
+	private Set<User> users = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -50,13 +53,15 @@ public class Rollen {
 		this.roleName = roleName;
 	}
 
-	//	public User getUser() {
-	//		return user;
-	//	}
-	//
-	//	public void setUser(User user) {
-	//		this.user = user;
-	//	}
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
+
 
 
 }

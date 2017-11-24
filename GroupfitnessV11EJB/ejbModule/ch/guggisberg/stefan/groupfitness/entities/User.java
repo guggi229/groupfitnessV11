@@ -9,7 +9,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +18,6 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedEntityGraphs;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.persistence.JoinColumn;
@@ -28,12 +26,12 @@ import javax.persistence.JoinColumn;
 @Table(name="user")
 @RequestScoped
 @NamedEntityGraphs({
-    @NamedEntityGraph(
-        name = User.GRAPH_WITH_USER_SKILLS,
-        attributeNodes = {
-            @NamedAttributeNode("kannUnterrichten")
-        }
-    )
+	@NamedEntityGraph(
+			name = User.GRAPH_WITH_USER_SKILLS,
+			attributeNodes = {
+					@NamedAttributeNode("kannUnterrichten")
+			}
+			)
 })
 public class User implements Serializable {
 
@@ -41,51 +39,56 @@ public class User implements Serializable {
 
 	// Hibernate
 	public static final String GRAPH_WITH_USER_SKILLS= "GRAPH_WITH_USER_SKILLS";
-	
+
+	public static final String PATTERN="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+			+"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+			+"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id;
-	
+
 	@Size(min=1,max=45)
 	@Column(name="name")
 	private String  userName;
-	
+
 	@Size(min=1,max=45)
 	@Column(name="vorname")
 	private String  userVorname;
-	
-	@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-	        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-	        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-	             message="{warn.email.invalid}")
+
+	@Pattern(regexp=PATTERN,
+			message="{warn.email.invalid}")
 	@Column(name="email")
 	private String  userEmail;
-	
+
 	@Size(min=8,max=45)
 	@Column(name="password")
 	private String  userPassword;
-	
+
 	@Column(name="lang")
 	private String  userLang;
-	
-	
+
+
 	@Column(name="createdDate")
 	private LocalDateTime  userCreatedDate;
-	
+
 	@Column(name="modifiedDate")
 	private LocalDateTime  userModifiedDate;
-//	
-//	@OneToMany(fetch = FetchType.EAGER)
-//	private Set<Rollen> roles;
-	
+
 	@ManyToMany(cascade = { CascadeType.ALL })	// Standard LAZY! 
-    @JoinTable( name = "kannUnterrichten", joinColumns = { 
-    		@JoinColumn(name = "userid") }, 
-        inverseJoinColumns = { @JoinColumn(name = "kursid") }
-    )
-    private Set<Kurs> kannUnterrichten = new HashSet<>();
-	
+	@JoinTable( name = "UserRolle", joinColumns = { 
+			@JoinColumn(name = "UserId") }, 
+	inverseJoinColumns = { @JoinColumn(name = "RolleId") }
+			)
+	private Set<Kurs> userRolle = new HashSet<>();
+
+	@ManyToMany(cascade = { CascadeType.ALL })	// Standard LAZY! 
+	@JoinTable( name = "kannUnterrichten", joinColumns = { 
+			@JoinColumn(name = "userid") }, 
+	inverseJoinColumns = { @JoinColumn(name = "kursid") }
+			)
+	private Set<Kurs> kannUnterrichten = new HashSet<>();
+
 	// Konstruktor für Hibernate
 	public User() {
 
@@ -127,12 +130,6 @@ public class User implements Serializable {
 	public void setUserVorname(String userVorname) {
 		this.userVorname = userVorname;
 	}
-//	public Set<Rollen> getRoles() {
-//		return roles;
-//	}
-//	public void setRoles(Set<Rollen> roles) {
-//		this.roles = roles;
-//	}
 	public LocalDateTime getUserCreatedDate() {
 		return userCreatedDate;
 	}
@@ -157,7 +154,14 @@ public class User implements Serializable {
 	public void setKannUnterrichten(Set<Kurs> kannUnterrichten) {
 		this.kannUnterrichten = kannUnterrichten;
 	}
-	
+	public Set<Kurs> getUserRolle() {
+		return userRolle;
+	}
+	public void setUserRolle(Set<Kurs> userRolle) {
+		this.userRolle = userRolle;
+	}
+
+
 
 
 
