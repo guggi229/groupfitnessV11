@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<ui:define name="title">#{msg['title.newCoursRun']}</ui:define>
+	<ui:define name="content">
+		<div class="container ">
+			
+				<h2 class="form-signin-heading">#{msg['title.newCoursRun']}</h2>
+				<h:form>
+					<div class="row">
+						<div class="col">
+							<label for="kurs">#{msg['newuser.cours']}</label>
+							<h:selectManyListbox value="#{userController.kurse}">
+								<f:selectItems value="#{kursController.allKurse}" var="k"
+									id="kurs" itemLabel="#{k.kursNameDe}" itemValue="#{k.id}" />
+							</h:selectManyListbox>
+						</div>
+
+						<div class="col">
+							<label for="rolle">#{msg['newuser.rollen']}</label>
+							<h:selectManyListbox value="#{userController.rollen}">
+								<f:selectItems value="#{rollenController.allRollen}" var="r"
+									id="rolle" itemLabel="#{r.roleName}" itemValue="#{r.id}" />
+							</h:selectManyListbox>
+						</div>
+					</div>
+
+				</h:form>
+
+
+
+			
+			
+
+		</div>
+		<!-- /container -->
+	</ui:define>
+</ui:composition>
+
+

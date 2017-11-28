@@ -29,7 +29,6 @@ public class UserController extends BaseBean implements Serializable {
 	private final String PROPERTY_IMAGE_PATH_EMPTY_AVATAR = PropertiesExporter.getPropertyImagePathEmptyAvatar();
 	private final int PROPERTY_IMAGE_SIZE_AVATAR=PropertiesExporter.getPropertyImageSizeAvatar();
 
-
 	private static Logger log = Logger.getLogger(UserController.class);
 
 	@EJB
