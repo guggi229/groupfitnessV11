@@ -77,7 +77,7 @@ public class KursController implements Serializable {
 			file= null;
 			kurs=null;
 		}
-		return "coursTypList";
+		return "viewCoursTyp";
 	}
 
 	public Kurs update(Kurs kurs) throws KursNotFoundException {
