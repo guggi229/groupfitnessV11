@@ -61,12 +61,24 @@ public class UserService extends BaseCrud<User> {
 	}
 
 	public User getUserWithSkills(Long id) {
-		// TODO ? --> Korrigieren
-
 		EntityGraph<?> graph = entityManager.getEntityGraph(User.GRAPH_WITH_USER_SKILLS);
 		Map<String, Object> hints = new HashMap<String, Object>();
 		hints.put("javax.persistence.fetchgraph", graph);
 		return this.entityManager.find(User.class, id, hints);
+	}
+	
+	public User getUserWithSkills(String email) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put(User.PARAM_EMAIL, email);
+		User user = findSingleResultNamedQuery(User.QUERY_FIND_USER_BY_EMAIL, params);
+		
+		User user2 = getUserWithSkills(user.getId());
+		for (Kurs k : user2.getKannUnterrichten()) {
+			System.out.println(k.getKursNameDe());
+			
+		}
+		return getUserWithSkills(user.getId());
+		
 	}
 
 	public User update(User user) {

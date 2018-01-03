@@ -12,7 +12,12 @@
 		aria-haspopup="true" aria-expanded="false">#{request.remoteUser}</a>
 
 		<div class="dropdown-menu" aria-labelledby="dropdown0z">
-			<a class="dropdown-item ion-edit" href="#">Action</a>
+			
+			
+					
+			<h:link outcome="/viewUser"
+				styleClass="dropdown-item">#{msg['mySetting.me']}</h:link>
+		
 			
 			<h:commandLink styleClass="dropdown-item"
 				action="#{loginBeanV2.logout()}" value="#{msg['login.logout']}" />

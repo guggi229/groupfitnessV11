@@ -3,8 +3,12 @@ package ch.guggisberg.stefan.groupfitness.user;
 import java.io.File;
 import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.List;
+import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.SessionContext;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.mail.MessagingException;
@@ -13,6 +17,7 @@ import javax.servlet.http.Part;
 import org.apache.log4j.Logger;
 
 import ch.guggisberg.stefan.groupfitness.base.BaseBean;
+import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.entities.User;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 import ch.guggisberg.stefan.groupfitness.exceptions.UserAlreadyExistsException;
@@ -37,6 +42,7 @@ public class UserController extends BaseBean implements Serializable {
 	@EJB
 	private EmailManager emailManager;
 
+	
 	private Part file;
 	private User user = new User();
 	private Long[] kurse;
@@ -138,6 +144,17 @@ public class UserController extends BaseBean implements Serializable {
 	public String getPROPERTY_IMAGE_PATH_EMPTY_AVATAR() {
 		return PROPERTY_IMAGE_PATH_EMPTY_AVATAR;
 	}
-
+	/**
+	 * 
+	 * @param email
+	 * @return Liefert den User mit allen möglichen Kurse, die er durchführen kann 
+	 */
+	public User getUserSkillsByEmail() {
+		return userService.getUserWithSkills("123@123.ch");
+	}
+	
+	public List<Kurs> getUserSkills(){
+		return userService.getUserWithSkills("123@123.ch").getKannUnterrichten();
+	}
 
 }

@@ -10,8 +10,25 @@
 	<ui:define name="content">
 		<div class="container">
 
-			
+			<h1>#{msg['mySetting.hello']} #{request.remoteUser}</h1>
+			<div>
+				<div>
+					<span class="border border-primary rounded">
+						#{userController.userSkillsByEmail.userName} </span>
+				</div>
+				<div>
+					<span class="border border-primary rounded">
+				
+					 <ui:repeat	var="u"	value="#{userController.userSkills}">
+							#{u.kursNameDe}
+						</ui:repeat>
 
+						<p></p>
+
+					</span>
+				</div>
+
+			</div>
 		</div>
 		<!-- /container -->
 	</ui:define>

@@ -2,7 +2,9 @@ package ch.guggisberg.stefan.groupfitness.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
@@ -17,6 +19,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedEntityGraphs;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -33,12 +37,18 @@ import javax.persistence.JoinColumn;
 			}
 			)
 })
+@NamedQueries({
+	@NamedQuery(name= User.QUERY_FIND_USER_BY_EMAIL, 
+			query ="SELECT u FROM User u WHERE  u.userEmail=:"+User.PARAM_EMAIL)
+})
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -8974946876389769968L;
 
 	// Hibernate
 	public static final String GRAPH_WITH_USER_SKILLS= "GRAPH_WITH_USER_SKILLS";
+	public static final String QUERY_FIND_USER_BY_EMAIL= "QUERY_FIND_USER_BY_EMAIL";
+	public static final String PARAM_EMAIL= "PARAM_EMAIL";
 
 	public static final String PATTERN="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
 			+"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
@@ -87,7 +97,7 @@ public class User implements Serializable {
 			@JoinColumn(name = "userid") }, 
 	inverseJoinColumns = { @JoinColumn(name = "kursid") }
 			)
-	private Set<Kurs> kannUnterrichten = new HashSet<>();
+	private List<Kurs> kannUnterrichten = new ArrayList<>();
 
 	// Konstruktor für Hibernate
 	public User() {
@@ -148,10 +158,11 @@ public class User implements Serializable {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public Set<Kurs> getKannUnterrichten() {
+
+	public List<Kurs> getKannUnterrichten() {
 		return kannUnterrichten;
 	}
-	public void setKannUnterrichten(Set<Kurs> kannUnterrichten) {
+	public void setKannUnterrichten(List<Kurs> kannUnterrichten) {
 		this.kannUnterrichten = kannUnterrichten;
 	}
 	public Set<Rollen> getUserRolle() {
