@@ -12,6 +12,7 @@ import javax.servlet.http.Part;
 
 import org.apache.log4j.Logger;
 
+import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursAlreadyExistsException;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
@@ -21,7 +22,7 @@ import ch.guggisberg.stefan.groupfitness.utils.PropertiesExporter;
 
 @RequestScoped
 @Named
-public class KursController implements Serializable {
+public class KursController extends BaseBean implements Serializable {
 	private static final long serialVersionUID = 8012191796192067840L;
 	private final String PROPERTY_IMAGE_PATH_COURS = PropertiesExporter.getPropertyImagePathCours();
 	private final int PROPERTY_IMAGE_SIZE_COURS=PropertiesExporter.getPropertyImageSizeCours();
@@ -53,6 +54,7 @@ public class KursController implements Serializable {
 				file.write(PROPERTY_IMAGE_PATH_COURS+ kurs.getId() + "." + getFileTyp());
 				ImageUtil.imageResizerFile(new File (PROPERTY_IMAGE_PATH_COURS+ kurs.getId() + "." + getFileTyp()), PROPERTY_IMAGE_SIZE_COURS);
 			}
+			showGlobalMessage("info.UserDataSaved", null);
 		}  catch (IOException e) {
 			log.error("Es gab beim Speicher ein Problem", e);
 			e.printStackTrace();
@@ -68,7 +70,8 @@ public class KursController implements Serializable {
 		try {
 			kursService.update(kurs);								
 			if (file != null) file.write(PROPERTY_IMAGE_PATH_COURS+ kurs.getId() + "." + getFileTyp());
-			ImageUtil.imageResizerFile(new File (PROPERTY_IMAGE_PATH_COURS+ kurs.getId() + "." + getFileTyp()), 300);
+			ImageUtil.imageResizerFile(new File (PROPERTY_IMAGE_PATH_COURS+ kurs.getId() + "." + getFileTyp()), PROPERTY_IMAGE_SIZE_COURS);
+			showGlobalMessage("info.UserDataSaved", null);
 		}  catch (IOException e) {
 			log.error("Es gab beim Speicher ein Problem", e);
 			e.printStackTrace();

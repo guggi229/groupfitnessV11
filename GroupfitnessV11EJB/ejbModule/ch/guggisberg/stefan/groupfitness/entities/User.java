@@ -74,7 +74,8 @@ public class User implements Serializable {
 
 	@Column(name="modifiedDate")
 	private LocalDateTime  userModifiedDate;
-
+	
+	//Owning Side
 	@ManyToMany(cascade = { CascadeType.ALL })	// Standard LAZY! 
 	@JoinTable( name = "UserRolle", joinColumns = { 
 			@JoinColumn(name = "UserId") }, 

@@ -6,7 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-	<ui:define name="title">Login Page</ui:define>
+	<ui:define name="title">#{msg['title.coursTyp']}</ui:define>
 	<ui:define name="content">
 		<div class="container">
 
@@ -22,9 +22,6 @@
 						<div class="card-body">
 							<h4 class="card-title">#{k.kursNameDe}</h4>
 							<p class="card-text">#{k.kursDescriptionDe}</p>
-							<p class="card-text">
-								<small class="text-muted">Last updated 3 mins ago</small>
-							</p>
 						</div>
 
 						<!-- Admin Zone -->

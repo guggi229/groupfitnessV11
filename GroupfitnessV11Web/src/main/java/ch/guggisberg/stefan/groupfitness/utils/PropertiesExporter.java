@@ -1,6 +1,4 @@
-/*
- * Copyright 2012 - 2017 by PostFinance Ltd - All rights reserved
- */
+
 package ch.guggisberg.stefan.groupfitness.utils;
 
 import org.apache.commons.configuration.ConfigurationException;

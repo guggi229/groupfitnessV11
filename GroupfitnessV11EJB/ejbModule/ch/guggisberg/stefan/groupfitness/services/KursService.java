@@ -17,13 +17,12 @@ import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 public class KursService extends  BaseCrud<Kurs> {
 
 	private static final long serialVersionUID = 319735437119932640L;
-	
+
 	@RolesAllowed("GroupfitnessAdmin")
 	public Kurs create(Kurs kurs) throws KursAlreadyExistsException {
-		//showGlobalMessage("info.UserDataSaved", "saveOK");
 		kurs.setDeleted(false);
 		entityManager.persist(kurs);
-	
+
 		return kurs;
 	}
 
@@ -38,7 +37,7 @@ public class KursService extends  BaseCrud<Kurs> {
 		kurs.setDeleted(true);
 		update(kurs);
 	}
-	
+
 	@PermitAll
 	public Kurs getKurs(Long id) throws KursNotFoundException {
 		return entityManager.find(Kurs.class, id);
@@ -51,5 +50,5 @@ public class KursService extends  BaseCrud<Kurs> {
 	}
 
 
-	
+
 }
