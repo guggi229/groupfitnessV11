@@ -6,28 +6,32 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
 	<ui:define name="title">#{msg['title.user']}</ui:define>
 	<ui:define name="content">
 		<div class="container">
-
 			<h1>#{msg['mySetting.hello']} #{request.remoteUser}</h1>
 			<div>
 				<div>
-					<span class="border border-primary rounded">
-						#{userController.userSkillsByEmail.userName} </span>
+					<h2>#{msg['kurstable.name']}</h2>
+					<div>#{msg['kurstable.intro']}</div>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#{msg['kurstable.beschreibung']}</th>
+								<th scope="col">#{msg['kurstable.beschreibungFr']}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<ui:repeat var="u" value="#{userController.userSkills}">
+								<tr>
+									<td>#{u.kursNameDe}</td>
+									<td>#{u.kursNameFr}</td>
+								</tr>
+							</ui:repeat>
+						</tbody>
+					</table>
 				</div>
-				<div>
-					<span class="border border-primary rounded">
-				
-					 <ui:repeat	var="u"	value="#{userController.userSkills}">
-							#{u.kursNameDe}
-						</ui:repeat>
-
-						<p></p>
-
-					</span>
-				</div>
-
 			</div>
 		</div>
 		<!-- /container -->

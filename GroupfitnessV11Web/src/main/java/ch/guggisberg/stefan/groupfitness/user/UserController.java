@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.mail.MessagingException;
 import javax.servlet.http.Part;
@@ -144,17 +145,10 @@ public class UserController extends BaseBean implements Serializable {
 	public String getPROPERTY_IMAGE_PATH_EMPTY_AVATAR() {
 		return PROPERTY_IMAGE_PATH_EMPTY_AVATAR;
 	}
-	/**
-	 * 
-	 * @param email
-	 * @return Liefert den User mit allen möglichen Kurse, die er durchführen kann 
-	 */
-	public User getUserSkillsByEmail() {
-		return userService.getUserWithSkills("123@123.ch");
-	}
+
 	
 	public List<Kurs> getUserSkills(){
-		return userService.getUserWithSkills("123@123.ch").getKannUnterrichten();
+		return userService.getUserWithSkills(FacesContext.getCurrentInstance().getExternalContext().getRemoteUser()).getKannUnterrichten();
 	}
 
 }
