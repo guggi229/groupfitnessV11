@@ -9,34 +9,24 @@
 	<ui:define name="title">#{msg['title.newCoursRun']}</ui:define>
 	<ui:define name="content">
 		<div class="container ">
-			
-				<h2 class="form-signin-heading">#{msg['title.newCoursRun']}</h2>
-				<h:form>
-					<div class="row">
-						<div class="col">
-							<label for="kurs">#{msg['newuser.cours']}</label>
-							<h:selectManyListbox value="#{userController.kurse}">
-								<f:selectItems value="#{kursController.allKurse}" var="k"
-									id="kurs" itemLabel="#{k.kursNameDe}" itemValue="#{k.id}" />
-							</h:selectManyListbox>
-						</div>
-
-						<div class="col">
-							<label for="rolle">#{msg['newuser.rollen']}</label>
-							<h:selectManyListbox value="#{userController.rollen}">
-								<f:selectItems value="#{rollenController.allRollen}" var="r"
-									id="rolle" itemLabel="#{r.roleName}" itemValue="#{r.id}" />
-							</h:selectManyListbox>
-						</div>
+			<h2 class="form-signin-heading">#{msg['title.newCoursRun']}</h2>
+			<h:form>
+				<div class="row">
+					<div class="col">
+						<label for="kurs">#{msg['newuser.cours']}</label>
+						<h:selectManyListbox value="#{userController.kurse}">
+							<f:selectItems value="#{kursController.allKurse}" var="k"
+								id="kurs" itemLabel="#{k.kursNameDe}" itemValue="#{k.id}" />
+						</h:selectManyListbox>
 					</div>
-
-				</h:form>
-
-
-
-			
-			
-
+					<div class="col">
+					<f:inputDate type="date" name="rday" max="1979-12-31"/>
+					</div>
+							<div class="col">
+					<f:inputDate type="time" name="rtime" max="1979-12-31"/>
+					</div>
+				</div>
+			</h:form>
 		</div>
 		<!-- /container -->
 	</ui:define>
