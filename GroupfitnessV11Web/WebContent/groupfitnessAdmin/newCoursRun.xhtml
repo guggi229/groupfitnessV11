@@ -11,20 +11,45 @@
 		<div class="container ">
 			<h2 class="form-signin-heading">#{msg['title.newCoursRun']}</h2>
 			<h:form>
-				<div class="row">
-					<div class="col">
-						<label for="kurs">#{msg['newuser.cours']}</label>
-						<h:selectManyListbox value="#{userController.kurse}">
+
+				<div class="form-group">
+					<div>
+						<h:outputLabel for="kurs">#{msg['newcoursrun.possible.cours']}</h:outputLabel>
+						<h:selectOneMenu value="#{userController.kurse}"
+							styleClass="form-control">
 							<f:selectItems value="#{kursController.allKurse}" var="k"
 								id="kurs" itemLabel="#{k.kursNameDe}" itemValue="#{k.id}" />
-						</h:selectManyListbox>
+						</h:selectOneMenu>
 					</div>
-					<div class="col">
-					<f:inputDate type="date" name="rday" max="1979-12-31"/>
+					<div class="form-group">
+						<h:outputLabel for="duration">#{msg['newcoursrun.possible.duration']}</h:outputLabel>
+						<h:inputText value="" id="duration" styleClass="form-control" />
 					</div>
-							<div class="col">
-					<f:inputDate type="time" name="rtime" max="1979-12-31"/>
-					</div>
+				</div>
+
+				<div class="form-group">
+					<h:outputLabel for="sdate">#{msg['newcoursrun.possible.start.date']}</h:outputLabel>
+					<h:inputText pt:type="date" name="bday" id="sdate"
+						styleClass="form-control"></h:inputText>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="edate">#{msg['newcoursrun.possible.end.date']}</h:outputLabel>
+					<h:inputText pt:type="date" name="bday" id="edate"
+						styleClass="form-control"></h:inputText>
+				</div>
+				<div class="form-check">
+					<h:outputLabel sytleClass="form-check-label" for="period">#{msg['newcoursrun.possible.weekly']}</h:outputLabel>
+					<h:selectBooleanCheckbox sytleClass="form-check-input" id="period">
+					</h:selectBooleanCheckbox>
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="time">#{msg['newcoursrun.possible.time']}</h:outputLabel>
+					<h:inputText pt:type="time" name="bday" id="time"
+						styleClass="form-control"></h:inputText>
+				</div>
+				<div>
+					<h:commandButton action="#{kursController.addKurs}"
+						styleClass="btn btn-primary" value="#{msg['button.create']}" />
 				</div>
 			</h:form>
 		</div>

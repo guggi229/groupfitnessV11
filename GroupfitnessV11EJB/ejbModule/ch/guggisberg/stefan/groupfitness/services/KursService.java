@@ -20,7 +20,6 @@ public class KursService extends  BaseCrud<Kurs> {
 	
 	@RolesAllowed("GroupfitnessAdmin")
 	public Kurs create(Kurs kurs) throws KursAlreadyExistsException {
-		//showGlobalMessage("info.UserDataSaved", "saveOK");
 		kurs.setDeleted(false);
 		entityManager.persist(kurs);
 	
