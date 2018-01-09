@@ -2,7 +2,6 @@ package ch.guggisberg.stefan.groupfitness.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="coursRun")
@@ -44,7 +42,7 @@ public class CoursRun implements Serializable {
 	private int duration;
 
 	@Column(name="time")
-	private LocalTime startTime;
+	private String startTime;
 
 	@Column(name="maxPlaceCustomer")
 	private int maxPlace;
@@ -95,20 +93,20 @@ public class CoursRun implements Serializable {
 		this.duration = duration;
 	}
 
-	public LocalTime getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
-	}
-
 	public int getMaxPlace() {
 		return maxPlace;
 	}
 
 	public void setMaxPlace(int maxPlace) {
 		this.maxPlace = maxPlace;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 
 
