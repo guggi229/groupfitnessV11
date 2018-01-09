@@ -71,8 +71,8 @@ public class Kurs implements Serializable {
 	@ManyToMany(mappedBy = "kannUnterrichten")
     private Set<User> users = new HashSet<>();
 	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="kurs")
-	private Set<CoursRun> coursRuns;
+//	@OneToMany(fetch=FetchType.EAGER, mappedBy="kurs")
+//	private Set<CoursRun> coursRuns;
 	
 	
 

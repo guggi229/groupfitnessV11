@@ -15,7 +15,7 @@
 				<div class="form-group">
 					<div>
 						<h:outputLabel for="kurs">#{msg['newcoursrun.possible.cours']}</h:outputLabel>
-						<h:selectOneMenu value="#{userController.kurse}"
+						<h:selectOneMenu value="#{kursRunController.id}"
 							styleClass="form-control">
 							<f:selectItems value="#{kursController.allKurse}" var="k"
 								id="kurs" itemLabel="#{k.kursNameDe}" itemValue="#{k.id}" />
@@ -45,7 +45,7 @@
 				<div class="form-group">
 					<h:outputLabel for="time">#{msg['newcoursrun.possible.time']}</h:outputLabel>
 					<h:inputText pt:type="time" name="bday" id="time"
-						styleClass="form-control" value="#{kursRunController.coursRun.startTime}" converter="localDateTimeConverter"></h:inputText>
+						styleClass="form-control" value="#{kursRunController.coursRun.startTime}" converter="localTimeConverter"></h:inputText>
 				</div>
 				<div>
 					<h:commandButton action="#{kursRunController.createCoursRun()}"

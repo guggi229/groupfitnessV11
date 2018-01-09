@@ -9,6 +9,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import ch.guggisberg.stefan.groupfitness.entities.CoursRun;
+import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 
 @Stateless
 @LocalBean
@@ -35,6 +36,10 @@ public class KursRunService extends BaseCrud<CoursRun>{
 	@PermitAll
 	public List<CoursRun> getAllCoursRun(){
 		return entityManager.createNamedQuery(CoursRun.QUERY_FIND_ALL_COURS_RUN).getResultList();
+	}
+	@PermitAll
+	public Kurs getKurs(Long id) {
+		return entityManager.find(Kurs.class, id);
 	}
 
 }
