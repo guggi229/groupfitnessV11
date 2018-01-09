@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,7 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedEntityGraphs;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import ch.guggisberg.stefan.groupfitness.entities.User;
@@ -41,11 +43,7 @@ public class Kurs implements Serializable {
 	// Hibernate
 	public static final String QUERY_FIND_ALL = "QUERY_FIND_ALL";
 	public static final String GRAPH_WITH_USERS= "GRAPH_WITH_USERS";
-	
-	public Kurs() {
-		
-	}
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -73,6 +71,11 @@ public class Kurs implements Serializable {
 	@ManyToMany(mappedBy = "kannUnterrichten")
     private Set<User> users = new HashSet<>();
 	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="kurs")
+	private Set<CoursRun> coursRuns;
+	
+	
+
 	public Long getId() {
 		return id;
 	}

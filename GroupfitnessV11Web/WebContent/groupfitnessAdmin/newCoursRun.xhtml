@@ -23,19 +23,19 @@
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="duration">#{msg['newcoursrun.possible.duration']}</h:outputLabel>
-						<h:inputText value="" id="duration" styleClass="form-control" />
+						<h:inputText value="#{kursRunController.coursRun.duration}" id="duration" styleClass="form-control" />
 					</div>
 				</div>
 
 				<div class="form-group">
 					<h:outputLabel for="sdate">#{msg['newcoursrun.possible.start.date']}</h:outputLabel>
-					<h:inputText pt:type="date" name="bday" id="sdate"
-						styleClass="form-control"></h:inputText>
+					<h:inputText pt:type="date" name="bday" id="sdate" converter="localDateTimeConverter"
+						styleClass="form-control" value="#{kursRunController.coursRun.startDate}"></h:inputText>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="edate">#{msg['newcoursrun.possible.end.date']}</h:outputLabel>
-					<h:inputText pt:type="date" name="bday" id="edate"
-						styleClass="form-control"></h:inputText>
+					<h:inputText pt:type="date" name="bday" id="edate" converter="localDateTimeConverter"
+						styleClass="form-control" value="#{kursRunController.coursRun.endDate}"></h:inputText>
 				</div>
 				<div class="form-check">
 					<h:outputLabel sytleClass="form-check-label" for="period">#{msg['newcoursrun.possible.weekly']}</h:outputLabel>
@@ -45,10 +45,10 @@
 				<div class="form-group">
 					<h:outputLabel for="time">#{msg['newcoursrun.possible.time']}</h:outputLabel>
 					<h:inputText pt:type="time" name="bday" id="time"
-						styleClass="form-control"></h:inputText>
+						styleClass="form-control" value="#{kursRunController.coursRun.startTime}" converter="localDateTimeConverter"></h:inputText>
 				</div>
 				<div>
-					<h:commandButton action="#{kursController.addKurs}"
+					<h:commandButton action="#{kursRunController.createCoursRun()}"
 						styleClass="btn btn-primary" value="#{msg['button.create']}" />
 				</div>
 			</h:form>
