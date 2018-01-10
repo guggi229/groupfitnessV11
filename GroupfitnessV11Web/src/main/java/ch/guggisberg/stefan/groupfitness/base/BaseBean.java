@@ -65,8 +65,4 @@ abstract public class BaseBean implements Serializable {
 		ResourceBundle bundle = ResourceBundle.getBundle(messageBundleName, locale);
 		return bundle.getString(key);
 	}
-	
-
-	
-	
 }

@@ -14,11 +14,11 @@
 
 				<div class="form-group">
 					<div>
-						<h:outputLabel for="kurs">#{msg['newcoursrun.possible.cours']}</h:outputLabel>
+						<h:outputLabel for="teacher">#{msg['newcoursrun.possible.possible.teacher']}</h:outputLabel>
 						<h:selectOneMenu value="#{kursRunController.id}"
 							styleClass="form-control">
-							<f:selectItems value="#{kursController.allKurse}" var="k"
-								id="kurs" itemLabel="#{k.kursNameDe}" itemValue="#{k.id}" />
+							<f:selectItems value="#{kursRunController.possibleUserForThisCours}" var="t"
+								id="teacher" itemLabel="#{t.userVorname} #{t.userName}" itemValue="#{t.id}" />
 						</h:selectOneMenu>
 					</div>
 					<div class="form-group">
@@ -40,11 +40,6 @@
 						converter="localDateTimeConverter" styleClass="form-control"
 						value="#{kursRunController.coursRun.endDate}"></h:inputText>
 				</div>
-				<div class="form-check">
-					<h:outputLabel sytleClass="form-check-label" for="period">#{msg['newcoursrun.possible.weekly']}</h:outputLabel>
-					<h:selectBooleanCheckbox sytleClass="form-check-input" id="period">
-					</h:selectBooleanCheckbox>
-				</div>
 				<div class="form-group">
 					<h:outputLabel for="time">#{msg['newcoursrun.possible.time']}</h:outputLabel>
 					<h:inputText pt:type="time" name="bday" id="time"
@@ -52,7 +47,7 @@
 						value="#{kursRunController.coursRun.startTime}"></h:inputText>
 				</div>
 				<div>
-					<h3>Radio Button</h3>
+					<h3>#{msg['newcoursrun.possible.day']}</h3>
 					<h:selectOneRadio value="#{kursRunController.day}">
 						<f:selectItem itemValue="1" itemLabel="#{msg['generell.dayOfWeek.moday']}" StyleClass="form-check form-check-inline" selected="true"/>
 						<f:selectItem itemValue="2" itemLabel="#{msg['generell.dayOfWeek.tuesday']}" StyleClass="form-check form-check-inline"/>
@@ -64,8 +59,8 @@
 					</h:selectOneRadio>
 				</div>
 				<div>
-					<h:commandButton action="#{kursRunController.createCoursRun()}"
-						styleClass="btn btn-primary" value="#{msg['button.create']}" />
+					<h:commandButton action="#{kursRunController.previewCoursRun()}"
+						styleClass="btn btn-primary" value="#{msg['button.preview']}" />
 				</div>
 			</h:form>
 		</div>

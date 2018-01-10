@@ -20,7 +20,7 @@ import javax.persistence.Table;
 	@NamedQuery(name= CoursRun.QUERY_FIND_ALL_COURS_RUN, 
 			query ="SELECT c FROM CoursRun c")
 })
-public class CoursRun implements Serializable {
+public class CoursRun implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 6799084951953976291L;
 	// Hibernate
@@ -37,6 +37,9 @@ public class CoursRun implements Serializable {
 
 	@Column(name="endDate")
 	private LocalDate endDate;
+	
+	@Column(name="currentDate")
+	private LocalDate currentDate;
 
 	@Column(name="duration")
 	private int duration;
@@ -109,6 +112,17 @@ public class CoursRun implements Serializable {
 		this.startTime = startTime;
 	}
 
+	public LocalDate getCurrentDate() {
+		return currentDate;
+	}
+
+	public void setCurrentDate(LocalDate currentDate) {
+		this.currentDate = currentDate;
+	}
+
+	public CoursRun copy(CoursRun origin) throws CloneNotSupportedException {
+		return (CoursRun) origin.clone();
+	}
 
 
 

@@ -43,6 +43,11 @@
 												immediate="true" styleClass="card-link"
 												action="#{kursController.modKurs(k)}"
 												value="  #{msg['kurstable.edit']}" /></li>
+												<!-- Editieren eines Kurses -->
+										<li class="list-group-item  ion-loop"><h:commandLink
+												immediate="true" styleClass="card-link"
+												action="#{kursRunController.newSerie(k)}"
+												value="  #{msg['kurstable.serie']}" /></li>
 									</h:form>
 								</ul>
 							</c:when>
