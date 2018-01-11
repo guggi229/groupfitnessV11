@@ -9,7 +9,6 @@ import javax.inject.Named;
 import org.apache.log4j.Logger;
 
 import ch.guggisberg.stefan.groupfitness.entities.Rollen;
-import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
 import ch.guggisberg.stefan.groupfitness.services.RollenService;
 
 @RequestScoped
@@ -21,7 +20,7 @@ public class RollenController implements Serializable {
 	@EJB 
 	RollenService rollenService;
 	
-	public List<Rollen> getAllRollen() throws KursNotFoundException{
+	public List<Rollen> getAllRollen() {
 		return rollenService.getAllRollen();
 	}
 

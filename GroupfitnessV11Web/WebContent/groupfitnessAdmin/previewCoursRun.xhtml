@@ -10,7 +10,6 @@
 	<ui:define name="content">
 		<div class="container ">
 			<h2 class="form-signin-heading">#{msg['title.newCoursRun']}</h2>
-Test
 			<h:form>
 				<table class="table table-striped">
 					<thead>
@@ -22,27 +21,19 @@ Test
 						</tr>
 					</thead>
 					<tbody>
-
-
 						<ui:repeat var="k" value="#{kursRunController.coursRuns}">
-
 							<tr>
-
 								<td>#{k.kurs.kursNameDe}</td>
 								<td>#{k.currentDate}</td>
 								<td>#{k.startTime}</td>
-								<td>
-									</td>
+								<td></td>
 							</tr>
-
-
-
 						</ui:repeat>
-
 					</tbody>
 				</table>
-				<div class="form-group">
-					
+				<div>
+					<h:commandButton action="#{kursRunController.createCoursRuns()}"
+						styleClass="btn btn-primary" value="#{msg['button.create']}" />
 				</div>
 			</h:form>
 		</div>

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.Local;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
@@ -38,6 +37,7 @@ public class KursRunController {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private List<LocalDate> localDates;
+
 	private List<CoursRun> coursRuns= new ArrayList<>();
 	private Kurs kurs = new Kurs();
 
@@ -47,9 +47,9 @@ public class KursRunController {
 	}
 
 	public String previewCoursRun() {
-		
 		localDates = new ArrayList<>();
 		LocalDate tempDate = startDate;
+		// Suche alle passende daten zwischen starDate und endDate die dem Tag day entsprechen.
 		while (tempDate.isBefore(endDate)) {
 			if (tempDate.getDayOfWeek().equals(DayOfWeek.of(day))) {
 				try {
@@ -62,38 +62,20 @@ public class KursRunController {
 					log.warn(e);
 					// return to a sorry Page
 				} catch (KursNotFoundException e) {
-				log.warn(e);
+					log.warn(e);
 				}
-				System.out.println(tempDate.toString());
 				localDates.add(tempDate);
 			}
 			tempDate=tempDate.plusDays(1L);
 		}
-
-
-		//		System.out.println(coursRun.getStartTime());
-		////		coursRun.setEndDate(null);
-		////		coursRun.setStartDate(null);
-		//		coursRun.setStartTime(null);
-		//		System.out.println(id);
-		//		Kurs kurs = crServce.getKurs(id);
-		//		System.out.println(kurs.getKursNameDe());
-		//		System.out.println("***************");
-		//		System.out.println("***************");
-		//
-		//		System.out.println(DayOfWeek.MONDAY);
-		//		DayOfWeek dayOfWeek = DayOfWeek.of(day);
-		//		System.out.println("Day of weekend is " + dayOfWeek);
-		//		
-		//		LocalDate tempDate = coursRun.getStartDate();
-		//		
-
-		//		
-		//		//coursRun.setKurs(kurs);
-		//		//crServce.create(coursRun);
-		System.out.println("previewCoursRun durchlaufen");
 		return "previewCoursRun";
 
+	}
+	public String createCoursRuns() {
+		for (CoursRun coursRun : coursRuns) {
+			crServce.create(coursRun);
+		}
+		return "/GroupfitnessV11Web/success";
 	}
 
 	public CoursRun getCoursRun() {
