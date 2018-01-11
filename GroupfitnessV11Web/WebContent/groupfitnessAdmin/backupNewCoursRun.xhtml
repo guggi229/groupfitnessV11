@@ -11,9 +11,16 @@
 		<div class="container ">
 			<h2 class="form-signin-heading">#{msg['title.newCoursRun']}</h2>
 			<h:form>
-				<h:inputHidden value="#{kursRunController.kurs.id}" />
-				<div class="form-group">
 
+				<div class="form-group">
+					<div>
+						<h:outputLabel for="teacher">#{msg['newcoursrun.possible.possible.teacher']}</h:outputLabel>
+						<h:selectOneMenu value="#{kursRunController.id}"
+							styleClass="form-control">
+							<f:selectItems value="#{kursRunController.possibleUserForThisCours}" var="t"
+								id="teacher" itemLabel="#{t.userVorname} #{t.userName}" itemValue="#{t.id}" />
+						</h:selectOneMenu>
+					</div>
 					<div class="form-group">
 						<h:outputLabel for="duration">#{msg['newcoursrun.possible.duration']}</h:outputLabel>
 						<h:inputText value="#{kursRunController.coursRun.duration}"
@@ -25,13 +32,13 @@
 					<h:outputLabel for="sdate">#{msg['newcoursrun.possible.start.date']}</h:outputLabel>
 					<h:inputText pt:type="date" name="bday" id="sdate"
 						converter="localDateTimeConverter" styleClass="form-control"
-						value="#{kursRunController.startDate}"></h:inputText>
+						value="#{kursRunController.coursRun.startDate}"></h:inputText>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="edate">#{msg['newcoursrun.possible.end.date']}</h:outputLabel>
 					<h:inputText pt:type="date" name="bday" id="edate"
 						converter="localDateTimeConverter" styleClass="form-control"
-						value="#{kursRunController.endDate}"></h:inputText>
+						value="#{kursRunController.coursRun.endDate}"></h:inputText>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="time">#{msg['newcoursrun.possible.time']}</h:outputLabel>
@@ -42,27 +49,13 @@
 				<div class="form-group">
 					<h3>#{msg['newcoursrun.possible.day']}</h3>
 					<h:selectOneRadio value="#{kursRunController.day}">
-						<f:selectItem itemValue="1"
-							itemLabel="#{msg['generell.dayOfWeek.moday']}"
-							StyleClass="form-check form-check-inline" selected="true" />
-						<f:selectItem itemValue="2"
-							itemLabel="#{msg['generell.dayOfWeek.tuesday']}"
-							StyleClass="form-check form-check-inline" />
-						<f:selectItem itemValue="3"
-							itemLabel="#{msg['generell.dayOfWeek.wednesday']}"
-							StyleClass="form-check form-check-inline" />
-						<f:selectItem itemValue="4"
-							itemLabel="#{msg['generell.dayOfWeek.thursday']}"
-							StyleClass="form-check form-check-inline" />
-						<f:selectItem itemValue="5"
-							itemLabel="#{msg['generell.dayOfWeek.friday']}"
-							StyleClass="form-check form-check-inline" />
-						<f:selectItem itemValue="6"
-							itemLabel="#{msg['generell.dayOfWeek.saturday']}"
-							StyleClass="form-check form-check-inline" />
-						<f:selectItem itemValue="7"
-							itemLabel="#{msg['generell.dayOfWeek.sunday']}"
-							StyleClass="form-check form-check-inline" />
+						<f:selectItem itemValue="1" itemLabel="#{msg['generell.dayOfWeek.moday']}" StyleClass="form-check form-check-inline" selected="true"/>
+						<f:selectItem itemValue="2" itemLabel="#{msg['generell.dayOfWeek.tuesday']}" StyleClass="form-check form-check-inline"/>
+						<f:selectItem itemValue="3" itemLabel="#{msg['generell.dayOfWeek.wednesday']}" StyleClass="form-check form-check-inline"/>
+						<f:selectItem itemValue="4" itemLabel="#{msg['generell.dayOfWeek.thursday']}" StyleClass="form-check form-check-inline"/>
+						<f:selectItem itemValue="5" itemLabel="#{msg['generell.dayOfWeek.friday']}" StyleClass="form-check form-check-inline"/>
+						<f:selectItem itemValue="6" itemLabel="#{msg['generell.dayOfWeek.saturday']}" StyleClass="form-check form-check-inline"/>
+						<f:selectItem itemValue="7" itemLabel="#{msg['generell.dayOfWeek.sunday']}" StyleClass="form-check form-check-inline"/>
 					</h:selectOneRadio>
 				</div>
 				<div>

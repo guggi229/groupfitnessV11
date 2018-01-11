@@ -32,14 +32,9 @@ public class CoursRun implements Serializable, Cloneable {
 	@Column(name="id")
 	private Long id;
 
-	@Column(name="startDate")
-	private LocalDate startDate;
 
-	@Column(name="endDate")
-	private LocalDate endDate;
-	
 	@Column(name="currentDate")
-	private LocalDate currentDate;
+	private LocalDate runningDate;
 
 	@Column(name="duration")
 	private int duration;
@@ -72,22 +67,7 @@ public class CoursRun implements Serializable, Cloneable {
 		this.id = id;
 	}
 
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-
-	public LocalDate getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
-	}
-
+	
 	public int getDuration() {
 		return duration;
 	}
@@ -113,11 +93,11 @@ public class CoursRun implements Serializable, Cloneable {
 	}
 
 	public LocalDate getCurrentDate() {
-		return currentDate;
+		return runningDate;
 	}
 
 	public void setCurrentDate(LocalDate currentDate) {
-		this.currentDate = currentDate;
+		this.runningDate = currentDate;
 	}
 
 	public CoursRun copy(CoursRun origin) throws CloneNotSupportedException {

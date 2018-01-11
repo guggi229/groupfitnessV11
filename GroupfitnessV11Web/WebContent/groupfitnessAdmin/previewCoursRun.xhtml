@@ -11,7 +11,40 @@
 		<div class="container ">
 			<h2 class="form-signin-heading">#{msg['title.newCoursRun']}</h2>
 Test
+			<h:form>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#{msg['newcourstyp.name.de']}</th>
+							<th scope="col">#{msg['newcoursrun.possible.date']}</th>
+							<th scope="col">#{msg['newcoursrun.possible.time']}</th>
+							<th scope="col">#{msg['newcoursrun.possible.possible.teacher']}</th>
+						</tr>
+					</thead>
+					<tbody>
 
+
+						<ui:repeat var="k" value="#{kursRunController.coursRuns}">
+
+							<tr>
+
+								<td>#{k.kurs.kursNameDe}</td>
+								<td>#{k.currentDate}</td>
+								<td>#{k.startTime}</td>
+								<td>
+									</td>
+							</tr>
+
+
+
+						</ui:repeat>
+
+					</tbody>
+				</table>
+				<div class="form-group">
+					
+				</div>
+			</h:form>
 		</div>
 		<!-- /container -->
 	</ui:define>
