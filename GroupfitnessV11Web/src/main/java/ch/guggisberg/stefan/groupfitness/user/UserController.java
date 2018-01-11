@@ -4,11 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.SessionContext;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;

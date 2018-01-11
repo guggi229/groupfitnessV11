@@ -13,14 +13,7 @@
 			<h:form>
 
 				<div class="form-group">
-					<div>
-						<h:outputLabel for="teacher">#{msg['newcoursrun.possible.possible.teacher']}</h:outputLabel>
-						<h:selectOneMenu value="#{kursRunController.id}"
-							styleClass="form-control">
-							<f:selectItems value="#{kursRunController.possibleUserForThisCours}" var="t"
-								id="teacher" itemLabel="#{t.userVorname} #{t.userName}" itemValue="#{t.id}" />
-						</h:selectOneMenu>
-					</div>
+
 					<div class="form-group">
 						<h:outputLabel for="duration">#{msg['newcoursrun.possible.duration']}</h:outputLabel>
 						<h:inputText value="#{kursRunController.coursRun.duration}"
@@ -46,7 +39,7 @@
 						styleClass="form-control"
 						value="#{kursRunController.coursRun.startTime}"></h:inputText>
 				</div>
-				<div>
+				<div class="form-group">
 					<h3>#{msg['newcoursrun.possible.day']}</h3>
 					<h:selectOneRadio value="#{kursRunController.day}">
 						<f:selectItem itemValue="1" itemLabel="#{msg['generell.dayOfWeek.moday']}" StyleClass="form-check form-check-inline" selected="true"/>
