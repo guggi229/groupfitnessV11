@@ -26,7 +26,11 @@
 								<td>#{k.kurs.kursNameDe}</td>
 								<td>#{k.currentDate}</td>
 								<td>#{k.startTime}</td>
-								<td></td>
+								<td><h:selectOneMenu value="#{kursRunController.userId}"
+							styleClass="form-control">
+							<f:selectItems value="#{kursRunController.possibleUserForThisCours}" var="t"
+								id="teacher" itemLabel="#{t.userVorname} #{t.userName}" itemValue="#{t.id}" />
+						</h:selectOneMenu></td>
 							</tr>
 						</ui:repeat>
 					</tbody>

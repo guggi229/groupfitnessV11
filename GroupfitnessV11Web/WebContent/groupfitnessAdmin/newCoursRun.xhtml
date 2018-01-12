@@ -13,13 +13,24 @@
 			<h:form>
 				<h:inputHidden value="#{kursRunController.kurs.id}" />
 				<div class="form-group">
-
-					<div class="form-group">
-						<h:outputLabel for="duration">#{msg['newcoursrun.possible.duration']}</h:outputLabel>
-						<h:inputText value="#{kursRunController.coursRun.duration}"
-							id="duration" styleClass="form-control" />
-					</div>
+				
+			<h:outputLabel for="teacher">#{msg['newcoursrun.possible.possible.teacher']}</h:outputLabel>
+						<h:selectOneMenu value="#{kursRunController.userId}"
+							styleClass="form-control">
+							<f:selectItem  itemLabel="Auswählen" />
+							<f:selectItems value="#{kursRunController.possibleUserForThisCours}" var="t"
+								id="teacher" itemLabel="#{t.userVorname} #{t.userName}" itemValue="#{t.id}" />
+						</h:selectOneMenu>
+							
 				</div>
+
+
+				<div class="form-group">
+					<h:outputLabel for="duration">#{msg['newcoursrun.possible.duration']}</h:outputLabel>
+					<h:inputText value="#{kursRunController.coursRun.duration}"
+						id="duration" styleClass="form-control" />
+				</div>
+
 
 				<div class="form-group">
 					<h:outputLabel for="sdate">#{msg['newcoursrun.possible.start.date']}</h:outputLabel>

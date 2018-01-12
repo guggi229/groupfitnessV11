@@ -1,5 +1,6 @@
 package ch.guggisberg.stefan.groupfitness.kurseRun;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import org.apache.log4j.Logger;
@@ -15,12 +17,14 @@ import ch.guggisberg.stefan.groupfitness.entities.CoursRun;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.entities.User;
 import ch.guggisberg.stefan.groupfitness.exceptions.KursNotFoundException;
+import ch.guggisberg.stefan.groupfitness.exceptions.UserNotFoundException;
 import ch.guggisberg.stefan.groupfitness.services.KursRunService;
 import ch.guggisberg.stefan.groupfitness.services.KursService;
+import ch.guggisberg.stefan.groupfitness.services.UserService;
 
-@RequestScoped
+@SessionScoped
 @Named
-public class KursRunController {
+public class KursRunController implements Serializable {
 
 	@EJB
 	private KursRunService crServce;
@@ -28,10 +32,13 @@ public class KursRunController {
 	@EJB
 	private KursService cService;
 
+	@EJB
+	private UserService uService;
 	private static Logger log = Logger.getLogger(KursRunController.class);
 
 	private CoursRun coursRun = new CoursRun();
-	private Long id;
+	private Long userId;
+	private User selectedUser;
 	private int day;
 	// Dating Stuff
 	private LocalDate startDate;
@@ -40,13 +47,16 @@ public class KursRunController {
 
 	private List<CoursRun> coursRuns= new ArrayList<>();
 	private Kurs kurs = new Kurs();
+	private User teacher = new User();
 
 	public String newSerie(Kurs k) {
 		kurs=k;
 		return "groupfitnessAdmin/newCoursRun";
 	}
 
-	public String previewCoursRun() {
+	public String previewCoursRun() throws UserNotFoundException {
+		System.out.println("******first line***************");
+		selectedUser = uService.getUser(userId);
 		localDates = new ArrayList<>();
 		LocalDate tempDate = startDate;
 		// Suche alle passende daten zwischen starDate und endDate die dem Tag day entsprechen.
@@ -57,7 +67,7 @@ public class KursRunController {
 					tempCours.setCurrentDate(tempDate);
 					tempCours.setKurs(cService.getKurs(kurs.getId()));
 					coursRuns.add(tempCours);
-					crServce.create(tempCours);
+					//crServce.create(tempCours);
 				} catch (CloneNotSupportedException e) {
 					log.warn(e);
 					// return to a sorry Page
@@ -65,17 +75,32 @@ public class KursRunController {
 					log.warn(e);
 				}
 				localDates.add(tempDate);
+				
 			}
 			tempDate=tempDate.plusDays(1L);
+		}
+		
+		System.out.println("**********************");
+		System.out.println("**********************");
+
+		System.out.println("**********************");
+
+		System.out.println(userId);
+		try {
+			teacher = uService.getUser(userId);
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "previewCoursRun";
 
 	}
-	public String createCoursRuns() {
+	public String createCoursRuns() throws KursNotFoundException {
 		for (CoursRun coursRun : coursRuns) {
+		
 			crServce.create(coursRun);
 		}
-		return "/GroupfitnessV11Web/success";
+		return "/GroupfitnessV11Web/success"; //????????
 	}
 
 	public CoursRun getCoursRun() {
@@ -85,12 +110,14 @@ public class KursRunController {
 		this.coursRun = coursRun;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		System.out.println("******getter***************");
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long id) {
+		System.out.println("************setter *********" + id);
+		this.userId = id;
 	}
 
 	public int getDay() {
@@ -101,6 +128,7 @@ public class KursRunController {
 		this.day = day;
 	}
 	public List<User> getPossibleUserForThisCours(){
+		System.out.println("*********getpossible********" + kurs.getId());
 		return cService.getPossibleUserForThisCours(kurs.getId());
 	}
 
@@ -136,7 +164,20 @@ public class KursRunController {
 		this.coursRuns = coursRuns;
 	}
 
+	public User getTeacher() {
+		return teacher;
+	}
 
+	public void setTeacher(User teacher) {
+		this.teacher = teacher;
+	}
 
+	public User getSelectedUser() {
+		return selectedUser;
+	}
+
+	public void setSelectedUser(User selectedUser) {
+		this.selectedUser = selectedUser;
+	}
 
 }
