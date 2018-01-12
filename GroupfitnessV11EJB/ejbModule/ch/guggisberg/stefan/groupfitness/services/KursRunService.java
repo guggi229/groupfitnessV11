@@ -1,5 +1,7 @@
 package ch.guggisberg.stefan.groupfitness.services;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.security.DeclareRoles;
@@ -40,6 +42,12 @@ public class KursRunService extends BaseCrud<CoursRun>{
 	@PermitAll
 	public Kurs getKurs(Long id) {
 		return entityManager.find(Kurs.class, id);
+	}
+	@PermitAll
+	public List<CoursRun> getCoursRunListAtThisDate(LocalDate date){
+		HashMap<String, Object> params = new HashMap<>();
+		params.put(CoursRun.PARAM_DATE, date);
+		return findListResultNamedQuery(CoursRun.QUERY_FIND_COURS_AT_THIS_DATE,params);
 	}
 
 }

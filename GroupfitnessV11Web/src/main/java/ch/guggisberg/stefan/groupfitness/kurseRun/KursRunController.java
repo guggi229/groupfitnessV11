@@ -3,16 +3,17 @@ package ch.guggisberg.stefan.groupfitness.kurseRun;
 import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import org.apache.log4j.Logger;
 
+import ch.guggisberg.stefan.groupfitness.converter.LocalDateTimeConverter;
 import ch.guggisberg.stefan.groupfitness.entities.CoursRun;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.entities.User;
@@ -25,6 +26,8 @@ import ch.guggisberg.stefan.groupfitness.services.UserService;
 @SessionScoped
 @Named
 public class KursRunController implements Serializable {
+
+	private static final long serialVersionUID = -5838233856742419611L;
 
 	@EJB
 	private KursRunService crServce;
@@ -179,5 +182,22 @@ public class KursRunController implements Serializable {
 	public void setSelectedUser(User selectedUser) {
 		this.selectedUser = selectedUser;
 	}
+	public List<CoursRun> getCoursRunListAtThisDate(){
 
+		LocalDate firstDay_2014 = LocalDate.of(2018, Month.JANUARY, 15);
+		List<CoursRun> runs = crServce.getCoursRunListAtThisDate((firstDay_2014));
+		
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("*******************");
+		System.out.println("****Size**************" + runs.size());
+		for (CoursRun coursRun : runs) {
+			System.out.println(coursRun.getId());
+			System.out.println(coursRun.getKurs().getKursNameDe());
+
+		}
+		return runs;
+		
+	}
 }

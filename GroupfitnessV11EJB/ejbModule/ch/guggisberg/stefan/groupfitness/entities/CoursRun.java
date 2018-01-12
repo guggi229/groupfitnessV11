@@ -18,22 +18,25 @@ import javax.persistence.Table;
 
 @NamedQueries({
 	@NamedQuery(name= CoursRun.QUERY_FIND_ALL_COURS_RUN, 
-			query ="SELECT c FROM CoursRun c")
+			query ="SELECT c FROM CoursRun c"),
+	@NamedQuery(name= CoursRun.QUERY_FIND_COURS_AT_THIS_DATE, 
+	query ="SELECT c FROM CoursRun c WHERE c.runningDate=:" + CoursRun.PARAM_DATE)
 })
 public class CoursRun implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 6799084951953976291L;
 	// Hibernate
 	public static final String QUERY_FIND_ALL_COURS_RUN = "QUERY_FIND_ALL_COURS_RUN";
-	public static final String GRAPH_WITH_KURS= "GRAPH_WITH_KURS";
-	
+	public static final String QUERY_FIND_COURS_AT_THIS_DATE = "QUERY_FIND_COURS_AT_THIS_DATE";
+	public static final String PARAM_DATE="PARAM_DATE";
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Long id;
 
 
-	@Column(name="currentDate")
+	@Column(name="runningDate")
 	private LocalDate runningDate;
 
 	@Column(name="duration")
@@ -44,7 +47,9 @@ public class CoursRun implements Serializable, Cloneable {
 
 	@Column(name="maxPlaceCustomer")
 	private int maxPlace;
+
 	
+	// Warum Eager? Ein KursRun ohne Kurstyp ist nutzlos!
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Kurs kurs;
 
@@ -67,7 +72,7 @@ public class CoursRun implements Serializable, Cloneable {
 		this.id = id;
 	}
 
-	
+
 	public int getDuration() {
 		return duration;
 	}

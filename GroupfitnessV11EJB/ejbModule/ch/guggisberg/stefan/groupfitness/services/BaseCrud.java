@@ -1,5 +1,6 @@
 package ch.guggisberg.stefan.groupfitness.services;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,15 @@ public class BaseCrud<T>  {
 			query.setParameter(paramName, params.get(paramName));
 		}
 		return (T) query.getSingleResult();
+	}
+	
+	@SuppressWarnings({ "unchecked", "hiding" })
+	public <T> List<T>  findListResultNamedQuery(String name, Map <String, Object> params) {
+		Query query = getEntityManager().createNamedQuery(name);	
+		for (String paramName : params.keySet()) {
+			query.setParameter(paramName, params.get(paramName));
+		}
+		return (List<T>) query.getResultList();
 	}
 	
 	public T persist(T entity) {

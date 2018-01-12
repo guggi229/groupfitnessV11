@@ -6,11 +6,36 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-	<ui:define name="title">#{msg['title.user']}</ui:define>
+	<ui:define name="title">#{msg['title.coursTable']}</ui:define>
 	<ui:define name="content">
 		<div class="container">
+			<!-- First day! -->
+			<div>
+				<ul class="list-group">
+					<li class="list-group-item active">Heute, Feritag, finden
+						folgende Kurse statt.</li>
 
-			
+					<ui:repeat var="k"
+						value="#{kursRunController.coursRunListAtThisDate}">
+						<li class="list-group-item">#{k.startTime}
+							#{k.kurs.kursNameDe}</li>
+					</ui:repeat>
+				</ul>
+			</div>
+
+			<div>
+				<!-- Second day -->
+				<ul class="list-group">
+					<li class="list-group-item active">Heute, Feritag, finden
+						folgende Kurse statt.</li>
+
+					<ui:repeat var="k"
+						value="#{kursRunController.coursRunListAtThisDate}">
+						<li class="list-group-item">#{k.startTime}
+							#{k.kurs.kursNameDe}</li>
+					</ui:repeat>
+				</ul>
+			</div>
 		</div>
 		<!-- /container -->
 	</ui:define>
