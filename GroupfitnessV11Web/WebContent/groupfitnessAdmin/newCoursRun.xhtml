@@ -11,23 +11,22 @@
 		<div class="container ">
 			<h2 class="form-signin-heading">#{msg['title.newCoursRun']}</h2>
 			<h:form>
-				<h:inputHidden value="#{kursRunController.kurs.id}" />
+				<h:inputHidden value="#{newKursRunController.kurs.id}" />
 				<div class="form-group">
-				
-			<h:outputLabel for="teacher">#{msg['newcoursrun.possible.possible.teacher']}</h:outputLabel>
-						<h:selectOneMenu value="#{kursRunController.userId}"
-							styleClass="form-control">
-							<f:selectItem  itemLabel="Auswählen" />
-							<f:selectItems value="#{kursRunController.possibleUserForThisCours}" var="t"
-								id="teacher" itemLabel="#{t.userVorname} #{t.userName}" itemValue="#{t.id}" />
-						</h:selectOneMenu>
-							
+
+					<h:outputLabel for="teacher">#{msg['newcoursrun.possible.possible.teacher']}</h:outputLabel>
+					<h:selectOneMenu value="#{newKursRunController.userId}"
+						styleClass="form-control">
+						<f:selectItem itemLabel="Auswählen" />
+						<f:selectItems
+							value="#{newKursRunController.possibleUserForThisCours}" var="t"
+							id="teacher" itemLabel="#{t.userVorname} #{t.userName}"
+							itemValue="#{t.id}" />
+					</h:selectOneMenu>
 				</div>
-
-
 				<div class="form-group">
 					<h:outputLabel for="duration">#{msg['newcoursrun.possible.duration']}</h:outputLabel>
-					<h:inputText value="#{kursRunController.coursRun.duration}"
+					<h:inputText value="#{newKursRunController.coursRun.duration}"
 						id="duration" styleClass="form-control" />
 				</div>
 
@@ -36,23 +35,23 @@
 					<h:outputLabel for="sdate">#{msg['newcoursrun.possible.start.date']}</h:outputLabel>
 					<h:inputText pt:type="date" name="bday" id="sdate"
 						converter="localDateTimeConverter" styleClass="form-control"
-						value="#{kursRunController.startDate}"></h:inputText>
+						value="#{newKursRunController.startDate}"></h:inputText>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="edate">#{msg['newcoursrun.possible.end.date']}</h:outputLabel>
 					<h:inputText pt:type="date" name="bday" id="edate"
 						converter="localDateTimeConverter" styleClass="form-control"
-						value="#{kursRunController.endDate}"></h:inputText>
+						value="#{newKursRunController.endDate}"></h:inputText>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="time">#{msg['newcoursrun.possible.time']}</h:outputLabel>
 					<h:inputText pt:type="time" name="bday" id="time"
 						styleClass="form-control"
-						value="#{kursRunController.coursRun.startTime}"></h:inputText>
+						value="#{newKursRunController.coursRun.startTime}"></h:inputText>
 				</div>
 				<div class="form-group">
 					<h3>#{msg['newcoursrun.possible.day']}</h3>
-					<h:selectOneRadio value="#{kursRunController.day}">
+					<h:selectOneRadio value="#{newKursRunController.day}">
 						<f:selectItem itemValue="1"
 							itemLabel="#{msg['generell.dayOfWeek.moday']}"
 							StyleClass="form-check form-check-inline" selected="true" />
@@ -77,7 +76,7 @@
 					</h:selectOneRadio>
 				</div>
 				<div>
-					<h:commandButton action="#{kursRunController.previewCoursRun()}"
+					<h:commandButton action="#{newKursRunController.previewCoursRun()}"
 						styleClass="btn btn-primary" value="#{msg['button.preview']}" />
 				</div>
 			</h:form>
