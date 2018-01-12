@@ -20,7 +20,7 @@ import javax.persistence.Table;
 	@NamedQuery(name= CoursRun.QUERY_FIND_ALL_COURS_RUN, 
 			query ="SELECT c FROM CoursRun c"),
 	@NamedQuery(name= CoursRun.QUERY_FIND_COURS_AT_THIS_DATE, 
-	query ="SELECT c FROM CoursRun c WHERE c.runningDate=:" + CoursRun.PARAM_DATE)
+	query ="SELECT c FROM CoursRun c WHERE c.runningDate=:" + CoursRun.PARAM_DATE + " order by c.startTime asc")
 })
 public class CoursRun implements Serializable, Cloneable {
 

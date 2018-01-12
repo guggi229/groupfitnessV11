@@ -4,16 +4,30 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	<ui:define name="title">#{msg['title.coursTable']}</ui:define>
 	<ui:define name="content">
 		<div class="container">
-		
-			<!-- First day! -->
 			<div>
+				<h:form styleClass="form-inline">
+					 <div class="form-group mb-2">
+						<h:outputLabel for="sdate">#{msg['newcoursrun.possible.start.date']}</h:outputLabel>
+						<h:inputText pt:type="date" name="bday" id="sdate"
+							converter="localDateTimeConverter" styleClass="form-control"
+							value="#{kursRunController.startDate}"></h:inputText>
+					</div>
+					<div>
+						<h:commandButton action="#{kursRunController.reload()}"
+							styleClass="btn btn-primary mb-2" value="#{msg['button.preview']}" />
+					</div>
+				</h:form>
+			</div>
+			<div class="topMargin">
 				<ul class="list-group">
-					<li class="list-group-item active">ddd</li>
+					<li class="list-group-item active">#{kursRunController.day}
+						#{kursRunController.startDate}</li>
 
 					<ui:repeat var="k"
 						value="#{kursRunController.coursRunListAtThisDate}">
@@ -23,19 +37,6 @@
 				</ul>
 			</div>
 
-			<div>
-				<!-- Second day -->
-				<ul class="list-group">
-					<li class="list-group-item active">Heute, Feritag, finden
-						folgende Kurse statt.</li>
-
-					<ui:repeat var="k"
-						value="#{kursRunController.coursRunListAtThisDate}">
-						<li class="list-group-item">#{k.startTime}
-							#{k.kurs.kursNameDe}</li>
-					</ui:repeat>
-				</ul>
-			</div>
 		</div>
 		<!-- /container -->
 	</ui:define>

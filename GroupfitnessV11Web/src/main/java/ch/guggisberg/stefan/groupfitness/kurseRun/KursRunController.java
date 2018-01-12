@@ -1,8 +1,8 @@
 package ch.guggisberg.stefan.groupfitness.kurseRun;
 
 import java.io.Serializable;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -32,16 +32,33 @@ public class KursRunController implements Serializable {
 	private UserService uService;
 	private static Logger log = Logger.getLogger(KursRunController.class);
 
+	// Dating Stuff
+	private LocalDate startDate = LocalDate.now();
+		
 	public List<CoursRun> getCoursRunListAtThisDate(){
-		LocalDate firstDay_2014 = LocalDate.of(2018, Month.JANUARY, 15);
-		List<CoursRun> runs = crServce.getCoursRunListAtThisDate((firstDay_2014));
-
+		List<CoursRun> runs = crServce.getCoursRunListAtThisDate((startDate));
 		for (CoursRun coursRun : runs) {
 			System.out.println(coursRun.getId());
 			System.out.println(coursRun.getKurs().getKursNameDe());
 
 		}
 		return runs;
-		
 	}
+	public String reload() {
+		return "/viewCoursRun";
+	}
+
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+	public String getDay() {
+		return startDate.getDayOfWeek().toString();
+	}
+
 }

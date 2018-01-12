@@ -79,4 +79,7 @@ _callouts.scss:6
     border-left-width: .25rem;
     border-radius: .25rem;
 }
-
+/* Timetable Margin Inputfield*/
+.topMargin {
+	margin-top: 20px;
+}
