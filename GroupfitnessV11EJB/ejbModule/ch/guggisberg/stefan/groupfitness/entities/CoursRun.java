@@ -47,12 +47,14 @@ public class CoursRun implements Serializable, Cloneable {
 
 	@Column(name="maxPlaceCustomer")
 	private int maxPlace;
-
 	
 	// Warum Eager? Ein KursRun ohne Kurstyp ist nutzlos!
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Kurs kurs;
 
+	// Warum Eager? Ein KursRun ohne User ist nutzlos!
+	@ManyToOne(fetch=FetchType.EAGER)
+	private User user;
 
 	// Getter / Setter
 
@@ -107,6 +109,22 @@ public class CoursRun implements Serializable, Cloneable {
 
 	public CoursRun copy(CoursRun origin) throws CloneNotSupportedException {
 		return (CoursRun) origin.clone();
+	}
+
+	public LocalDate getRunningDate() {
+		return runningDate;
+	}
+
+	public void setRunningDate(LocalDate runningDate) {
+		this.runningDate = runningDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 

@@ -1,7 +1,6 @@
 package ch.guggisberg.stefan.groupfitness.kurseRun;
 
 import java.io.Serializable;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -36,13 +35,7 @@ public class KursRunController implements Serializable {
 	private LocalDate startDate = LocalDate.now();
 		
 	public List<CoursRun> getCoursRunListAtThisDate(){
-		List<CoursRun> runs = crServce.getCoursRunListAtThisDate((startDate));
-		for (CoursRun coursRun : runs) {
-			System.out.println(coursRun.getId());
-			System.out.println(coursRun.getKurs().getKursNameDe());
-
-		}
-		return runs;
+		return crServce.getCoursRunListAtThisDate((startDate));
 	}
 	public String reload() {
 		return "/viewCoursRun";

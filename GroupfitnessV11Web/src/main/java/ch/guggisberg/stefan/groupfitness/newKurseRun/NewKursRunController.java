@@ -57,7 +57,6 @@ public class NewKursRunController implements Serializable {
 	}
 
 	public String previewCoursRun() throws UserNotFoundException {
-		selectedUser = uService.getUser(userId);
 		localDates = new ArrayList<>();
 		LocalDate tempDate = startDate;
 		// Suche alle passende daten zwischen starDate und endDate die dem Tag day entsprechen.
@@ -67,6 +66,7 @@ public class NewKursRunController implements Serializable {
 					CoursRun tempCours = coursRun.copy(coursRun);
 					tempCours.setCurrentDate(tempDate);
 					tempCours.setKurs(cService.getKurs(kurs.getId()));
+					tempCours.setUser(uService.getUser(userId));
 					coursRuns.add(tempCours);
 					//crServce.create(tempCours);
 				} catch (CloneNotSupportedException e) {
@@ -80,12 +80,7 @@ public class NewKursRunController implements Serializable {
 			}
 			tempDate=tempDate.plusDays(1L);
 		}
-		try {
-			teacher = uService.getUser(userId);
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		return "previewCoursRun";
 
 	}
