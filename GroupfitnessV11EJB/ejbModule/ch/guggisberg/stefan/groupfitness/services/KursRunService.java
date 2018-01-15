@@ -49,5 +49,13 @@ public class KursRunService extends BaseCrud<CoursRun>{
 		params.put(CoursRun.PARAM_DATE, date);
 		return findListResultNamedQuery(CoursRun.QUERY_FIND_COURS_AT_THIS_DATE,params);
 	}
+	@PermitAll
+	public List<CoursRun> getKursRunWithParticipantAmount(LocalDate startDate, LocalDate endDate, Long teacherID){
+		HashMap<String, Object> params = new HashMap<>();
+		params.put(CoursRun.PARAM_START_DATE, startDate);
+		params.put(CoursRun.PARAM_END_DATE, endDate);
+		params.put(CoursRun.PARAM_TEACHER_ID, teacherID);
+		return findListResultNamedQuery(CoursRun.QUERY_FIND_ALL_PARTICIPANT_IN_THIS_MONTH,params);
+	}	
 
 }

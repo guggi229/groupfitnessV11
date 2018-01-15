@@ -143,8 +143,6 @@ public class UserController extends BaseBean implements Serializable {
 	}
 
 	
-	public List<Kurs> getUserSkills(){
-		return userService.getUserWithSkills(FacesContext.getCurrentInstance().getExternalContext().getRemoteUser()).getKannUnterrichten();
-	}
+
 
 }

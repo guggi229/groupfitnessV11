@@ -20,15 +20,21 @@ import javax.persistence.Table;
 	@NamedQuery(name= CoursRun.QUERY_FIND_ALL_COURS_RUN, 
 			query ="SELECT c FROM CoursRun c"),
 	@NamedQuery(name= CoursRun.QUERY_FIND_COURS_AT_THIS_DATE, 
-	query ="SELECT c FROM CoursRun c WHERE c.runningDate=:" + CoursRun.PARAM_DATE + " order by c.startTime asc")
+	query ="SELECT c FROM CoursRun c WHERE c.runningDate=:" + CoursRun.PARAM_DATE + " order by c.startTime asc"),
+	@NamedQuery(name= CoursRun.QUERY_FIND_ALL_PARTICIPANT_IN_THIS_MONTH, 
+	query ="SELECT c FROM CoursRun c WHERE c.runningDate>=:" + CoursRun.PARAM_START_DATE + " AND c.runningDate<=:" + CoursRun.PARAM_END_DATE + " AND c.user.id=:"+ CoursRun.PARAM_TEACHER_ID +" order by c.startTime asc")
 })
 public class CoursRun implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 6799084951953976291L;
 	// Hibernate
 	public static final String QUERY_FIND_ALL_COURS_RUN = "QUERY_FIND_ALL_COURS_RUN";
+	public static final String QUERY_FIND_ALL_PARTICIPANT_IN_THIS_MONTH= "QUERY_FIND_ALL_Participant_IN_THIS_MONTH";
 	public static final String QUERY_FIND_COURS_AT_THIS_DATE = "QUERY_FIND_COURS_AT_THIS_DATE";
 	public static final String PARAM_DATE="PARAM_DATE";
+	public static final String PARAM_START_DATE="PARAM_START_DATE";
+	public static final String PARAM_END_DATE="PARAM_END_DATE";
+	public static final String PARAM_TEACHER_ID="PARAM_TECHER_ID";
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -56,6 +62,9 @@ public class CoursRun implements Serializable, Cloneable {
 	@ManyToOne(fetch=FetchType.EAGER)
 	private User user;
 
+	@Column(name="participantAmount")
+	private int participantAmount;
+	
 	// Getter / Setter
 
 	public Kurs getKurs() {
@@ -125,6 +134,14 @@ public class CoursRun implements Serializable, Cloneable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public int getParticipantAmount() {
+		return participantAmount;
+	}
+
+	public void setParticipantAmount(int participantAmount) {
+		this.participantAmount = participantAmount;
 	}
 
 

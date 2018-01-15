@@ -23,7 +23,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<ui:repeat var="u" value="#{userController.userSkills}">
+							<ui:repeat var="u" value="#{viewUserController.userSkills}">
 								<tr>
 									<td>#{u.kursNameDe}</td>
 									<td>#{u.kursNameFr}</td>
@@ -32,6 +32,12 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
+			<div>
+			<ui:repeat var="u" value="#{viewUserController.kursRunWithParticipantAmount}">
+			#{u.runningDate}
+			
+			</ui:repeat>
 			</div>
 		</div>
 		<!-- /container -->
