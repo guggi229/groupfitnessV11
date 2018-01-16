@@ -33,12 +33,33 @@
 					</table>
 				</div>
 			</div>
-			<div>
-			<ui:repeat var="u" value="#{viewUserController.kursRunWithParticipantAmount}">
-			#{u.runningDate}
-			
-			</ui:repeat>
-			</div>
+			<c:when test="#{request.isUserInRole('Teacher')}">
+				<div>
+					<div class="topMargin">
+						<ul class="list-group">
+							<li class="list-group-item active">#{msg['userview.statistics']}</li>
+							<ui:repeat var="u"
+								value="#{viewUserController.kursRunWithParticipantAmount}">
+								<li class="list-group-item">
+								<div class="form-group mb-2">
+								#{u.formattedCurrentDate} #{u.startTime} 
+									#{u.kurs.kursNameDe} 
+									</div>
+									<h:form styleClass="form-inline">
+										<div class="form-group mx-sm-3 mb-2">
+										<h:inputText value="#{u.participantAmount}" size="3"></h:inputText>
+										</div>
+									
+										<h:commandButton styleClass="btn btn-primary mb-2"
+											action="#{viewUserController.saveParticipal()}" value="#{msg['button.ok']}" />
+							
+									</h:form>
+								</li>
+							</ui:repeat>
+						</ul>
+					</div>
+				</div>
+			</c:when>
 		</div>
 		<!-- /container -->
 	</ui:define>

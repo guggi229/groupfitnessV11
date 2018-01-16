@@ -10,6 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import ch.guggisberg.stefan.groupfitness.base.BaseBean;
 import ch.guggisberg.stefan.groupfitness.entities.CoursRun;
 import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.entities.User;
@@ -19,7 +20,7 @@ import java.io.Serializable;
 
 @SessionScoped
 @Named
-public class ViewUserController implements Serializable {
+public class ViewUserController extends BaseBean implements Serializable {
 
 	private static final long serialVersionUID = 987697781060951911L;
 
@@ -46,4 +47,7 @@ public class ViewUserController implements Serializable {
 		return crService.getKursRunWithParticipantAmount(LocalDate.of(2018, Month.JANUARY, 1), LocalDate.of(2018, Month.JANUARY, 31), user.getId());
 	}
 	
+	public void saveParticipal() {
+		
+	}
 }

@@ -2,6 +2,8 @@ package ch.guggisberg.stefan.groupfitness.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -111,7 +113,10 @@ public class CoursRun implements Serializable, Cloneable {
 	public LocalDate getCurrentDate() {
 		return runningDate;
 	}
-
+	public String getFormattedCurrentDate() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+		return runningDate.format(formatter);
+	}
 	public void setCurrentDate(LocalDate currentDate) {
 		this.runningDate = currentDate;
 	}

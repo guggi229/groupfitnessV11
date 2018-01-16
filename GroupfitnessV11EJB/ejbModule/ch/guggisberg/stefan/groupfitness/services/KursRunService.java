@@ -15,7 +15,7 @@ import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 
 @Stateless
 @LocalBean
-@DeclareRoles({"GroupfitnessAdmin", "Customer", "Admin"})
+@DeclareRoles({"GroupfitnessAdmin", "Customer", "Admin", "Teacher"})
 public class KursRunService extends BaseCrud<CoursRun>{
 
 	@RolesAllowed("GroupfitnessAdmin")
