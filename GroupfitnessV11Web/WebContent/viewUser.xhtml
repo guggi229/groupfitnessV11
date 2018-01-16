@@ -68,7 +68,7 @@
 
 											<h:form styleClass="form-inline">
 												<div class="form-group mx-sm-3 mb-2">
-													<h:selectOneMenu value="1" styleClass="form-control">
+													<h:selectOneMenu value="#{viewUserController.month}" styleClass="form-control">
 														<f:selectItem itemValue="1" itemLabel="#{msg['generell.month.jan']}" />
 														<f:selectItem itemValue="2" itemLabel="#{msg['generell.month.feb']}" />
 														<f:selectItem itemValue="3"
@@ -76,7 +76,7 @@
 													</h:selectOneMenu>
 												</div>
 												<h:commandButton styleClass="ion-ios-cloud-upload"
-													action="#{viewUserController.saveParticipal(u)}"
+													action="#{viewUserController.reload()}"
 													value="#{msg['button.ok']}" />
 											</h:form>
 										</div>

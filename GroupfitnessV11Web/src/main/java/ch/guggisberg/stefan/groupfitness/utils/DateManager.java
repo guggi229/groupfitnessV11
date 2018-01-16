@@ -10,10 +10,12 @@ public class DateManager {
 	private int lastDay;
 	private int year;
 	private Month month;
+	private LocalDate date;
 
 	private static Logger log = Logger.getLogger(DateManager.class);
 	
 	public DateManager(LocalDate date) {
+		this.date=date;
 		firstDay=1;
 		lastDay =date.lengthOfMonth();
 		month = date.getMonth();
@@ -28,10 +30,15 @@ public class DateManager {
 	public Month getMonth() {
 		return month;
 	}
+
 	public int getLastDayOfMonth() {
 		return lastDay;
 	}
 	public int getFirstDay() {
 		return firstDay;
+	}
+	public void setMonth(int month) {
+		this.month=Month.of(month);
+		lastDay =this.month.length(false);
 	}
 }

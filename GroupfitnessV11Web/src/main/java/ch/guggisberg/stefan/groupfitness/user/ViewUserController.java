@@ -34,13 +34,17 @@ public class ViewUserController extends BaseBean implements Serializable {
 	
 	private User user = new User();
 	private List<Kurs> userSkills;
+	private List<CoursRun> coursRuns;
 	private DateManager dm;
+	private int month;
 		
 	@PostConstruct
 	public void init() {
 		user = userService.getUserWithSkills((FacesContext.getCurrentInstance().getExternalContext().getRemoteUser()));
 		userSkills=user.getKannUnterrichten();
 		dm = new DateManager(LocalDate.now());
+		coursRuns = crService.getKursRunWithParticipantAmount(LocalDate.of(dm.getYear(), dm.getMonth(), dm.getFirstDay()), LocalDate.of(dm.getYear(), dm.getMonth(), dm.getLastDayOfMonth()), user.getId());
+		month=dm.getMonth().getValue();
 	}
 	
 	public List<Kurs> getUserSkills(){
@@ -48,11 +52,25 @@ public class ViewUserController extends BaseBean implements Serializable {
 	}
 	
 	public List<CoursRun> getKursRunWithParticipantAmount(){
-		return crService.getKursRunWithParticipantAmount(LocalDate.of(dm.getYear(), dm.getMonth(), dm.getFirstDay()), LocalDate.of(dm.getYear(), dm.getMonth(), dm.getLastDayOfMonth()), user.getId());
+		return coursRuns;
 	}
 	
 	public void saveParticipal(CoursRun c) {
 		crService.update(c);
 		showGlobalMessage("info.UserDataSaved", null);
 	}
+	public String reload() {
+		coursRuns = crService.getKursRunWithParticipantAmount(LocalDate.of(dm.getYear(), dm.getMonth(), dm.getFirstDay()), LocalDate.of(dm.getYear(), dm.getMonth(), dm.getLastDayOfMonth()), user.getId());
+		return "/viewUser";
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+		dm.setMonth(month);
+	}
+	
 }
