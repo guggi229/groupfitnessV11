@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -21,10 +23,17 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name= CoursRun.QUERY_FIND_ALL_COURS_RUN, 
 			query ="SELECT c FROM CoursRun c"),
+	@NamedQuery(name= CoursRun.QUERY_FIND_ALL_COURS_WITHOUT_TEACHER, 
+	query ="SELECT c FROM CoursRun c WHERE c.user IS NULL AND c.runningDate>=:" + CoursRun.PARAM_START_DATE + " AND c.runningDate<=:" + CoursRun.PARAM_END_DATE +" order by c.runningDate asc,c.startTime asc"),
 	@NamedQuery(name= CoursRun.QUERY_FIND_COURS_AT_THIS_DATE, 
 	query ="SELECT c FROM CoursRun c WHERE c.runningDate=:" + CoursRun.PARAM_DATE + " order by c.startTime asc"),
 	@NamedQuery(name= CoursRun.QUERY_FIND_ALL_PARTICIPANT_IN_THIS_MONTH, 
 	query ="SELECT c FROM CoursRun c WHERE c.runningDate>=:" + CoursRun.PARAM_START_DATE + " AND c.runningDate<=:" + CoursRun.PARAM_END_DATE + " AND c.user.id=:"+ CoursRun.PARAM_TEACHER_ID +" order by c.startTime asc")
+	
+})
+@NamedNativeQueries({
+	@NamedNativeQuery(name= CoursRun.NATIVE_QUERY_FIND_COURSRUN_WITHOUT_TEACHER_FOR_THIS_TEACHER, 
+			query ="SELECT DISTINCT cr.id FROM groupfitness.coursRun AS cr, groupfitness.kannUnterrichten AS k WHERE cr.user_id is null AND k.kursid=cr.kurs_id", resultClass = CoursRun.class)
 })
 public class CoursRun implements Serializable, Cloneable {
 
@@ -32,7 +41,10 @@ public class CoursRun implements Serializable, Cloneable {
 	// Hibernate
 	public static final String QUERY_FIND_ALL_COURS_RUN = "QUERY_FIND_ALL_COURS_RUN";
 	public static final String QUERY_FIND_ALL_PARTICIPANT_IN_THIS_MONTH= "QUERY_FIND_ALL_Participant_IN_THIS_MONTH";
+	public static final String QUERY_FIND_ALL_COURS_WITHOUT_TEACHER = "QUERY_FIND_ALL_COURS_WITHOUT_TEACHER";
 	public static final String QUERY_FIND_COURS_AT_THIS_DATE = "QUERY_FIND_COURS_AT_THIS_DATE";
+
+	public static final String NATIVE_QUERY_FIND_COURSRUN_WITHOUT_TEACHER_FOR_THIS_TEACHER = "NATIVE_QUERY_FIND_COURSRUN_WITHOUT_TEACHER";
 	public static final String PARAM_DATE="PARAM_DATE";
 	public static final String PARAM_START_DATE="PARAM_START_DATE";
 	public static final String PARAM_END_DATE="PARAM_END_DATE";
