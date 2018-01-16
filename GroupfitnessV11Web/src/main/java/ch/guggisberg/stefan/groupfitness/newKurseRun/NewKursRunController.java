@@ -66,7 +66,7 @@ public class NewKursRunController implements Serializable {
 					CoursRun tempCours = coursRun.copy(coursRun);
 					tempCours.setCurrentDate(tempDate);
 					tempCours.setKurs(cService.getKurs(kurs.getId()));
-					tempCours.setUser(uService.getUser(userId));
+					if (userId!=null) tempCours.setUser(uService.getUser(userId));
 					coursRuns.add(tempCours);
 					//crServce.create(tempCours);
 				} catch (CloneNotSupportedException e) {
