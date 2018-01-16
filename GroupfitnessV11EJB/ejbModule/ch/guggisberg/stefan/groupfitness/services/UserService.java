@@ -74,11 +74,14 @@ public class UserService extends BaseCrud<User> {
 		
 		User user2 = getUserWithSkills(user.getId());
 		for (Kurs k : user2.getKannUnterrichten()) {
-			System.out.println(k.getKursNameDe());
-			
+			log.info((k.getKursNameDe()));
 		}
 		return getUserWithSkills(user.getId());
-		
+	}
+	public User getUserWithoutSkillsByEmail(String email) {
+		HashMap<String, Object> params = new HashMap<>();
+		params.put(User.PARAM_EMAIL, email);
+		return findSingleResultNamedQuery(User.QUERY_FIND_USER_BY_EMAIL, params);
 	}
 
 	public User update(User user) {
