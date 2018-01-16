@@ -89,4 +89,5 @@ _callouts.scss: 6
 	margin-right: 10px;
 	min-width: 300px;
 	max-width: 300px;
+	<!-- max-width: 18rem; -->
 }

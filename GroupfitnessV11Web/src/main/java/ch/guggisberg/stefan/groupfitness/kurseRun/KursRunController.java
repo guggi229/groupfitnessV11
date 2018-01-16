@@ -32,26 +32,26 @@ public class KursRunController implements Serializable {
 	private static Logger log = Logger.getLogger(KursRunController.class);
 
 	// Dating Stuff
-	private LocalDate startDate = LocalDate.now();
+	private LocalDate date = LocalDate.now();
 		
 	public List<CoursRun> getCoursRunListAtThisDate(){
-		return crServce.getCoursRunListAtThisDate((startDate));
+		return crServce.getCoursRunListAtThisDate((date));
 	}
 	public String reload() {
 		return "/viewCoursRun";
 	}
 
 
-	public LocalDate getStartDate() {
-		return startDate;
+	public LocalDate getDate() {
+		return date;
 	}
 
 
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
+	public void setDate(LocalDate startDate) {
+		this.date = startDate;
 	}
 	public String getDay() {
-		return startDate.getDayOfWeek().toString();
+		return date.getDayOfWeek().toString();
 	}
 
 }

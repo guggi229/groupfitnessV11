@@ -1,6 +1,7 @@
 package ch.guggisberg.stefan.groupfitness.kurseRun;
 
 import java.io.Serializable;
+import java.nio.file.FileVisitResult;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
@@ -22,14 +23,23 @@ public class ViewKursRunWithoutTeacher implements Serializable {
 
 	@EJB
 	private KursRunService crServce;
-
+	private LocalDate date;
+	private int startDate;
+	private int endDate;
+	private int year;
+	
 	private static Logger log = Logger.getLogger(ViewKursRunWithoutTeacher.class);
 
 	// Dating Stuff
-
+	public ViewKursRunWithoutTeacher() {
+		 date = LocalDate.now();
+		 startDate=1;
+		 endDate =date.lengthOfMonth();
+		 year =date.getYear();
+	}
 		
 	public List<CoursRun> getCourseRunWithoutTeacherinThisMonth(){
-		return crServce.getCourseRunWithoutTeacherinThisMonth(LocalDate.of(2018, Month.JANUARY, 1), LocalDate.of(2018, Month.JANUARY, 31));
+		return crServce.getCourseRunWithoutTeacherinThisMonth(LocalDate.of(year, date.getMonth(), startDate), LocalDate.of(year, date.getMonth(), endDate));
 	}
 
 

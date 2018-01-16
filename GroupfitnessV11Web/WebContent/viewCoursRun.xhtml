@@ -16,7 +16,7 @@
 						<h:outputLabel for="sdate">#{msg['newcoursrun.possible.start.date']}</h:outputLabel>
 						<h:inputText pt:type="date" name="bday" id="sdate"
 							converter="localDateTimeConverter" styleClass="form-control"
-							value="#{kursRunController.startDate}"></h:inputText>
+							value="#{kursRunController.date}"></h:inputText>
 					</div>
 					<div>
 						<h:commandButton action="#{kursRunController.reload()}"
@@ -27,7 +27,7 @@
 			<div class="topMargin">
 				<ul class="list-group">
 					<li class="list-group-item active">#{kursRunController.day}
-						#{kursRunController.startDate}</li>
+						#{kursRunController.date}</li>
 
 					<ui:repeat var="k"
 						value="#{kursRunController.coursRunListAtThisDate}">
