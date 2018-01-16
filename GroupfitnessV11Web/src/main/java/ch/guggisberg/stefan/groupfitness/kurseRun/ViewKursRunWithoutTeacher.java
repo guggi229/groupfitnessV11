@@ -1,9 +1,7 @@
 package ch.guggisberg.stefan.groupfitness.kurseRun;
 
 import java.io.Serializable;
-import java.nio.file.FileVisitResult;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -14,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import ch.guggisberg.stefan.groupfitness.entities.CoursRun;
 import ch.guggisberg.stefan.groupfitness.services.KursRunService;
+import ch.guggisberg.stefan.groupfitness.utils.DateManager;
 
 @SessionScoped
 @Named
@@ -23,26 +22,20 @@ public class ViewKursRunWithoutTeacher implements Serializable {
 
 	@EJB
 	private KursRunService crServce;
-	private LocalDate date;
-	private int startDate;
-	private int endDate;
-	private int year;
-	
+	private DateManager dm;
+
 	private static Logger log = Logger.getLogger(ViewKursRunWithoutTeacher.class);
 
 	// Dating Stuff
 	public ViewKursRunWithoutTeacher() {
-		 date = LocalDate.now();
-		 startDate=1;
-		 endDate =date.lengthOfMonth();
-		 year =date.getYear();
+		dm = new DateManager(LocalDate.now());
 	}
-		
+
 	public List<CoursRun> getCourseRunWithoutTeacherinThisMonth(){
-		return crServce.getCourseRunWithoutTeacherinThisMonth(LocalDate.of(year, date.getMonth(), startDate), LocalDate.of(year, date.getMonth(), endDate));
+		return crServce.getCourseRunWithoutTeacherinThisMonth(LocalDate.of(dm.getYear(), dm.getMonth(), dm.getFirstDay()), LocalDate.of(dm.getYear(), dm.getMonth(), dm.getLastDayOfMonth()));
 	}
 
 
-	
+
 
 }

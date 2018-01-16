@@ -16,6 +16,8 @@ import ch.guggisberg.stefan.groupfitness.entities.Kurs;
 import ch.guggisberg.stefan.groupfitness.entities.User;
 import ch.guggisberg.stefan.groupfitness.services.KursRunService;
 import ch.guggisberg.stefan.groupfitness.services.UserService;
+import ch.guggisberg.stefan.groupfitness.utils.DateManager;
+
 import java.io.Serializable;
 
 @SessionScoped
@@ -32,11 +34,13 @@ public class ViewUserController extends BaseBean implements Serializable {
 	
 	private User user = new User();
 	private List<Kurs> userSkills;
+	private DateManager dm;
 		
 	@PostConstruct
 	public void init() {
 		user = userService.getUserWithSkills((FacesContext.getCurrentInstance().getExternalContext().getRemoteUser()));
 		userSkills=user.getKannUnterrichten();
+		dm = new DateManager(LocalDate.now());
 	}
 	
 	public List<Kurs> getUserSkills(){
@@ -44,7 +48,7 @@ public class ViewUserController extends BaseBean implements Serializable {
 	}
 	
 	public List<CoursRun> getKursRunWithParticipantAmount(){
-		return crService.getKursRunWithParticipantAmount(LocalDate.of(2018, Month.JANUARY, 1), LocalDate.of(2018, Month.JANUARY, 31), user.getId());
+		return crService.getKursRunWithParticipantAmount(LocalDate.of(dm.getYear(), dm.getMonth(), dm.getFirstDay()), LocalDate.of(dm.getYear(), dm.getMonth(), dm.getLastDayOfMonth()), user.getId());
 	}
 	
 	public void saveParticipal(CoursRun c) {
