@@ -55,7 +55,8 @@
 .cardForm {
 	max-width: 320px;
 }
-.cardWhiteCours{
+
+.cardWhiteCours {
 	min-width: 300px;
 	max-width: 300px;
 	margin-bottom: 30px;
@@ -67,19 +68,25 @@
 }
 /* Info Box */
 .bd-callout-info {
-    border-left-color: #5bc0de;
+	border-left-color: #5bc0de;
 }
 
-_callouts.scss:6
+_callouts.scss: 6
 .bd-callout {
-    padding: 1.25rem;
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
-    border: 1px solid #eee;
-    border-left-width: .25rem;
-    border-radius: .25rem;
+	padding: 1.25rem;
+	margin-top: 1.25rem;
+	margin-bottom: 1.25rem;
+	border: 1px solid #eee;
+	border-left-width: .25rem;
+	border-radius: .25rem;
 }
 /* Timetable Margin Inputfield*/
 .topMargin {
 	margin-top: 20px;
+}
+/* Card */
+.cardFormUserView {
+	margin-right: 10px;
+	min-width: 300px;
+	max-width: 300px;
 }

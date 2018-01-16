@@ -22,7 +22,7 @@ public class KursRunService extends BaseCrud<CoursRun>{
 	public void create(CoursRun coursRun) {
 		entityManager.persist(coursRun);
 	}
-	@RolesAllowed("GroupfitnessAdmin")
+	@RolesAllowed({"GroupfitnessAdmin", "Teacher"})
 	public CoursRun update(CoursRun coursRun) {
 		return entityManager.merge(coursRun);
 	}

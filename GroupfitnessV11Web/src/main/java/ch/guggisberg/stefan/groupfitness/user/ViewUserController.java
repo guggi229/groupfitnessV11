@@ -32,7 +32,7 @@ public class ViewUserController extends BaseBean implements Serializable {
 	
 	private User user = new User();
 	private List<Kurs> userSkills;
-	
+		
 	@PostConstruct
 	public void init() {
 		user = userService.getUserWithSkills((FacesContext.getCurrentInstance().getExternalContext().getRemoteUser()));
@@ -47,7 +47,8 @@ public class ViewUserController extends BaseBean implements Serializable {
 		return crService.getKursRunWithParticipantAmount(LocalDate.of(2018, Month.JANUARY, 1), LocalDate.of(2018, Month.JANUARY, 31), user.getId());
 	}
 	
-	public void saveParticipal() {
-		
+	public void saveParticipal(CoursRun c) {
+		crService.update(c);
+		showGlobalMessage("info.UserDataSaved", null);
 	}
 }
