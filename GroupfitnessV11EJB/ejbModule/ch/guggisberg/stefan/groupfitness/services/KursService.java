@@ -69,4 +69,5 @@ public class KursService extends  BaseCrud<Kurs> {
 		Set<User> users = kurs.getUsers();
 		return new ArrayList<>(users);
 	}
+
 }

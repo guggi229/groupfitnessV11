@@ -35,18 +35,31 @@ public class ViewUserController extends BaseBean implements Serializable {
 	private User user = new User();
 	private List<Kurs> userSkills;
 	private List<CoursRun> coursRuns;
+	private List<CoursRun> withoutTeacher;
 	private DateManager dm;
 	private int month;
 		
 	@PostConstruct
 	public void init() {
-		user = userService.getUserWithSkills((FacesContext.getCurrentInstance().getExternalContext().getRemoteUser()));
+		
+		// Load from DB
+		user = userService.getUserWithSkills((FacesContext.getCurrentInstance().getExternalContext().getRemoteUser())); // Get Logged User
 		userSkills=user.getKannUnterrichten();
 		dm = new DateManager(LocalDate.now());
+		withoutTeacher = crService.getAllPossibleCoursRunWithoutTeacher(user.getId());
 		coursRuns = crService.getKursRunWithParticipantAmount(LocalDate.of(dm.getYear(), dm.getMonth(), dm.getFirstDay()), LocalDate.of(dm.getYear(), dm.getMonth(), dm.getLastDayOfMonth()), user.getId());
 		month=dm.getMonth().getValue();
 	}
 	
+	// Actions
+	// =======
+	public String reload() {
+		coursRuns = crService.getKursRunWithParticipantAmount(LocalDate.of(dm.getYear(), dm.getMonth(), dm.getFirstDay()), LocalDate.of(dm.getYear(), dm.getMonth(), dm.getLastDayOfMonth()), user.getId());
+		return "/viewUser";
+	}
+	
+	// Getter / Setter
+	//================
 	public List<Kurs> getUserSkills(){
 		return userSkills;
 	}
@@ -59,11 +72,7 @@ public class ViewUserController extends BaseBean implements Serializable {
 		crService.update(c);
 		showGlobalMessage("info.UserDataSaved", null);
 	}
-	public String reload() {
-		coursRuns = crService.getKursRunWithParticipantAmount(LocalDate.of(dm.getYear(), dm.getMonth(), dm.getFirstDay()), LocalDate.of(dm.getYear(), dm.getMonth(), dm.getLastDayOfMonth()), user.getId());
-		return "/viewUser";
-	}
-
+	
 	public int getMonth() {
 		return month;
 	}
@@ -71,6 +80,14 @@ public class ViewUserController extends BaseBean implements Serializable {
 	public void setMonth(int month) {
 		this.month = month;
 		dm.setMonth(month);
+	}
+
+	public List<CoursRun> getWithoutTeacher() {
+		return withoutTeacher;
+	}
+
+	public void setWithoutTeacher(List<CoursRun> withoutTeacher) {
+		this.withoutTeacher = withoutTeacher;
 	}
 	
 }

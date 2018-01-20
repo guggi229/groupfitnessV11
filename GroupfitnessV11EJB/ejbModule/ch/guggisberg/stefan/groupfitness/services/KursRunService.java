@@ -63,6 +63,11 @@ public class KursRunService extends BaseCrud<CoursRun>{
 		params.put(CoursRun.PARAM_START_DATE, startDate);
 		params.put(CoursRun.PARAM_END_DATE, endDate);
 		return findListResultNamedQuery(CoursRun.QUERY_FIND_ALL_COURS_WITHOUT_TEACHER,params);
-		
+	}
+	@RolesAllowed({"GroupfitnessAdmin", "Teacher"})
+	public List<CoursRun> getAllPossibleCoursRunWithoutTeacher(Long teacherID){
+		HashMap<String, Object> params = new HashMap<>();
+		params.put(CoursRun.PARAM_TEACHER_ID, teacherID);
+		return findListResultNamedQuery(CoursRun.QUERY_FIND_COURSRUN_WITHOUT_TEACHER_FOR_THIS_TEACHER);
 	}
 }

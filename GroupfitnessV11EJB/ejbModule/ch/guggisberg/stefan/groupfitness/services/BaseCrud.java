@@ -20,16 +20,32 @@ public class BaseCrud<T>  {
 		}
 		return (T) query.getSingleResult();
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "hiding" })
 	public <T> List<T>  findListResultNamedQuery(String name, Map <String, Object> params) {
 		Query query = getEntityManager().createNamedQuery(name);	
-		for (String paramName : params.keySet()) {
-			query.setParameter(paramName, params.get(paramName));
+		if (params!=null) {
+			for (String paramName : params.keySet()) {
+				query.setParameter(paramName, params.get(paramName));
+			}
 		}
 		return (List<T>) query.getResultList();
 	}
-	
+	@SuppressWarnings("hiding")
+	public <T> List<T>  findListResultNamedQuery(String name) {
+		return findListResultNamedQuery(name, null);
+
+	}
+
+	//	@SuppressWarnings({ "hiding", "unchecked" })
+	//	public <T> List<T>  findListResultNativeNamedQuery(String name, Map <String, Object> params, Class<T> resultClass) {
+	//		Query query = getEntityManager().createNativeQuery(name, resultClass);	
+	//		for (String paramName : params.keySet()) {
+	//			query.setParameter(paramName, params.get(paramName));
+	//		}
+	//		return (List<T>) query.getResultList();
+	//	}
+
 	public T persist(T entity) {
 		entityManager.persist(entity);
 		entityManager.flush();
