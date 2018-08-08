@@ -46,7 +46,9 @@
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
-                        <keystore path="application.keystore" relative-to="jboss.server.config.dir" keystore-password="password" alias="server" key-password="password" generate-self-signed-certificate-host="localhost"/>
+                        <keystore path="application.keystore" relative-to="jboss.server.config.dir" keystore-password="
+                                                                                                                       
+                                                                                                                       word" alias="server" key-password="password" generate-self-signed-certificate-host="localhost"/>
                     </ssl>
                 </server-identities>
                 <authentication>
@@ -319,7 +321,7 @@
                 <smtp-server outbound-socket-binding-ref="infoHostfactory" username="info@group-fitness.ch" password="Du6YHa%EdULA"/>
             </mail-session>
              <mail-session name="bfh" jndi-name="java:jboss/mail/BFHMail">
-                <smtp-server outbound-socket-binding-ref="infoBFH" username="guggs2" password="Cisco80C"/>
+                <smtp-server outbound-socket-binding-ref="infoBFH" username="guggs2" password="XXXXXXXXX"/>
             </mail-session>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:naming:2.0">
